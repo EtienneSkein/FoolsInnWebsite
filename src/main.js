@@ -6,6 +6,7 @@ const navItems = [
   ["Gallery", "/gallery"],
   ["Contact", "/contact"],
   ["Blog", "/blog"],
+  ["FAQs", "/faqs"],
   ["Book Now", "/book-now"],
 ];
 
@@ -210,6 +211,51 @@ const blogPosts = [
   },
 ];
 
+const faqSections = [
+  {
+    title: "Booking & Payment",
+    items: [
+      ["How do I book my stay?", "Pick your room, private en-suite or a bed in our female-only dorm, and book straight through the site. Easy."],
+      ["How do I pay?", "Payment is made by bank transfer before you arrive. We'll send you everything you need once you've booked, so there's no scrambling on check-in day."],
+      ["What if I need to cancel or change my dates?", "Cancellation terms depend on your room type, so check the details at checkout before you confirm. If plans change, reach out and we'll help sort it."],
+      ["What do I need to bring?", "A valid photo ID and the card you booked with. That's it."],
+    ],
+  },
+  {
+    title: "Checking In & Out",
+    items: [
+      ["What time can I check in?", "From 3:00pm."],
+      ["What time is checkout?", "Between 8 and 10am. Squeeze in one more coffee before you go."],
+      ["Is there any storage for my luggage?", "Luggage storage is free of charge before check-in or on the day you check out. We unfortunately can't store luggage beyond checkout day, as luggage has previously been left for several days. Stored luggage is kept at your own risk."],
+      ["Can under-18s stay?", "Unfortunately no under 18s."],
+    ],
+  },
+  {
+    title: "Rooms",
+    items: [
+      ["What's the difference between a private room and the female-only dorm?", "Private rooms give you your own en-suite space, a double bed, a desk for getting things done and a Smart TV for switching off. The female-only dorm is a comfortable, secure shared stay with a bunk bed, en-suite bathroom, wardrobe and balcony, good for meeting people while still having your own space to unpack."],
+      ["What's included in my room?", "Every room comes with WiFi, a place to store your things and a proper spot to work if you need to. Private rooms add a TV and double bed; dorms add the bunk and balcony."],
+      ["Is there parking?", "Yes, secure on-site parking is available for an extra R50 per day. It needs to be arranged before check-in and is available on a first come, first served basis."],
+    ],
+  },
+  {
+    title: "Food, Drink & Getting Together",
+    items: [
+      ["Is there somewhere to eat and drink on site?", `Always. ${onlyFools()}, our on-site restaurant serving burgers, and ${ponyUp("Pony Up Rooftop Bar")} serving pizzas are both there: good food, good drinks and good company without leaving home.`],
+      ["Are pets or parties allowed?", `No pets and no parties in the rooms, sorry. The good news is ${ponyUp("Pony Up")} is right there when you're ready to celebrate.`],
+      ["Is there WiFi fast enough to work from?", "Yes, that's kind of the point. Fast WiFi and proper desks make Fools Inn an easy base for remote work between adventures."],
+    ],
+  },
+  {
+    title: "Location & Exploring",
+    items: [
+      ["Where is Fools Inn based?", "Right in the heart of Sea Point, a five-minute walk from the best coffee, a short stroll to Saunder's Beach, and close enough to Lion's Head, the Sea Point Promenade, V&A Waterfront and Table Mountain to explore all of it from one home base."],
+      ["Can I book tours and activities through Fools Inn?", "Yes, our on-site tour desk can sort you out with everything from surf lessons to shark cage diving to sunset hikes up Lion's Head. Check out our Tours page or ask at the desk once you're in."],
+      ["How long can I stay?", "As long as you like. Come for a night, stay for the week, stay for the vibe."],
+    ],
+  },
+];
+
 const gallery = [
   ["Sea Point", "sea-point.jpg", ""],
   ["Front Door", "fools-inn-2331.jpg", ""],
@@ -290,7 +336,7 @@ function icon(name) {
 }
 
 function layout(content) {
-  const current = normalize(location.pathname);
+  const current = normalize(currentPath());
   root.innerHTML = `
     <header class="site-header">
       <a class="brand" href="/" data-link aria-label="Fools Inn home"><span class="brand-mark">F</span><span>Fools Inn</span></a>
@@ -433,6 +479,15 @@ function blogPage() {
   );
 }
 
+function faqsPage() {
+  return pageShell(
+    "FAQs",
+    "Got questions? We've got answers.",
+    "If you don't see what you're looking for, just drop us a message, we're around.",
+    `<div class="faq-page-grid">${faqSections.map((section) => faqGroup(section)).join("")}</div>`
+  );
+}
+
 function bookingPage(compact = false) {
   return `
     <section class="${compact ? "booking-section" : "booking-section page-booking"}">
@@ -442,6 +497,22 @@ function bookingPage(compact = false) {
         <p>Booking links, tour widgets and direct calls to action will sit here once the final Activitar details are supplied.</p>
       </div>
       <a class="primary-button" href="${activitarUrl}" target="_blank" rel="noopener" aria-label="Start booking on Activitar">Start booking ${icon("arrow")}</a>
+    </section>
+  `;
+}
+
+function faqGroup(section) {
+  return `
+    <section class="faq-group">
+      <h2>${section.title}</h2>
+      <div class="faq-accordion">
+        ${section.items.map(([question, answer], index) => `
+          <details ${index === 0 ? "open" : ""}>
+            <summary>${question}</summary>
+            <p>${answer}</p>
+          </details>
+        `).join("")}
+      </div>
     </section>
   `;
 }
@@ -641,6 +712,7 @@ function render() {
     "/gallery": () => galleryPage(false),
     "/contact": contactPage,
     "/blog": blogPage,
+    "/faqs": faqsPage,
     "/book-now": () => bookingPage(false),
   };
   layout((pages[path] || homePage)());

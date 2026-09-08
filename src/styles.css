@@ -813,6 +813,81 @@ h3 {
   line-height: 1.55;
 }
 
+.faq-page-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.faq-group {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 14px 34px rgba(23, 35, 33, 0.08);
+}
+
+.faq-group h2 {
+  margin: 0;
+  padding: clamp(22px, 4vw, 30px);
+  border-bottom: 1px solid var(--line);
+  color: var(--green);
+  font-family: "Instrument Sans", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  letter-spacing: 0;
+}
+
+.faq-accordion details {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-accordion details:last-child {
+  border-bottom: 0;
+}
+
+.faq-accordion summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  min-height: 70px;
+  padding: 18px clamp(22px, 4vw, 30px);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.faq-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion summary::after {
+  content: "+";
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--green);
+  background: var(--paper);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.faq-accordion details[open] summary::after {
+  content: "-";
+}
+
+.faq-accordion p {
+  margin: 0;
+  padding: 0 clamp(22px, 4vw, 30px) 22px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.68;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr 1fr;
@@ -1874,7 +1949,8 @@ h2 {
   .proof-strip,
   .split-section,
   .contact-section,
-  .booking-section {
+  .booking-section,
+  .faq-group {
     border-radius: 0;
   }
 
@@ -1913,6 +1989,7 @@ h2 {
   .room-card,
   .tour-card,
   .blog-article,
+  .faq-group,
   .pillar-grid article,
   .neighbourhood-grid article {
     box-shadow: 0 10px 24px rgba(23, 35, 33, 0.07);
@@ -1934,6 +2011,33 @@ h2 {
   .voucher-strip {
     border-radius: 8px;
     line-height: 1.35;
+  }
+
+  .faq-page-grid {
+    gap: 14px;
+  }
+
+  .faq-group h2 {
+    padding: 22px;
+  }
+
+  .faq-accordion summary {
+    grid-template-columns: minmax(0, 1fr) 30px;
+    gap: 12px;
+    min-height: 64px;
+    padding: 18px 22px;
+  }
+
+  .faq-accordion summary::after {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .faq-accordion p {
+    padding-right: 22px;
+    padding-bottom: 22px;
+    padding-left: 22px;
   }
 }
 
