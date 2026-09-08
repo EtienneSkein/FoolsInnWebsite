@@ -6,3 +6,4 @@ dist
 *.zip
 *.tar.gz
 audit-*.png
+.deploy
