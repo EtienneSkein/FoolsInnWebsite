@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server.mjs",
     "build": "node build.mjs",
-    "preview": "node server.mjs"
+    "preview": "node server.mjs",
+    "check": "node tools/check-site.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",

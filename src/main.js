@@ -1,7 +1,7 @@
 const navItems = [
   ["Home", "/"],
-  ["Stay", "/rooms"],
-  ["Experiences", "/tours"],
+  ["Rooms", "/rooms"],
+  ["Tours", "/tours"],
   ["Neighbourhood", "/neighbourhood"],
   ["Gallery", "/gallery"],
   ["Contact", "/contact"],
@@ -21,7 +21,8 @@ const rooms = [
 
 const tours = [
   {
-    title: "Private Surf Experience",
+    title: "Surf",
+    image: designPhoto(54),
     category: "Ocean & Adventure",
     price: "R3,600",
     voucher: `Beer and burger at ${onlyFools()}`,
@@ -32,6 +33,7 @@ const tours = [
   },
   {
     title: "Shark Cage Diving",
+    image: designPhoto(45),
     category: "Ocean & Adventure",
     price: "R4,655",
     voucher: `Palamo and pizza at ${ponyUp()}`,
@@ -41,7 +43,8 @@ const tours = [
     details: ["Marine biologist guidance", "Meal and onboard refreshments", "Wetsuit, booties, mask and towel", "Weather and tide dependent"],
   },
   {
-    title: "Marine Big 5 / Whale Watching",
+    title: "Sea Safari",
+    image: designPhoto(52),
     category: "Ocean & Adventure",
     price: "R2,340 + R150 conservation fee",
     voucher: "Food and beverage voucher included",
@@ -52,6 +55,7 @@ const tours = [
   },
   {
     title: "Kayak & Sauna",
+    image: designPhoto(50),
     category: "Ocean & Adventure",
     price: "R850",
     voucher: "Bagel and coffee at Prom Park",
@@ -61,7 +65,8 @@ const tours = [
     details: ["Kayak, paddles and safety gear", "Local wildlife/adventure guides", "Shower facilities", "Transport excluded; 5-min Uber recommended"],
   },
   {
-    title: "Kayak Standalone",
+    title: "Kayak",
+    image: designPhoto(55),
     category: "Ocean & Adventure",
     price: "R600",
     voucher: "Bagel and coffee at Prom Park",
@@ -71,7 +76,8 @@ const tours = [
     details: ["Expert ocean guides", "Friendly and inclusive experience", "Year-round, weather dependent", "R700 from October"],
   },
   {
-    title: "Lion's Head Sunrise or Sunset Hike",
+    title: "Lion's Head Hike",
+    image: designPhoto(49),
     category: "Ocean & Adventure",
     price: "R1,200",
     voucher: "Food and beverage voucher included",
@@ -81,37 +87,19 @@ const tours = [
     details: ["Qualified tour guide", "Head torches and safety equipment", "Coffee, tea, biscuits and fruit", "Average fitness required"],
   },
   {
-    title: "Cape Peninsula Small-Group Day Trip",
-    category: "Social & Sunset",
-    price: "Price TBC",
-    voucher: "Food and beverage voucher included",
-    duration: "Full day, capped at 10",
-    tag: "Social & sunset",
-    description: "A flexible small-group day trip for guests who want Cape Town scenery without being folded into a bus-load of forty.",
-    details: ["Small group format", "Cape Peninsula route", "Local guide details TBC", "Final itinerary to be supplied"],
-  },
-  {
-    title: "Stellenbosch Wine & Work",
-    category: "Work & Wander",
-    price: "Price TBC",
-    voucher: "Food and beverage voucher included",
-    duration: "Full day with WiFi-guaranteed stop",
-    tag: "Work & wander",
-    description: "A digital-nomad friendly wine country day that leaves room for laptop hours, good coffee and a better story than another cafe day.",
-    details: ["WiFi-guaranteed work stop", "Stellenbosch route", "Wine and work format", "Final itinerary to be supplied"],
-  },
-  {
     title: "Boerie & Games",
+    image: designPhoto(48),
     category: "Social & Sunset",
     price: "R300",
     voucher: `Hosted at ${ponyUp()}`,
     duration: "Tuesdays",
-    tag: "Content coming",
-    description: `A Tuesday ${ponyUp()} social built around boerie, games and a little planned nonsense. Full copy still to be supplied.`,
-    details: ["Copy outstanding", "Marge to create", "Good fit for the Fools Inn social calendar", "Booking details TBC"],
+    tag: "Come play",
+    description: `Join us at ${ponyUp()} on Tuesdays for boerie, games and a very easy way to make new friends.`,
+    details: ["Tuesday social", "Boerie and games", `Hosted at ${ponyUp("Pony Up Rooftop Bar")}`],
   },
   {
     title: "Skydiving",
+    image: designPhoto(44),
     category: "Ocean & Adventure",
     price: "R3,950",
     voucher: "Food and beverage voucher included",
@@ -122,6 +110,7 @@ const tours = [
   },
   {
     title: "Paragliding",
+    image: designPhoto(53),
     category: "Ocean & Adventure",
     price: "R1,900 pp",
     voucher: "Food and beverage voucher included",
@@ -132,6 +121,7 @@ const tours = [
   },
   {
     title: "Kruger on the GO",
+    image: designPhoto(46),
     category: "Work & Wander",
     price: "2026: R11,850 sharing / R12,750 single",
     voucher: "Food and beverage voucher included",
@@ -141,7 +131,8 @@ const tours = [
     details: ["Shared return road transfer", "All meals and tea/coffee", "Two afternoon/evening game drives", "Two morning game drives"],
   },
   {
-    title: "3-Day Sossusvlei Budget Camping Safari",
+    title: "Sossusvlei Budget Safari",
+    image: designPhoto(47),
     category: "Work & Wander",
     price: "N$12,000 pp sharing",
     voucher: "Food and beverage voucher included",
@@ -151,7 +142,8 @@ const tours = [
     details: ["Professional English-speaking guide", "Twin-share camping", "Meals and park entry fees", "Wednesday weekly departure"],
   },
   {
-    title: "3-Day Etosha Budget Camping Safari",
+    title: "Etosha Budget Safari",
+    image: designPhoto(43),
     category: "Work & Wander",
     price: "N$12,000 pp sharing",
     voucher: "Food and beverage voucher included",
@@ -162,6 +154,7 @@ const tours = [
   },
   {
     title: "Township Walking Tour",
+    image: designPhoto(42),
     category: "Social & Sunset",
     price: "R950 pp",
     voucher: "Food and beverage voucher included",
@@ -172,6 +165,7 @@ const tours = [
   },
   {
     title: "Township Cycle Tour",
+    image: designPhoto(39),
     category: "Social & Sunset",
     price: "R1,150 pp",
     voucher: "Food and beverage voucher included",
@@ -181,6 +175,18 @@ const tours = [
     details: ["Pickup and return transfer included", "Langa Museum and Cultural Centre", "Taxi rank and old hostels", "Traditional beer tasting"],
   },
 ];
+
+tours.push({
+  title: "Secret Hike",
+  image: designPhoto(41),
+  category: "Ocean & Adventure",
+  price: "R1,150 pp",
+  voucher: "Ask at the tour desk for the day's details",
+  duration: "Guided hike",
+  tag: "We'll lead the way",
+  description: "Cape Town has some of the most beautiful hikes in the world. And we want to take you there. Pack your hiking shoes, and we'll sort the rest.",
+  details: ["Guided Cape Town route", "Route and timing confirmed with your guide"],
+});
 
 const contactDetails = {
   address: "82 Regent Road, Sea Point",
@@ -331,404 +337,531 @@ function icon(name) {
     sparkle: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
     social: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z",
     x: "M6 6l12 12M18 6 6 18",
+    pause: "M10 4H6v16h4zM18 4h-4v16h4z",
+    play: "m6 3 14 9-14 9V3Z",
   };
   return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[name] || paths.sparkle}"></path></svg>`;
 }
 
+const primaryNav = [["Home", "/"], ["Rooms", "/rooms"], ["Tours", "/tours"], ["Contact Us", "/contact"]];
+const mobileViewport = window.matchMedia("(max-width: 700px)");
+const roomDetails = {
+  "/rooms/private": {
+    title: "Private Rooms", heading: "Make yourself at home", theme: "yellow",
+    hero: 36, photos: [33, 34, 32, 31], amenityPhoto: 35,
+    copy: "Our private en-suite rooms are made for travellers who enjoy the energy of a backpackers and the freedom of having their own space.",
+    more: "Stretch out on a double bed, catch up on work at your desk or switch off in front of the Smart TV. If you like to share memories, but not bathrooms, this room's for you.",
+    amenities: ["Double bed", "Table & chair", "Wardrobe", "En-suite bathroom", "WiFi", "Smart TV"],
+  },
+  "/rooms/female-dorm": {
+    title: "Female-Only Dorms", heading: "Stay in good company", theme: "pink",
+    hero: 29, photos: [21, 26, 25, 24], amenityPhoto: 27,
+    copy: "Our female-only dorms make shared accommodation feel a little more comfortable. Settle into your own bunk, unpack properly and make use of the en-suite bathroom, kitchen area and balcony.",
+    more: "It's an easy place to meet other women travelling through Cape Town, swap recommendations and make plans together. And when you feel like doing your own thing, you can do that too.",
+    amenities: ["Bunk bed", "Table & chair", "Wardrobe", "WiFi", "Balcony", "En-suite bathroom", "Kitchen area"],
+  },
+};
+
+function designPhoto(number) {
+  return "design/photo-" + String(number).padStart(2, "0") + ".jpg";
+}
+
+function photo(file, alt, className = "", eager = false) {
+  return `<img class="${className}" src="${asset(file)}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" ${eager ? 'fetchpriority="high"' : ""}>`;
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
+}
+
+let disposeTestimonials = () => {};
+
 function layout(content) {
-  const current = normalize(currentPath());
+  disposeTestimonials();
+  const current = currentPath();
+  const hasHero = ["/", "/rooms", "/tours", "/contact", ...Object.keys(roomDetails)].includes(current);
   root.innerHTML = `
-    <header class="site-header">
-      <a class="brand" href="/" data-link aria-label="Fools Inn home"><span class="brand-mark">F</span><span>Fools Inn</span></a>
-      <nav class="nav" aria-label="Main navigation">
-        ${navItems.map(([label, href]) => `<a class="${current === href ? "active" : ""}" href="${href}" data-link>${label}</a>`).join("")}
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <aside class="announcement">
+      <span>Want to go on an adventure? We've got curated tours you'll tell your grandkids about.</span>
+      <a href="/tours" data-link>Book a tour now ${icon("arrow")}</a>
+    </aside>
+    <header class="site-header ${hasHero ? "over-hero" : ""}">
+      <a class="brand wordmark" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
+      <nav class="nav" id="main-nav" aria-label="Main navigation">
+        ${primaryNav.map(([label, href]) => `<a class="${current === href || (href === "/rooms" && current.startsWith("/rooms/")) ? "active" : ""} ${href === "/contact" ? "contact-link" : ""}" href="${href}" data-link ${current === href ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
+        <div class="mobile-extra">${navItems.filter(([, href]) => !primaryNav.some(([, main]) => href === main) && href !== "/book-now").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>
       </nav>
-      <a class="book-link" href="/book-now" data-link>Book now</a>
-      <button class="menu-button" type="button" aria-label="Toggle navigation">${icon("menu")}</button>
+      <a class="book-link button" href="/book-now" data-link>Book Now</a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
     </header>
-    <main>${content}</main>
+    <main id="main-content" tabindex="-1">${content}</main>
     ${footer()}
   `;
   bindLinks();
+  bindForms();
+  syncTourLayout();
+  disposeTestimonials = bindTestimonialsCarousel();
+}
+
+function navigate(href) {
+  if (location.protocol === "file:") {
+    location.hash = href;
+  } else {
+    history.pushState({}, "", href);
+    render();
+  }
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function bindLinks() {
-  document.querySelectorAll("[data-link]").forEach((link) => {
+  // Keep in-page anchors separate from the hash routes used by offline previews.
+  document.querySelectorAll('a[href^="#"]:not([data-link])').forEach((link) => {
     link.addEventListener("click", (event) => {
+      const target = document.getElementById(link.getAttribute("href").slice(1));
+      if (!target) return;
       event.preventDefault();
-      const href = link.getAttribute("href");
-      if (location.protocol === "file:") {
-        location.hash = href;
-      } else {
-        history.pushState({}, "", href);
-      }
-      render();
-      scrollTo({ top: 0, behavior: "smooth" });
+      target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+      if (target.id === "main-content") target.focus({ preventScroll: true });
     });
   });
-
-  const menuButton = document.querySelector(".menu-button");
-  const nav = document.querySelector(".nav");
-  menuButton?.addEventListener("click", () => {
-    nav.classList.toggle("nav-open");
-    menuButton.innerHTML = nav.classList.contains("nav-open") ? icon("x") : icon("menu");
+  document.querySelectorAll("[data-link]").forEach((link) => {
+    if (location.protocol === "file:") link.href = "#" + link.getAttribute("href");
+    link.addEventListener("click", (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      navigate(link.getAttribute("href").replace(/^#/, ""));
+    });
   });
+  const button = document.querySelector(".menu-button");
+  const nav = document.querySelector(".nav");
+  const closeMenu = () => {
+    nav.classList.remove("nav-open");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-label", "Open navigation");
+    button.innerHTML = icon("menu");
+  };
+  button.addEventListener("click", () => {
+    const open = nav.classList.toggle("nav-open");
+    button.setAttribute("aria-expanded", String(open));
+    button.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    button.innerHTML = icon(open ? "x" : "menu");
+  });
+  nav.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { closeMenu(); button.focus(); }
+  });
+  document.querySelectorAll("[data-scroll]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const track = document.getElementById(button.dataset.scroll);
+      if (track.id === "review-track") {
+        track.dispatchEvent(new CustomEvent("carouselstep", { detail: Number(button.dataset.direction) }));
+        return;
+      }
+      track.scrollBy({ left: Number(button.dataset.direction) * track.clientWidth * 0.85, behavior: "smooth" });
+    });
+  });
+}
+
+function hero(title, file, options = {}) {
+  return `<section class="hero ${options.home ? "home-hero" : ""} ${options.intro ? "tour-hero" : ""}" data-page="${escapeHtml(currentPath())}">
+    ${photo(file, options.alt || title, "hero-image", true)}
+    <div class="hero-inner">
+      <h1><span>${title}</span></h1>
+      ${options.intro ? `<div class="hero-description"><p>${options.intro}</p>${options.home ? bookingSearch() : `<div class="actions"><a class="button" href="/book-now" data-link>Book Now ${icon("arrow")}</a><a class="button button-light" href="#adventures">Explore More</a></div>`}</div>` : ""}
+    </div>
+  </section>`;
+}
+
+function bookingSearch() {
+  return `<form class="booking-search" aria-label="Plan your stay">
+    <label>${icon("calendar")}<span>Check-in</span><input type="date" name="checkin" aria-label="Check-in date" required></label>
+    <label><span>Check-out</span><input type="date" name="checkout" aria-label="Check-out date" required></label>
+    <label><span>Guests</span><select name="guests" aria-label="Number of guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}">${n} ${n === 1 ? "guest" : "guests"}</option>`).join("")}</select></label>
+    <label class="code-field"><span>Promo code</span><input name="code" maxlength="40" placeholder="Add code" aria-label="Promo code"></label>
+    <button class="button" type="submit">Enquire ${icon("arrow")}</button>
+  </form>`;
 }
 
 function homePage() {
   return `
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Sea Point * Cape Town</p>
-        <h1>Backpacker energy. Boutique comfort.</h1>
-        <p>Perched above Cape Town's favourite local bar, right on the Sea Point promenade; Fools Inn is where you land for a night and end up staying for a week.</p>
-        <div class="hero-actions">
-          <a class="primary-button" href="/book-now" data-link>Book your stay ${icon("arrow")}</a>
-          <a class="secondary-button" href="/tours" data-link>Explore experiences</a>
-        </div>
-      </div>
-      <div class="hero-visual" aria-label="Fools Inn guesthouse preview">
-        <div class="visual-card visual-main photo-panel" style="--photo: url('${asset("fools-inn-2331.jpg")}')"><span>FOOLS IN SEA POINT</span></div>
-        <div class="visual-card visual-small logo-card"><img src="${asset("logo-white.png")}" alt="Fools Inn"></div>
-      </div>
+    ${hero("Stay where the people are.", "design/home-exterior.jpg", {
+      home: true, alt: "Only Fools restaurant below Fools Inn in Sea Point",
+      intro: `Perched above one of Cape Town's favourite local bars, Fools Inn is a boutique backpackers and your home base for working, exploring and meeting people. Come for a night; stay for the week.`
+    })}
+    <section class="home-intro section-pad">
+      <h2>Backpacker energy.<br>Boutique comfort.</h2>
+      ${photo(designPhoto(11), "The entrance and reception at Fools Inn")}
+      <p>Fools Inn is like a backpackers, but better. Check into a private en-suite room or a female-only dorm. Get some work done. Go for a walk on the Sea Point Promenade or a dip at Saunders' Beach. And end your day with new friends at ${onlyFools()} or the ${ponyUp("Pony Up Rooftop Bar")}. Experience it all from your home base in the heart of Sea Point.</p>
     </section>
-    <section class="intro-strip" aria-label="Site sections">
-      ${stat("bed", "Private en-suite", "Your own room. Your own lock.")}
-      ${stat("compass", "Ocean two minutes away", "Promenade, surf, sunset, repeat.")}
-      ${stat("calendar", `${ponyUp("Pony Up rooftop")}`, "Meet people, keep your privacy.")}
-    </section>
-    <section class="proof-strip">
-      <p>Don't take our word for it. Thousands of happy guests have stayed with Fools Inn since 2021.</p>
-      <span>★★★★★</span>
-    </section>
-    ${introSection()}
-    ${pillars()}
-    ${section("Stay", "Simple rooms in the heart of Sea Point.", roomCards() + `<a class="text-link" href="/rooms" data-link>Explore accommodation ${icon("arrow")}</a>`)}
-    ${toursPreview()}
-    ${neighbourhoodPreview()}
-    ${tourFaqs()}
-    ${galleryPage(true)}
-    ${bookingPage(true)}
+    ${photoStrip([15, 3, 8, 13], ["Cape Town beach and mountains", "A sunny afternoon by the ocean", "Fools Inn cap and sunglasses", "A beach day in Cape Town"])}
+    ${adventureSection()}
+    ${testimonials()}
+    ${faqSection()}
   `;
+}
+
+function photoStrip(numbers, labels) {
+  return `<div class="photo-strip" aria-label="Life at Fools Inn">${numbers.map((n, i) => photo(designPhoto(n), labels[i])).join("")}</div>`;
+}
+
+function scrollControls(id) {
+  return `<div class="scroll-controls"><button type="button" data-scroll="${id}" data-direction="-1" aria-label="Scroll back" title="Scroll back">${icon("chevron")}</button><button type="button" data-scroll="${id}" data-direction="1" aria-label="Scroll forward" title="Scroll forward">${icon("chevron")}</button></div>`;
+}
+
+function bindTestimonialsCarousel() {
+  const section = document.querySelector(".testimonials");
+  if (!section) return () => {};
+
+  const track = section.querySelector(".review-track");
+  const originals = Array.from(track.children);
+  if (originals.length < 2) return () => {};
+  const copies = originals.map((review) => {
+    const copy = review.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    copy.setAttribute("tabindex", "-1");
+    track.appendChild(copy);
+    return copy;
+  });
+  const cleanups = [];
+  const listen = (target, type, handler) => {
+    target.addEventListener(type, handler);
+    cleanups.push(() => target.removeEventListener(type, handler));
+  };
+  const speed = 30; // Pixels per second, independent of the display refresh rate.
+  let hovered = window.matchMedia("(hover: hover)").matches &&
+    [...originals, ...copies].some((review) => review.matches(":hover"));
+  let position = track.scrollLeft;
+  let appliedScroll = position;
+  let lastTime;
+  let frame;
+  let selectedReview = null;
+
+  const selectReview = (index) => {
+    selectedReview = selectedReview === index ? null : index;
+    // Keep the repeated copy in sync when the carousel crosses its loop boundary.
+    [...originals, ...copies].forEach((review, position) => {
+      const selected = position % originals.length === selectedReview;
+      review.classList.toggle("review-selected", selected);
+      review.setAttribute("aria-pressed", String(selected));
+    });
+  };
+
+  for (const [index, review] of [...originals, ...copies].entries()) {
+    listen(review, "click", () => selectReview(index % originals.length));
+    listen(review, "keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      if (!event.repeat) selectReview(index % originals.length);
+    });
+    listen(review, "pointerenter", (event) => {
+      if (event.pointerType !== "touch") hovered = true;
+    });
+    listen(review, "pointerleave", (event) => {
+      if (event.pointerType !== "touch") hovered = false;
+    });
+  }
+
+  const loopWidth = () => copies[0].offsetLeft - originals[0].offsetLeft;
+  const moveTo = (value) => {
+    const width = loopWidth();
+    if (width <= 0) return;
+    position = ((value % width) + width) % width;
+    track.scrollTo({ left: position, behavior: "instant" });
+    appliedScroll = track.scrollLeft;
+  };
+
+  listen(track, "carouselstep", (event) => {
+    const step = originals[1].offsetLeft - originals[0].offsetLeft;
+    moveTo(position + event.detail * step);
+  });
+
+  const animate = (time) => {
+    // Retain fractional pixels; reading scrollLeft each frame can round slow motion away.
+    const elapsed = lastTime === undefined ? 0 : Math.min(time - lastTime, 64);
+    lastTime = time;
+    if (Math.abs(track.scrollLeft - appliedScroll) > 1) position = track.scrollLeft;
+    if (!hovered) moveTo(position + speed * elapsed / 1000);
+    frame = window.requestAnimationFrame(animate);
+  };
+  frame = window.requestAnimationFrame(animate);
+
+  return () => {
+    window.cancelAnimationFrame(frame);
+    cleanups.forEach((cleanup) => cleanup());
+    copies.forEach((copy) => copy.remove());
+  };
+}
+
+function adventureSection() {
+  const items = [
+    ["Work", 6, "Laptop time between adventures", "Digital nomads, this one's for you. We're making remote working make sense. Fast WiFi, proper desks, and a five-minute walk to Sea Point's freshest coffee."],
+    ["Explore", 5, "Lion's Head above Sea Point", "Take a mid-day surf break, hike up Lion's Head for sunset, or stroll along Sea Point Promenade whenever you want."],
+    ["Play", 1, "Coffee and good company in Sea Point", `Raise a glass to new friends at ${onlyFools()} or take the party upstairs to ${ponyUp("Pony Up Rooftop Bar")}. Good drinks, good music and even better company are just outside your door.`],
+    ["Sleep", 10, "A private room at Fools Inn", "Choose a private en-suite room or a bed in our female-only dorms. Both give you a comfortable place to rest before doing it all again tomorrow."]
+  ];
+  return `<section class="adventure-section section-pad theme-yellow">
+    <div class="section-heading"><h2>Choose your own adventure.</h2><p>Work a little, explore a lot, and meet some people along the way. The best coffee, the best food, the best beaches, and the best trails in Cape Town are on your doorstep. Where you go next is up to you.</p></div>
+    ${scrollControls("adventure-track")}
+    <div class="adventure-grid" id="adventure-track">${items.map(([title, image, alt, copy]) => `<article>${photo(designPhoto(image), alt)}<h3>${title}</h3><p>${copy}</p></article>`).join("")}</div>
+  </section>`;
+}
+
+function testimonials() {
+  const reviews = [
+    ["Great location for a good price. Clean and well kept.", "Van", "Switzerland"],
+    ["Central location and friendly staff. Good for a quick short stay and within distance to all restaurants and bars! They do have a nice secure place for luggage storage.", "Nemi", "the UK"],
+    ["The room is clean and has everything you need for a short stay. The location is fantastic and the staff were lovely.", "Rachel", "the USA"],
+    ["The location and the staff were very helpful and understanding.", "Maryke", "Brazil"],
+  ];
+  return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
+    <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Some guests make friends, some become friends, and some keep coming back. Get the scoop.</p></div></div>
+    ${scrollControls("review-track")}
+    <div class="review-track" id="review-track" tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" role="button" tabindex="0" aria-pressed="false"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
+  </section>`;
 }
 
 function roomsPage() {
-  return pageShell("Stay", "You've outgrown the 20-bed dorm.", `You still want the people, the stories, and the energy - just with a door that locks and a bed that's yours. Fools Inn gives you private en-suite rooms above ${onlyFools()}, with ${ponyUp("Pony Up Rooftop Bar")} close enough when you want the scene.`, roomCards());
+  return `${hero("Meet you back at ours", designPhoto(23), {alt: "A sunny seaside afternoon"})}
+    <section class="section-pad room-listing">
+      <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="/book-now" data-link>Book Now ${icon("arrow")}</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
+      <div class="room-grid" id="our-rooms">
+        ${roomCard("Private Rooms", "Your own space. Your own pace.", "A comfortable private room with an en-suite bathroom, comfortable double bed and dedicated workspace for switching off or logging on.", 20, "/rooms/private")}
+        ${roomCard("Female-Only Dorms", "Good company included.", "A comfortable and secure shared stay for female travellers, with an en-suite bathroom and space to unpack.", 21, "/rooms/female-dorm")}
+      </div>
+    </section>
+    ${lifestyleSection(false)}`;
+}
+
+function roomCard(title, tag, description, image, href) {
+  return `<article class="room-card">${photo(designPhoto(image), title + " at Fools Inn")}
+    <div class="room-card-body"><h3>${title}</h3><p class="room-tag">${tag}</p><p>${description}</p><a class="text-link" href="${href}" data-link>View ${title} ${icon("arrow")}</a></div></article>`;
+}
+
+function roomPage(room) {
+  return `${hero(room.heading, designPhoto(room.hero), {alt: room.heading})}
+    <section class="room-description theme-${room.theme}">
+      <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="text-link" href="/book-now?room=${encodeURIComponent(room.title)}" data-link>Book your stay ${icon("arrow")}</a></div></div>
+      ${photoStrip(room.photos, room.photos.map((_, i) => room.title + " interior, view " + (i + 1)))}
+    </section>
+    <section class="amenities section-pad ${room.theme === "pink" ? "theme-red" : "theme-blue"}">
+      <div class="amenities-photos">${photo(designPhoto(room.amenityPhoto), room.theme === "pink" ? "Colourful beachwear on pink shower tiles" : "Ready for a beach day")}${photo(designPhoto(room.photos[0]), room.title + " at Fools Inn", "amenities-secondary")}</div>
+      <div><h2>Amenities</h2><ol>${room.amenities.map((item, i) => `<li><span>[ ${String(i + 1).padStart(2, "0")} ]</span>${item}</li>`).join("")}</ol></div>
+    </section>`;
+}
+
+function lifestyleSection(tour = false) {
+  return `<section class="lifestyle section-pad ${tour ? "theme-navy" : "theme-yellow"}">
+    <p class="lifestyle-intro">${tour ? "Salt in your hair. Cape Town at your feet. A shark gliding past the cage or wildlife wandering into view at an Etosha waterhole. These are the days that get you up early, turn strangers into friends, and leave you with a camera roll filled with experiences to take back home." : "You'll know you've settled in when the faces downstairs become familiar, yesterday's stranger is today's adventure buddy, and the local barista knows your order. Fools Inn gives you the space to make yourself comfortable, and enough happening around you to make every day different. Stay for a good time or a long time, or both."}</p>
+    <figure class="lifestyle-wide">${photo(designPhoto(tour ? 38 : 19), tour ? "A Cape Town beach with yellow umbrellas" : "Friends on the beach with a portable radio")}<figcaption>${tour ? "Swim, surf and kayak in our backyard." : "Book your room at Fools Inn and this could be you on a random Tuesday."}</figcaption></figure>
+    <div class="lifestyle-pair">
+      <figure>${photo(designPhoto(tour ? 37 : 18), tour ? "Enjoying a drink in the sunshine" : "Friends sharing a drink at Pony Up")}<figcaption>${tour ? "Your camera roll will thank you." : `${ponyUp("Pony Up Rooftop Bar")} has the bevs, the food and the company you've been looking for.`}</figcaption></figure>
+      <figure>${photo(designPhoto(tour ? 40 : 22), tour ? "A group ready for their next adventure" : "Fools Inn cap on a sunny day")}<figcaption>${tour ? "It's hard to choose just one experience, but you don't have to. Line 'em up!" : "You'll get the hype once you're here."}</figcaption></figure>
+    </div>
+  </section>`;
 }
 
 function toursPage() {
-  const groups = ["Ocean & Adventure", "Social & Sunset", "Work & Wander"].map((category) => {
-    const cards = tours.filter((tour) => tour.category === category).map((tour) => tourCard(tour)).join("");
-    return `<section class="tour-group"><p class="eyebrow">${category}</p><div class="tour-card-grid">${cards}</div></section>`;
-  }).join("");
-  return pageShell("Experiences", "Cape Town experiences, booked from your Sea Point base.", "Small groups, active days, ocean routes and local favourites shaped for guests who want more than a bed. Each Fools Inn experience includes a food or beverage voucher where noted.", `${groups}<section class="closing-cta"><h2>Ready to plan the day?</h2><p>Ask at reception or book below to lock your spot.</p><a class="primary-button" href="/book-now" data-link>Book an experience ${icon("arrow")}</a></section>${tourFaqs()}`);
+  return `${hero("Get out there", designPhoto(51), {alt: "A surfboard loaded onto a car for an adventure", intro: "We've curated small-group tours in Cape Town and beyond. No big buses and no flags to follow. Just proper adventures, expert guides and the best memories."})}
+    <section class="tours-section section-pad theme-yellow" id="adventures">
+      <h2>Click for adventure.</h2>
+      <div class="tour-grid">${tours.map((tour, i) => tourCard(tour, i)).join("")}</div>
+    </section>
+    ${lifestyleSection(true)}`;
 }
 
-function tourCard(tour) {
-  return `
+function tourCard(tour, index) {
+  return `<details class="tour-item" ${index === 0 ? "open" : ""}>
+    <summary>${tour.title}<span aria-hidden="true">+</span></summary>
     <article class="tour-card">
-      <div class="tour-image photo-panel" style="--photo: url('${asset(tourImage(tour))}')"></div>
-      <div class="tour-card-body">
-        <p>${tour.tag}</p>
-        <h3>${tour.title}</h3>
-        <div class="tour-meta">
-          <strong>${tour.price}</strong>
-          <span>${tour.duration}</span>
-        </div>
-        <span>${tour.description}</span>
-        <div class="voucher-strip">${tour.voucher}</div>
-        <ul>
-          ${tour.details.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-        <a href="/book-now" data-link>Book via Activitar</a>
+      <div class="tour-image">${photo(tour.image, tour.title)}<span class="tour-price">${tour.price}</span></div>
+      <div class="tour-card-body"><h3>${tour.title}</h3><p class="tour-duration">${tour.duration}</p><p>${tour.description}</p>
+        <div class="tour-inclusions"><p>${tour.voucher}</p><ul>${tour.details.map((item) => `<li>${item}</li>`).join("")}</ul></div>
+        <a class="button button-outline" href="${activitarUrl}" target="_blank" rel="noopener">Book Now ${icon("arrow")}</a>
       </div>
     </article>
-  `;
+  </details>`;
 }
 
-function galleryPage(compact = false) {
-  const images = compact ? gallery.slice(0, 6) : liveGalleryImages.map((file, index) => [`Fools Inn ${index + 1}`, file, "gallery"]);
-  return pageShell(
-    "Gallery",
-    compact ? "Shot like a phone gallery, not a studio." : "Unfiltered, loud, trendy and a little random.",
-    compact ? "" : "The full gallery from the live Fools Inn site, carried over here as lazy-loaded mobile-friendly tiles.",
-    `<div class="${compact ? "gallery-grid" : "live-gallery-grid"}">${images.map(([label, image, dir], index) => galleryTile(label, image, dir, index, compact)).join("")}</div>`
-  );
+function syncTourLayout() {
+  document.querySelectorAll(".tour-item").forEach((item, index) => {
+    item.open = !mobileViewport.matches || index === 0;
+  });
+}
+
+function faqSection(standalone = false) {
+  const headings = ["Booking & Payment", "Checking In & Out", "Rooms & Amenities", "Food, Drinks & Remote Work", "Location & Things to Do in Sea Point"];
+  return `<section class="faqs section-pad theme-pink ${standalone ? "standalone" : ""}">
+    <div class="section-heading">${standalone ? "<h1>FAQs</h1>" : "<h2>FAQs</h2>"}<p>Got questions? We've got answers. If you don't see what you're looking for, just <a class="inline-link" href="/contact" data-link>drop us a message</a>; we're around.</p></div>
+    <div class="faq-groups">${faqSections.map((group, i) => `<details class="faq-category"><summary>${headings[i]}<span aria-hidden="true">+</span></summary><div class="faq-questions">${group.items.map(([question, answer]) => `<details><summary>${question}<span aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join("")}</div></details>`).join("")}</div>
+  </section>`;
 }
 
 function contactPage() {
-  return `
-    <section class="contact-section page-contact">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2>We would love to hear from you.</h2>
-        <p>Need a room, a route, or help getting your stay together? Use the live Fools Inn contact details below.</p>
-        ${contactCards()}
-      </div>
-      ${contactForm()}
+  return `${hero("Don't be a stranger", designPhoto(56), {alt: "Friends looking out across the beach"})}
+    <section class="contact-section section-pad">
+      <div><h2>Let's chat.</h2><p>Need a room, an adventure or a little local advice? Pop us a message.</p></div>
+      <div>${contactForm()}${contactCards()}</div>
     </section>
-  `;
-}
-
-function blogPage() {
-  return pageShell(
-    "Blog",
-    "Field notes from Sea Point.",
-    "The live Fools Inn blog content, brought into the new site and shaped for easier reading on mobile.",
-    `<div class="blog-row">${blogPosts.map((post) => blogArticle(post)).join("")}</div>`
-  );
-}
-
-function faqsPage() {
-  return pageShell(
-    "FAQs",
-    "Got questions? We've got answers.",
-    "If you don't see what you're looking for, just drop us a message, we're around.",
-    `<div class="faq-page-grid">${faqSections.map((section) => faqGroup(section)).join("")}</div>`
-  );
-}
-
-function bookingPage(compact = false) {
-  return `
-    <section class="${compact ? "booking-section" : "booking-section page-booking"}">
-      <div>
-        <p class="eyebrow">Book Now</p>
-        <h2>Book the room. Chase the sun.</h2>
-        <p>Booking links, tour widgets and direct calls to action will sit here once the final Activitar details are supplied.</p>
-      </div>
-      <a class="primary-button" href="${activitarUrl}" target="_blank" rel="noopener" aria-label="Start booking on Activitar">Start booking ${icon("arrow")}</a>
-    </section>
-  `;
-}
-
-function faqGroup(section) {
-  return `
-    <section class="faq-group">
-      <h2>${section.title}</h2>
-      <div class="faq-accordion">
-        ${section.items.map(([question, answer], index) => `
-          <details ${index === 0 ? "open" : ""}>
-            <summary>${question}</summary>
-            <p>${answer}</p>
-          </details>
-        `).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function roomCards() {
-  return `<div class="card-grid">${rooms.map(([title, tag, detail, image, amenities]) => `
-    <article class="room-card">
-      <div class="room-image photo-panel" style="--photo: url('${asset(image)}')"></div>
-      <div class="room-card-body">
-        <p>${tag}</p>
-        <h3>${title}</h3>
-        <span>${detail}</span>
-        <div class="amenity-list">${amenities.map((item) => `<small>${item}</small>`).join("")}</div>
-      </div>
-    </article>
-  `).join("")}</div>`;
-}
-
-function toursPreview() {
-  const featured = ["Private Surf Experience", "Lion's Head Sunrise or Sunset Hike", "Cape Peninsula Small-Group Day Trip", "Stellenbosch Wine & Work"];
-  return `
-    <section class="split-section">
-      <div>
-        <p class="eyebrow">Experiences</p>
-        <h2>Active Cape Town days, easy to book from your stay.</h2>
-        <p>Ocean mornings, sunset hikes, wine-and-work days, and social routes that feel more like a good tip than a brochure.</p>
-      </div>
-      <div class="tour-list">
-        ${tours.filter((tour) => featured.includes(tour.title)).map((tour) => `<a href="/tours" data-link><span>${tour.title}</span><small>${tour.duration}</small>${icon("chevron")}</a>`).join("")}
-      </div>
-    </section>
-  `;
+    <section class="map-section section-pad theme-red">
+      <iframe title="Fools Inn at 82 Regent Road, Sea Point" src="https://maps.google.com/maps?q=82%20Regent%20Road%2C%20Sea%20Point%2C%20Cape%20Town&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Get directions ${icon("arrow")}</a></div>
+    </section>`;
 }
 
 function contactForm() {
-  return `
-    <form class="contact-form">
-      <label>Name<input type="text" placeholder="Guest name"></label>
-      <label>Email<input type="email" placeholder="guest@example.com"></label>
-      <label>Message<textarea placeholder="Tell us what you need"></textarea></label>
-      <a class="form-button" href="${contactDetails.emailHref}">Send enquiry</a>
-    </form>
-  `;
+  return `<form class="contact-form">
+    <div class="form-grid">
+      <label>Name<input name="name" autocomplete="given-name" required maxlength="100"></label>
+      <label>Surname<input name="surname" autocomplete="family-name" maxlength="100"></label>
+      <label>Phone number<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+    </div>
+    <label>Your message<textarea name="message" rows="4" required maxlength="5000"></textarea></label>
+    <button class="button" type="submit">Send my message ${icon("arrow")}</button>
+    <p class="form-status" role="status"></p>
+  </form>`;
 }
 
 function contactCards() {
-  return `
-    <div class="contact-card-grid">
-      <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.address)}" target="_blank" rel="noopener">${icon("map")}<span><strong>Our Location</strong>${contactDetails.address}</span></a>
-      <a href="${contactDetails.phoneHref}">${icon("phone")}<span><strong>Our Phone</strong>${contactDetails.phone}</span></a>
-      <a href="${contactDetails.emailHref}">${icon("mail")}<span><strong>Mail Address</strong>${contactDetails.email}</span></a>
-      ${socialLinks.map(([label, href]) => `<a href="${href}" target="_blank" rel="noopener">${icon("social")}<span><strong>Social</strong>${label}</span></a>`).join("")}
-    </div>
-  `;
+  return `<div class="contact-details">
+    <a href="${contactDetails.phoneHref}">${icon("phone")}<span><strong>Phone number</strong>${contactDetails.phone}</span></a>
+    <a href="${contactDetails.emailHref}">${icon("mail")}<span><strong>Email address</strong>${contactDetails.email}</span></a>
+    <a href="${mapsUrl()}" target="_blank" rel="noopener">${icon("map")}<span><strong>Our location</strong>${contactDetails.address}</span></a>
+  </div>`;
 }
 
-function blogArticle(post) {
-  return `
-    <article class="blog-article">
-      <div class="blog-image photo-panel" style="--photo: url('${asset(post.image)}')"></div>
-      <div class="blog-content">
-        <span>${post.category} / ${post.date}</span>
-        <h3>${post.title}</h3>
-        <p>${post.excerpt}</p>
-        ${post.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+function mapsUrl() {
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(contactDetails.address + ", Cape Town");
+}
+
+function bookingPage() {
+  const params = currentParams();
+  return `<section class="section-pad booking-page">
+    <h1>Let's make it official.</h1>
+    <div class="section-heading"><h2>Come stay with us.</h2><div><p>Fools Inn is a boutique backpackers offering private en-suite rooms and female-only dorms in the heart of Sea Point. Come for the fast WiFi, the ${ponyUp("Pony Up Rooftop Bar")}, and the unbeatable Cape Town location; stay for the company.</p><p>Send us your dates and we'll confirm room availability and payment details with you.</p></div></div>
+    <form class="stay-enquiry">
+      <div class="form-grid">
+        <label>Room<select name="room">${["Private Rooms", "Female-Only Dorms"].map((room) => `<option ${params.get("room") === room ? "selected" : ""}>${room}</option>`).join("")}</select></label>
+        <label>Guests<select name="guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}" ${params.get("guests") === String(n) ? "selected" : ""}>${n}</option>`).join("")}</select></label>
+        <label>Check-in<input type="date" name="checkin" value="${escapeHtml(params.get("checkin") || "")}" required></label>
+        <label>Check-out<input type="date" name="checkout" value="${escapeHtml(params.get("checkout") || "")}" required></label>
+        <label>Name<input name="name" autocomplete="name" required maxlength="100"></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+        <label>Promo code<input name="code" value="${escapeHtml(params.get("code") || "")}" maxlength="40"></label>
       </div>
-    </article>
-  `;
+      <button class="button" type="submit">Enquire about my stay ${icon("arrow")}</button>
+      <p class="form-status" role="status"></p>
+    </form>
+    <div class="booking-tours theme-blue"><div><h2>Coming with plans?</h2><p>Find your next adventure and continue to Activitar for tour bookings.</p></div><a class="button" href="${activitarUrl}" target="_blank" rel="noopener">Visit Activitar ${icon("arrow")}</a></div>
+  </section>`;
 }
 
-function galleryTile(label, image, dir, index, compact) {
-  const src = asset(dir ? `${dir}/${image}` : image);
-  if (compact) {
-    return `<div class="gallery-tile tile-${index + 1} photo-panel" style="--photo: url('${src}')">${icon("camera")}<span>${label}</span></div>`;
-  }
-  return `
-    <figure class="live-gallery-tile tile-${index + 1}">
-      <img src="${src}" alt="${label}" loading="${index < 6 ? "eager" : "lazy"}" decoding="async">
-    </figure>
-  `;
+function localDate(date = new Date()) {
+  return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
 }
 
-function introSection() {
-  return `
-    <section class="intro-copy">
-      <p>You've outgrown the 20-bed dorm. You still want the people, the stories, and the energy - just with a door that locks and a bed that's yours.</p>
-      <p>Fools Inn gives you both: private en-suite rooms, a rooftop bar full of new friends, and the ocean two minutes from your door.</p>
-    </section>
-  `;
+function bindForms() {
+  document.querySelectorAll(".booking-search, .stay-enquiry").forEach((form) => {
+    const arrival = form.elements.checkin;
+    const departure = form.elements.checkout;
+    arrival.min = localDate();
+    const updateDates = () => {
+      const earliest = new Date((arrival.value || localDate()) + "T12:00:00");
+      earliest.setDate(earliest.getDate() + 1);
+      departure.min = localDate(earliest);
+      departure.setCustomValidity(departure.value && departure.value < departure.min ? "Check-out must be after check-in." : "");
+    };
+    arrival.addEventListener("change", updateDates);
+    departure.addEventListener("change", updateDates);
+    updateDates();
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      updateDates();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      if (form.matches(".booking-search")) {
+        navigate("/book-now?" + new URLSearchParams(data).toString());
+      } else {
+        const body = `Hi Fools Inn,\n\nI'd like to enquire about a stay.\nRoom: ${data.get("room")}\nGuests: ${data.get("guests")}\nCheck-in: ${data.get("checkin")}\nCheck-out: ${data.get("checkout")}\nPromo code: ${data.get("code") || "None"}\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}`;
+        openEmail(form, "Fools Inn stay enquiry", body);
+      }
+    });
+  });
+  document.querySelector(".contact-form")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const body = `${data.get("message")}\n\nFrom: ${data.get("name")} ${data.get("surname")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}`;
+    openEmail(form, "Fools Inn website enquiry", body);
+  });
 }
 
-function pillars() {
-  const items = [
-    ["Work by day", "Fast WiFi, proper desks, and a five-minute walk to Sea Point's best coffee. Built for the traveller who still has a job to do."],
-    ["Wander by dusk", "Surf breaks, sunset hikes, and the promenade right outside; Fools Inn puts the outdoors within arm's reach."],
-    ["Meet people, keep your privacy", `Come up to ${ponyUp("Pony Up Rooftop Bar")} for the community. Go back to your own private room when you're done. No forced dorm small talk required.`],
-  ];
-  return `<section class="pillar-grid">${items.map(([title, text]) => `<article><p class="eyebrow">[ ${title} ]</p><h3>${title}</h3><span>${text}</span></article>`).join("")}</section>`;
+function openEmail(form, subject, body) {
+  location.href = contactDetails.emailHref + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  form.querySelector(".form-status").textContent = "Your email app will open with your enquiry. Send it there to reach us. You can also email " + contactDetails.email + ".";
 }
 
-function neighbourhoodPreview() {
-  return `
-    <section class="neighbourhood-band">
-      <div>
-        <p class="eyebrow">The Neighbourhood</p>
-        <h2>Sea Point is the real lobby.</h2>
-        <p>Cafes, gyms, coworking, surf checks and promenade laps sit close enough to become part of the stay.</p>
-      </div>
-      <div class="neighbourhood-photo photo-panel" style="--photo: url('${asset("sea-point.jpg")}')" aria-label="Sea Point promenade"></div>
-      <a class="secondary-button" href="/neighbourhood" data-link>Explore Sea Point</a>
-    </section>
-  `;
+function galleryPage() {
+  return pageShell("Gallery", "A little look around.", "Rooms, familiar faces and the Sea Point life.",
+    `<div class="live-gallery-grid">${liveGalleryImages.map((file, i) => `<figure>${photo("gallery/" + file, "Fools Inn gallery photograph " + (i + 1))}</figure>`).join("")}</div>`);
+}
+
+function blogPage() {
+  return pageShell("Blog", "Field notes from Sea Point.", "A few stories from your Cape Town home base.",
+    `<div class="blog-list">${blogPosts.map((post) => `<article class="blog-article">${photo(post.image, post.title)}<div><p class="eyebrow">${post.category} / ${post.date}</p><h2>${post.title}</h2>${post.body.map((copy) => `<p>${copy}</p>`).join("")}</div></article>`).join("")}</div>`);
 }
 
 function neighbourhoodPage() {
-  return pageShell(
-    "The Neighbourhood",
-    "Work by day, wander by dusk.",
-    "Sea Point gives Fools Inn its edge: promenade mornings, cafes for laptop hours, gyms for routine, ocean access for active travellers, and enough bar energy to make a Tuesday feel planned.",
-    `<div class="neighbourhood-hero photo-panel" style="--photo: url('${asset("sea-point.jpg")}')" aria-label="Sea Point promenade"></div>
+  return pageShell("The neighbourhood", "Work by day, wander by dusk.", "Promenade mornings, coffee stops and the Atlantic on your doorstep.",
+    `${photo(designPhoto(15), "Cape Town coastline and mountains", "neighbourhood-image")}
     <div class="neighbourhood-grid">
-      <article><p class="eyebrow">[ Coffee ]</p><h3>Five-minute laptop fuel</h3><span>Nearby cafes make the digital-nomad rhythm easy: work, refill, walk, repeat.</span></article>
-      <article><p class="eyebrow">[ Promenade ]</p><h3>Two minutes to the ocean</h3><span>Surf partnerships, kayak mornings, sunset walks and the Atlantic right outside.</span></article>
-      <article><p class="eyebrow">[ Social ]</p><h3>${onlyFools("Only Fools downstairs")}</h3><span>A proper local bar base without forcing anyone into dorm-hostel chaos.</span></article>
-    </div>`
-  );
-}
-
-function tourFaqs() {
-  return `
-    <section class="faq-strip">
-      <div>
-        <p class="eyebrow">[ Tour FAQs ]</p>
-        <h2>Good to know before you say yes.</h2>
-      </div>
-      <div class="faq-list">
-        <article><strong>Are tours weather dependent?</strong><span>Many outdoor and ocean tours are weather dependent. Launch and start times may be confirmed the day before.</span></article>
-        <article><strong>Is the voucher included?</strong><span>Yes. The tour content notes a food and beverage voucher as a key Fools Inn differentiator.</span></article>
-        <article><strong>Where do bookings happen?</strong><span>Final booking buttons will link through Activitar once the exact product links or embed code are supplied.</span></article>
-      </div>
-    </section>
-  `;
+      <article><h2>Coffee, then everything else.</h2><p>Nearby cafes make the remote-working rhythm easy: work, refill, walk, repeat.</p></article>
+      <article><h2>Meet you at the ocean.</h2><p>Walk the Sea Point Promenade, take a dip at Saunders' Beach, or head out on a guided kayak trip.</p><a class="text-link" href="/tours" data-link>Explore tours ${icon("arrow")}</a></article>
+      <article><h2>Good company downstairs.</h2><p>${onlyFools()} and ${ponyUp("Pony Up Rooftop Bar")} keep the food, drinks and conversation close to home.</p></article>
+    </div>`);
 }
 
 function pageShell(eyebrow, title, intro, children) {
-  return `
-    <section class="section page-shell">
-      <div class="section-heading">
-        <p class="eyebrow">${eyebrow}</p>
-        <h1>${title}</h1>
-        ${intro ? `<p>${intro}</p>` : ""}
-      </div>
-      ${children}
-    </section>
-  `;
-}
-
-function section(eyebrow, title, children) {
-  return `<section class="section"><div class="section-heading"><p class="eyebrow">${eyebrow}</p><h2>${title}</h2></div>${children}</section>`;
-}
-
-function tourImage(tour) {
-  if (/surf|kayak/i.test(tour.title)) return "sea-point.jpg";
-  if (/shark|marine|whale/i.test(tour.title)) return "clifton.jpg";
-  if (/lion|table|paragliding|skydiving/i.test(tour.title)) return "table-mountain.jpg";
-  if (/peninsula/i.test(tour.title)) return "waterfront.jpg";
-  if (/township|boerie/i.test(tour.title)) return "fools-inn-123.jpg";
-  if (/stellenbosch|wine/i.test(tour.title)) return "clifton.jpg";
-  return "waterfront.jpg";
-}
-
-function stat(iconName, label, value) {
-  return `<div class="stat">${icon(iconName)}<div><strong>${label}</strong><span>${value}</span></div></div>`;
+  return `<section class="section-pad page-shell"><div class="page-heading"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${intro}</p></div>${children}</section>`;
 }
 
 function footer() {
-  return `
-    <footer class="footer">
-      <div><strong>Fools Inn</strong><span>Sea Point * Cape Town</span></div>
-      <div class="footer-links">
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.address)}" target="_blank" rel="noopener">${icon("map")} ${contactDetails.address}</a>
-        <a href="${contactDetails.emailHref}">${icon("mail")} ${contactDetails.email}</a>
-        <a href="${contactDetails.phoneHref}">${icon("phone")} ${contactDetails.phone}</a>
-        ${socialLinks.map(([label, href]) => `<a href="${href}" target="_blank" rel="noopener">${icon("social")} ${label}</a>`).join("")}
-      </div>
-    </footer>
-  `;
+  const warm = ["/rooms", "/tours"].includes(currentPath());
+  return `<footer class="footer section-pad ${warm ? "theme-red" : "theme-yellow"}">
+    <div class="footer-top"><a class="wordmark footer-brand" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
+      <nav class="footer-links" aria-label="Explore Fools Inn">${navItems.filter(([, href]) => href !== "/book-now").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</nav>
+      <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="${contactDetails.emailHref}">${contactDetails.email}</a><a href="${contactDetails.phoneHref}">${contactDetails.phone}</a></div>
+    </div>
+    <div class="footer-bottom"><small>Copyright &copy; ${new Date().getFullYear()} Fools Inn. All rights reserved.</small><div>${socialLinks.map(([label, href]) => `<a href="${href}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">${icon("social")}</a>`).join("")}</div></div>
+  </footer>`;
 }
 
-function render() {
-  const path = normalize(currentPath());
-  const pages = {
-    "/": homePage,
-    "/rooms": roomsPage,
-    "/tours": toursPage,
-    "/neighbourhood": neighbourhoodPage,
-    "/gallery": () => galleryPage(false),
-    "/contact": contactPage,
-    "/blog": blogPage,
-    "/faqs": faqsPage,
-    "/book-now": () => bookingPage(false),
-  };
-  layout((pages[path] || homePage)());
+function currentRoute() {
+  return location.protocol === "file:" ? location.hash.replace(/^#/, "") || "/" : location.pathname + location.search;
 }
 
 function currentPath() {
-  if (location.protocol === "file:") {
-    return location.hash.replace(/^#/, "") || "/";
-  }
-  return location.pathname;
+  return currentRoute().split("?")[0].replace(/\/$/, "") || "/";
 }
 
-function normalize(path) {
-  return navItems.some(([, href]) => href === path) ? path : "/";
+function currentParams() {
+  return new URLSearchParams(currentRoute().split("?")[1] || "");
 }
 
+function render() {
+  const path = currentPath();
+  const pages = {
+    "/": homePage, "/rooms": roomsPage, "/tours": toursPage,
+    "/neighbourhood": neighbourhoodPage, "/gallery": galleryPage,
+    "/contact": contactPage, "/blog": blogPage, "/faqs": () => faqSection(true),
+    "/book-now": bookingPage,
+  };
+  document.title = "Fools Inn | " + (roomDetails[path]?.title || ({"/": "Boutique Backpackers in Sea Point", "/rooms": "Rooms", "/tours": "Cape Town Tours", "/contact": "Contact", "/faqs": "FAQs", "/gallery": "Gallery", "/blog": "Blog", "/book-now": "Plan Your Stay", "/neighbourhood": "Sea Point"}[path] || "Sea Point"));
+  layout(roomDetails[path] ? roomPage(roomDetails[path]) : (pages[path] || homePage)());
+}
+
+mobileViewport.addEventListener("change", syncTourLayout);
 window.addEventListener("popstate", render);
 window.addEventListener("hashchange", render);
 render();

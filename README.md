@@ -33,6 +33,11 @@ npm run build -- --client-preview
 
 - Booking links currently point to Activitar and should be replaced with final
   product-specific booking URLs when supplied.
-- Gallery and room imagery are temporary assets copied from the existing Fools
-  Inn website.
+- The redesign follows the supplied desktop and mobile layouts. Optimised
+  photographs extracted from the supplied PDF are in `src/assets/old-site/design`.
+- Room detail pages are available at `/rooms/private` and `/rooms/female-dorm`.
+- Stay enquiries and contact messages open a prefilled email in the guest's
+  email app. They do not submit to a backend or confirm a reservation.
+- On mobile, tours expand individually and FAQ categories contain the full
+  approved questions and answers. Gallery and blog content remain available.
 - The contact details match the current public Fools Inn site.
