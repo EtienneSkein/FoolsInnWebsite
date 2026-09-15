@@ -29,6 +29,46 @@ For a client-friendly preview folder that can be opened directly from
 npm run build -- --client-preview
 ```
 
+## Deployment
+
+The site is hosted on Cloudflare Workers and is live at
+<https://fools-inn.etienneskein97.workers.dev>.
+
+```bash
+npm run deploy
+```
+
+That builds and publishes in one step. `wrangler.toml` serves `dist/` as static
+assets with `not_found_handling = "single-page-application"`, which is what
+makes client-side routes like `/rooms` return a real 200 on a hard refresh or a
+shared link. Without it the asset router redirects them back to `/`.
+
+To preview the deployed configuration locally:
+
+```bash
+npm run cf-dev
+```
+
+Pushes to `main` deploy automatically via `.github/workflows/deploy.yml`, which
+needs two repository secrets: `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID`. Until those are set, deploy manually with the command
+above.
+
+### Hosting somewhere other than the domain root
+
+Cloudflare serves the site from the root, so no extra configuration is needed.
+For a host that serves from a subpath, such as a GitHub Pages project site,
+build with a base:
+
+```bash
+node build.mjs --base=FoolsInnWebsite
+```
+
+That rewrites the asset URLs, sets `window.__BASE_PATH__` for the client router,
+writes a `404.html` copy of `index.html` as an SPA fallback, and adds
+`.nojekyll`. Note that on GitHub Pages deep links still return a 404 status
+while rendering correctly, because the fallback is the 404 page.
+
 ## Project notes
 
 - Booking links currently point to Activitar and should be replaced with final
