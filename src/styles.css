@@ -1179,9 +1179,16 @@ details[open]>summary>span {
     font-size: 12px;
     line-height: 1.35;
   }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
   .announcement a {
-    padding: 7px 10px;
-    font-size: 11px;
+    min-height: 44px;
+    justify-content: center;
+    padding: 7px 12px;
+    font-size: 12px;
     white-space: normal;
     text-align: center;
   }
@@ -1202,7 +1209,7 @@ details[open]>summary>span {
   }
   .book-link {
     padding: 9px 13px;
-    min-height: 42px;
+    min-height: 44px;
     font-size: 13px;
   }
   .menu-button {
@@ -1693,5 +1700,22 @@ details[open]>summary>span {
   *,*::before,*::after {
     scroll-behavior: auto!important;
     transition: none!important;
+  }
+}
+
+/* Touch targets are about the input device, not the viewport width.
+   A phone in landscape is 844px wide and a tablet is 768-834px, so the
+   max-width:700px rules never reach them - but they are still operated
+   with a finger. Key the 44px minimum off pointer:coarse instead. */
+@media (pointer: coarse) {
+  .brand,
+  .book-link,
+  .announcement a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .announcement a {
+    justify-content: center;
   }
 }
