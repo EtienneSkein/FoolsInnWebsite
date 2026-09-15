@@ -7,3 +7,6 @@ dist
 *.tar.gz
 audit-*.png
 .deploy
+
+# wrangler local state
+.wrangler

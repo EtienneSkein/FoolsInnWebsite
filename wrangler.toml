@@ -1,0 +1,19 @@
+# Cloudflare Workers deployment for the Fools Inn site.
+#
+# `npm run build` produces:
+#   dist/index.html, dist/src/...   -> served as static assets
+#   dist/server/index.js            -> the Worker, which falls back to
+#                                      index.html so client-side routes
+#                                      like /rooms resolve on a hard refresh
+name = "fools-inn"
+main = "dist/server/index.js"
+compatibility_date = "2026-05-01"
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+# Client-side routes like /rooms have no matching file. Without this the
+# asset router 307s them back to /, losing the route on a hard refresh or
+# a shared link. "single-page-application" serves index.html at the
+# original URL with a 200 instead.
+not_found_handling = "single-page-application"

@@ -316,6 +316,10 @@ function cloudbedsLink(data) {
   if (code) url.searchParams.set("promo", code);
   return url.toString();
 }
+// "" for root hosting, "/FoolsInnWebsite" when built with --base for
+// GitHub Pages project sites. Set by the build before this script loads.
+const basePath = (window.__BASE_PATH__ || "").replace(/\/+$/, "");
+
 const root = document.getElementById("root");
 
 function asset(file) {
@@ -330,7 +334,7 @@ function asset(file) {
     return `${base}/${file}`;
   }
 
-  return `/src/assets/old-site/${file}`;
+  return `${basePath}/src/assets/old-site/${file}`;
 }
 
 function ponyUp(label = "Pony Up") {
@@ -427,7 +431,7 @@ function navigate(href) {
   if (location.protocol === "file:") {
     location.hash = href;
   } else {
-    history.pushState({}, "", href);
+    history.pushState({}, "", basePath + href);
     render();
   }
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -921,7 +925,12 @@ function footer() {
 }
 
 function currentRoute() {
-  return location.protocol === "file:" ? location.hash.replace(/^#/, "") || "/" : location.pathname + location.search;
+  if (location.protocol === "file:") return location.hash.replace(/^#/, "") || "/";
+  let path = location.pathname;
+  if (basePath && (path === basePath || path.startsWith(basePath + "/"))) {
+    path = path.slice(basePath.length) || "/";
+  }
+  return path + location.search;
 }
 
 function currentPath() {
