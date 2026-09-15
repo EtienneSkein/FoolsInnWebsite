@@ -297,6 +297,22 @@ const liveGalleryImages = [
   "2k6a3476.jpg", "2k6a3486.jpg", "2k6a3511.jpg", "2k6a3514.jpg",
 ];
 const activitarUrl = "https://activitar.com/";
+const cloudbedsUrl = "https://us2.cloudbeds.com/en/reservation/0d7YI3?currency=zar";
+
+// Hand the booking bar's dates, guests and promo code to the Cloudbeds
+// booking engine so the guest lands on availability already filled in.
+function cloudbedsLink(data) {
+  const url = new URL(cloudbedsUrl);
+  const checkin = data.get("checkin");
+  const checkout = data.get("checkout");
+  const guests = data.get("guests");
+  const code = (data.get("code") || "").toString().trim();
+  if (checkin) url.searchParams.set("checkin", checkin);
+  if (checkout) url.searchParams.set("checkout", checkout);
+  if (guests) url.searchParams.set("adults", guests);
+  if (code) url.searchParams.set("promo", code);
+  return url.toString();
+}
 const root = document.getElementById("root");
 
 function asset(file) {
@@ -780,7 +796,7 @@ function bindForms() {
       if (!form.reportValidity()) return;
       const data = new FormData(form);
       if (form.matches(".booking-search")) {
-        navigate("/book-now?" + new URLSearchParams(data).toString());
+        window.open(cloudbedsLink(data), "_blank", "noopener");
       } else {
         const body = `Hi Fools Inn,\n\nI'd like to enquire about a stay.\nRoom: ${data.get("room")}\nGuests: ${data.get("guests")}\nCheck-in: ${data.get("checkin")}\nCheck-out: ${data.get("checkout")}\nPromo code: ${data.get("code") || "None"}\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}`;
         openEmail(form, "Fools Inn stay enquiry", body);
