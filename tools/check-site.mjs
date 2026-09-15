@@ -8,7 +8,7 @@ const source = readFileSync("src/main.js", "utf8");
 const index = readFileSync("index.html", "utf8");
 assert.ok(index.includes('href="/src/styles.css"'), "Styles load when refreshing nested room routes");
 assert.ok(index.includes('src="/src/main.js"'), "Scripts load when refreshing nested room routes");
-const routes = ["/", "/rooms", "/rooms/private", "/rooms/female-dorm", "/tours", "/neighbourhood", "/gallery", "/contact", "/blog", "/faqs", "/book-now"];
+const routes = ["/", "/rooms", "/rooms/private", "/rooms/female-dorm", "/tours", "/neighbourhood", "/gallery", "/contact", "/blog", "/faqs", "/book-now", "/terms"];
 
 function harness(protocol = "http:", mobile = false) {
   const root = { innerHTML: "" };
@@ -58,6 +58,13 @@ for (const protocol of ["http:", "file:"]) {
   assert.equal((env.root.innerHTML.match(/<details><summary>/g) || []).length, 17);
   assert.ok(env.root.innerHTML.includes("https://onlyfools.co.za/"));
   assert.ok(env.root.innerHTML.includes("https://www.instagram.com/_p0nyup_/"));
+  if (protocol === "file:") env.location.hash = "#/terms";
+  else env.location.pathname = "/terms";
+  env.context.render();
+  assert.equal((env.root.innerHTML.match(/<section><h3>/g) || []).length, 13);
+  assert.ok(env.root.innerHTML.includes(vm.runInContext("stayPaymentPolicy", env.context)), "Terms and FAQ share one payment policy");
+  assert.ok(env.root.innerHTML.includes("design/terms-stars.jpg"));
+  assert.ok(env.document.title.includes("Terms & Conditions"));
   if (protocol === "file:") env.location.hash = "#/book-now?room=Female-Only%20Dorms&guests=3&code=%22%3E%3Cscript%3E";
   else { env.location.pathname = "/book-now"; env.location.search = "?room=Female-Only%20Dorms&guests=3&code=%22%3E%3Cscript%3E"; }
   env.context.render();
@@ -75,6 +82,28 @@ for (const mobile of [false, true]) {
 }
 
 const env = harness();
+const embedUrl = new URL(env.context.mapEmbedUrl());
+assert.equal(embedUrl.origin, "https://www.google.com");
+assert.equal(embedUrl.pathname, "/maps/embed");
+assert.ok(embedUrl.searchParams.get("pb").includes("82 Regent Road, Sea Point, Cape Town"));
+const directions = new URL(env.context.directionsUrl());
+assert.equal(directions.pathname, "/maps/dir/");
+assert.equal(directions.searchParams.get("api"), "1");
+assert.equal(directions.searchParams.get("destination"), "82 Regent Road, Sea Point, Cape Town, South Africa");
+assert.ok(env.context.contactPage().includes('loading="eager"'));
+assert.ok(env.context.contactPage().includes("Open in Google Maps"));
+assert.ok(env.context.contactPage().includes("data-reload-map"));
+assert.deepEqual(
+  Array.from(env.context.featuredTours().matchAll(/<h3>([^<]+)<\/h3>/g), (match) => match[1]),
+  ["Kayak", "Surf", "Shark Cage Diving"],
+  "Homepage features the three tours in the revised design order",
+);
+assert.equal((env.context.toursPage().match(/class="tour-offer"/g) || []).length, 11);
+assert.equal((env.context.toursPage().match(/class="tour-inclusions"/g) || []).length, 15);
+assert.ok(env.context.homePage().includes('class="home-photo-story"'));
+assert.ok(env.context.homePage().includes("Leave a Review"));
+assert.ok(env.context.testimonials().includes('href="https://www.google.com/travel/search?'));
+assert.ok(!env.context.homePage().includes("Backpacker energy."));
 const expectedTours = [
   ["Surf", 54], ["Shark Cage Diving", 45], ["Sea Safari", 52],
   ["Kayak & Sauna", 50], ["Kayak", 55], ["Lion's Head Hike", 49],
@@ -102,7 +131,7 @@ handlers.change();
 assert.equal(departure.error, "");
 assert.ok(env.context.localDate().match(/^\d{4}-\d{2}-\d{2}$/));
 
-console.log("Passed: 11 routes over HTTP and file preview, image paths, FAQs, enquiry parameters, mobile tour states and date validation.");
+console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, enquiry parameters, mobile tour states and date validation.");
 
 const carousel = harness();
 let cardWidth = 300;

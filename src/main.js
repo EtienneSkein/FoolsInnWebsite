@@ -7,11 +7,14 @@ const navItems = [
   ["Contact", "/contact"],
   ["Blog", "/blog"],
   ["FAQs", "/faqs"],
+  ["Terms & Conditions", "/terms"],
   ["Book Now", "/book-now"],
 ];
 
 const ponyUpInstagram = "https://www.instagram.com/_p0nyup_/";
 const onlyFoolsUrl = "https://onlyfools.co.za/";
+const stayPaymentPolicy = "Payment is made by bank transfer before you arrive. We'll send you everything you need once you've booked, so there's no scrambling on check-in day.";
+const googleReviewUrl = "https://www.google.com/travel/search?q=foolsinn%20google%20review&g2lb=4965990%2C72471280%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C73064764%2C121529350%2C121608706%2C121738283%2C121762713%2C121921501%2C121951222%2C121954673%2C122005372%2C122014428%2C122014429&hl=en-ZA&gl=za&cs=1&ssta=1&ts=CAEaRgooEiYyJDB4MWRjYzY3YmEyZDBmZWM4MToweDExZjY0NWFkM2M1MzEyZBIaEhQKBwjqDxAJGA8SBwjqDxAJGBAYATICEAA&qs=CAEyE0Nnb0lyZUtVbnEyTDJZOEJFQUU4AkIJCS0xxdNaZB8BQgkJLTHF01pkHwE&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwjo_-DzmvCWAxUAAAAAHQAAAAAQCw";
 
 const rooms = [
   ["Private Room", "Private stay", "Made for guests who like their own space without missing out on the atmosphere. Smart TV, personal fridge, en-suite bathroom and an easy Sea Point reset.", "fools-inn-2189.jpg", ["Double bed", "Table & chair", "Wardrobe", "En-suite bathroom", "WiFi", "TV"]],
@@ -24,76 +27,76 @@ const tours = [
     title: "Surf",
     image: designPhoto(54),
     category: "Ocean & Adventure",
-    price: "R3,600",
+    price: "R3,600 pp",
     voucher: `Beer and burger at ${onlyFools()}`,
     duration: "4-5 hour half-day tour",
-    tag: "Waves chased daily",
-    description: "Private and exclusive surf sessions with Cape Town's premier surf school and tour operator, from complete beginners to experienced surfers.",
+    tag: "Let's catch some waves.",
+    description: "New to surfing or already hooked? Your private guide will find the day's best spot, bring the gear and help you make the most of it.",
     details: ["Private surf van transport", "1.5-hour personalised surf lesson", "Premium gear included", "Photos captured by your coach"],
   },
   {
     title: "Shark Cage Diving",
     image: designPhoto(45),
     category: "Ocean & Adventure",
-    price: "R4,655",
-    voucher: `Palamo and pizza at ${ponyUp()}`,
+    price: "From R4,655 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "4 hours",
-    tag: "Kleinbaai adrenaline",
-    description: "Come face-to-face with the ocean's apex predators on a guided great white shark experience from The Great White House.",
+    tag: "Meet Great Whites in the Big Blue.",
+    description: "Head out from Kleinbaai, suit up, and see one of the ocean's apex predators up-close.",
     details: ["Marine biologist guidance", "Meal and onboard refreshments", "Wetsuit, booties, mask and towel", "Weather and tide dependent"],
   },
   {
     title: "Sea Safari",
     image: designPhoto(52),
     category: "Ocean & Adventure",
-    price: "R2,340 + R150 conservation fee",
-    voucher: "Food and beverage voucher included",
+    price: "From R2,340 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "45 min meeting + 2h30 at sea",
-    tag: "Dyer Island route",
-    description: "A wildlife photography favourite through Dyer Island and Shark Alley, with chances to spot whales, dolphins, seals, penguins and sharks.",
-    details: ["Tea, coffee and muffins on arrival", "Water, towels and blankets onboard", "Soup and bread after the trip", "Best whale season: June-December"],
+    tag: "Spot the Big Five of the sea.",
+    description: "Cruise around Dyer Island and keep watch for whales, dolphins, seals, penguins and sharks. Bring your camera and capture more than memories.",
+    details: ["R150 conservation fee applies", "Tea, coffee and muffins on arrival", "Water, towels and blankets onboard", "Soup and bread after the trip", "Best whale season: June-December"],
   },
   {
     title: "Kayak & Sauna",
     image: designPhoto(50),
     category: "Ocean & Adventure",
-    price: "R850",
-    voucher: "Bagel and coffee at Prom Park",
+    price: "R850 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "2 hours",
-    tag: "Ocean meets recovery",
-    description: "A coastal ritual combining Atlantic kayaking with SaunaHaus hot-and-cold Scandinavian Saunagus on the promenade.",
+    tag: "Paddle, sweat, chill.",
+    description: "Kayak along the Atlantic coastline, then warm up with a guided sauna and ice-bath ritual at SaunaHaus on the promenade.",
     details: ["Kayak, paddles and safety gear", "Local wildlife/adventure guides", "Shower facilities", "Transport excluded; 5-min Uber recommended"],
   },
   {
     title: "Kayak",
     image: designPhoto(55),
     category: "Ocean & Adventure",
-    price: "R600",
-    voucher: "Bagel and coffee at Prom Park",
+    price: "R600 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "2 hours",
-    tag: "Sea Point Promenade",
-    description: "Escape into nature from the promenade next to Green Point Lighthouse, with dolphins, penguins, seals, whales and sunfish on the possible guest list.",
+    tag: "See Sea Point from the sea.",
+    description: "Paddle out from the promenade and look back at the city. If you're lucky, some dolphins, seals, penguins, sunfish and whales might join you.",
     details: ["Expert ocean guides", "Friendly and inclusive experience", "Year-round, weather dependent", "R700 from October"],
   },
   {
     title: "Lion's Head Hike",
     image: designPhoto(49),
     category: "Ocean & Adventure",
-    price: "R1,200",
-    voucher: "Food and beverage voucher included",
+    price: "R1,200 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "3-4 hour round trip",
-    tag: "Views, torches, tea",
-    description: "A guided hike to Cape Town's famous sunrise or sunset viewpoint, with summit photos and a quieter tea/coffee stop on the way down.",
+    tag: "Get the view from the top.",
+    description: "Choose sunrise or sunset, lace up and tackle Lion's Head with a qualified guide and a few future friends. Come for the views; stay for the snacks.",
     details: ["Qualified tour guide", "Head torches and safety equipment", "Coffee, tea, biscuits and fruit", "Average fitness required"],
   },
   {
     title: "Boerie & Games",
     image: designPhoto(48),
     category: "Social & Sunset",
-    price: "R300",
-    voucher: `Hosted at ${ponyUp()}`,
+    price: "R300 pp",
+    voucher: "",
     duration: "Tuesdays",
-    tag: "Come play",
+    tag: "Come play.",
     description: `Join us at ${ponyUp()} on Tuesdays for boerie, games and a very easy way to make new friends.`,
     details: ["Tuesday social", "Boerie and games", `Hosted at ${ponyUp("Pony Up Rooftop Bar")}`],
   },
@@ -101,11 +104,11 @@ const tours = [
     title: "Skydiving",
     image: designPhoto(44),
     category: "Ocean & Adventure",
-    price: "R3,950",
-    voucher: "Food and beverage voucher included",
+    price: "R3,950 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "Approximately 2 hours",
-    tag: "10,000ft decision",
-    description: "Tandem skydive from 10,000ft with a 40-second freefall and a 6-7 minute parachute flight.",
+    tag: "Take the leap.",
+    description: "10,000-foot flying, 40-second freefall, 6-7 minutes of pure adrenaline. You'll never look at Cape Town the same again.",
     details: ["Safety briefing", "All necessary equipment", "Transport excluded", "Camera packages excluded"],
   },
   {
@@ -113,43 +116,43 @@ const tours = [
     image: designPhoto(53),
     category: "Ocean & Adventure",
     price: "R1,900 pp",
-    voucher: "Food and beverage voucher included",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "1 hour",
-    tag: "Signal Hill or Lion's Head",
-    description: "A tandem training flight with experienced instructors. Launch site and flight time depend on Cape Town's very opinionated wind.",
+    tag: "Take the scenic way down.",
+    description: "Fly tandem from Signal Hill or Lion's Head and float above the best city (in our opinion) in the world.",
     details: ["Lift back up to vehicle included", "Optional photos: R350", "All year, weather dependent", "Hi-res imagery available"],
   },
   {
     title: "Kruger on the GO",
     image: designPhoto(46),
     category: "Work & Wander",
-    price: "2026: R11,850 sharing / R12,750 single",
-    voucher: "Food and beverage voucher included",
+    price: "From R11,850 pp",
+    voucher: "",
     duration: "2 nights / 3 days",
-    tag: "Big 5 country",
-    description: "Shared road transfer from OR Tambo, two nights in a tented camp, all meals and daily open-vehicle safari drives.",
-    details: ["Shared return road transfer", "All meals and tea/coffee", "Two afternoon/evening game drives", "Two morning game drives"],
+    tag: "Go wild for a few days.",
+    description: "Spend two nights in a tented camp, head out on four Big Five game drives and let someone else sort the meals and transfers for you.",
+    details: ["2026: R11,850 sharing / R12,750 single", "Shared return road transfer", "All meals and tea/coffee", "Two afternoon/evening game drives", "Two morning game drives"],
   },
   {
     title: "Sossusvlei Budget Safari",
     image: designPhoto(47),
     category: "Work & Wander",
-    price: "N$12,000 pp sharing",
-    voucher: "Food and beverage voucher included",
+    price: "From N$12,000 pp sharing",
+    voucher: "",
     duration: "3 days / 2 nights",
-    tag: "Namib Desert",
-    description: "Small-group camping safari from Windhoek to Swakopmund through Sesriem, Dune 45, Sossusvlei, Dead Vlei and Walvis Bay.",
+    tag: "Escape to the desert.",
+    description: "Camp beneath the Namibian sky for 2 nights and explore Dune 45, Dead Vlei, Sossusvlei and Sesriem Canyon along the way.",
     details: ["Professional English-speaking guide", "Twin-share camping", "Meals and park entry fees", "Wednesday weekly departure"],
   },
   {
     title: "Etosha Budget Safari",
     image: designPhoto(43),
     category: "Work & Wander",
-    price: "N$12,000 pp sharing",
-    voucher: "Food and beverage voucher included",
+    price: "From N$12,000 pp sharing",
+    voucher: "",
     duration: "3 days / 2 nights",
-    tag: "Etosha wildlife",
-    description: "Small-group camping safari from Swakopmund to Windhoek, focused on Etosha National Park game drives and waterhole viewing.",
+    tag: "See the wild up close.",
+    description: "Spend three days chasing wildlife sightings, watching the waterholes and camping under Namibia's brightest stars.",
     details: ["Professional English-speaking guide", "Full-day Etosha open game viewer drive", "Twin-share camping", "Saturday weekly departure"],
   },
   {
@@ -157,10 +160,10 @@ const tours = [
     image: designPhoto(42),
     category: "Social & Sunset",
     price: "R950 pp",
-    voucher: "Food and beverage voucher included",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "Morning or afternoon",
-    tag: "Langa on foot",
-    description: "A walking tour with a local guide in Langa, Cape Town's oldest township, exploring community history and present-day life.",
+    tag: "Make friends in Langa.",
+    description: "Explore Cape Town's oldest township with a local guide, stopping at the museum, community projects and family homes along the way.",
     details: ["Pickup and return transfer included", "Langa museum and family visits", "Community projects", "Sundays may include gospel/church visit"],
   },
   {
@@ -168,10 +171,10 @@ const tours = [
     image: designPhoto(39),
     category: "Social & Sunset",
     price: "R1,150 pp",
-    voucher: "Food and beverage voucher included",
+    voucher: `Beer and burger at ${onlyFools()}`,
     duration: "Approximately 3 hours cycling",
-    tag: "Langa by bike",
-    description: "Cycle through Langa with a local guide, visiting cultural stops, family homes, traditional beer tasting and township landmarks.",
+    tag: "Cruise around Langa.",
+    description: "Take a three-hour ride with a local guide, cycling between Langa's landmarks, community spaces and everyday meeting places.",
     details: ["Pickup and return transfer included", "Langa Museum and Cultural Centre", "Taxi rank and old hostels", "Traditional beer tasting"],
   },
 ];
@@ -181,9 +184,9 @@ tours.push({
   image: designPhoto(41),
   category: "Ocean & Adventure",
   price: "R1,150 pp",
-  voucher: "Ask at the tour desk for the day's details",
+  voucher: `Beer and burger at ${onlyFools()}`,
   duration: "Guided hike",
-  tag: "We'll lead the way",
+  tag: "We'll lead the way.",
   description: "Cape Town has some of the most beautiful hikes in the world. And we want to take you there. Pack your hiking shoes, and we'll sort the rest.",
   details: ["Guided Cape Town route", "Route and timing confirmed with your guide"],
 });
@@ -222,7 +225,7 @@ const faqSections = [
     title: "Booking & Payment",
     items: [
       ["How do I book my stay?", "Pick your room, private en-suite or a bed in our female-only dorm, and book straight through the site. Easy."],
-      ["How do I pay?", "Payment is made by bank transfer before you arrive. We'll send you everything you need once you've booked, so there's no scrambling on check-in day."],
+      ["How do I pay?", stayPaymentPolicy],
       ["What if I need to cancel or change my dates?", "Cancellation terms depend on your room type, so check the details at checkout before you confirm. If plans change, reach out and we'll help sort it."],
       ["What do I need to bring?", "A valid photo ID and the card you booked with. That's it."],
     ],
@@ -379,7 +382,7 @@ let disposeTestimonials = () => {};
 function layout(content) {
   disposeTestimonials();
   const current = currentPath();
-  const hasHero = ["/", "/rooms", "/tours", "/contact", ...Object.keys(roomDetails)].includes(current);
+  const hasHero = ["/", "/rooms", "/tours", "/contact", "/terms", ...Object.keys(roomDetails)].includes(current);
   root.innerHTML = `
     <a class="skip-link" href="#main-content">Skip to content</a>
     <aside class="announcement">
@@ -460,6 +463,12 @@ function bindLinks() {
       track.scrollBy({ left: Number(button.dataset.direction) * track.clientWidth * 0.85, behavior: "smooth" });
     });
   });
+  document.querySelectorAll("[data-reload-map]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const frame = document.getElementById("contact-map");
+      frame.src = mapEmbedUrl();
+    });
+  });
 }
 
 function hero(title, file, options = {}) {
@@ -488,12 +497,17 @@ function homePage() {
       home: true, alt: "Only Fools restaurant below Fools Inn in Sea Point",
       intro: `Perched above one of Cape Town's favourite local bars, Fools Inn is a boutique backpackers and your home base for working, exploring and meeting people. Come for a night; stay for the week.`
     })}
-    <section class="home-intro section-pad">
-      <h2>Backpacker energy.<br>Boutique comfort.</h2>
-      ${photo(designPhoto(11), "The entrance and reception at Fools Inn")}
+    <section class="home-intro section-pad" aria-label="Your Sea Point home base">
       <p>Fools Inn is like a backpackers, but better. Check into a private en-suite room or a female-only dorm. Get some work done. Go for a walk on the Sea Point Promenade or a dip at Saunders' Beach. And end your day with new friends at ${onlyFools()} or the ${ponyUp("Pony Up Rooftop Bar")}. Experience it all from your home base in the heart of Sea Point.</p>
+      <div class="home-photo-story">
+        <figure class="home-photo-wide">${photo(designPhoto(13), "A red umbrella beside the Sea Point tidal pool")}</figure>
+        <div class="home-photo-pair">
+          <figure>${photo(designPhoto(20), "A private room with a double bed and fresh flowers")}</figure>
+          <figure>${photo(designPhoto(16), "A sunny desk and chair in a Fools Inn room")}<figcaption>This is the place. Wait till you meet the people.</figcaption></figure>
+        </div>
+      </div>
     </section>
-    ${photoStrip([15, 3, 8, 13], ["Cape Town beach and mountains", "A sunny afternoon by the ocean", "Fools Inn cap and sunglasses", "A beach day in Cape Town"])}
+    ${featuredTours()}
     ${adventureSection()}
     ${testimonials()}
     ${faqSection()}
@@ -502,6 +516,14 @@ function homePage() {
 
 function photoStrip(numbers, labels) {
   return `<div class="photo-strip" aria-label="Life at Fools Inn">${numbers.map((n, i) => photo(designPhoto(n), labels[i])).join("")}</div>`;
+}
+
+function featuredTours() {
+  const featured = ["Kayak", "Surf", "Shark Cage Diving"].map((title) => tours.find((tour) => tour.title === title));
+  return `<section class="featured-tours section-pad">
+    <div class="featured-heading"><h2>Make your stay more epic.<br>Book a curated tour.</h2><a class="button button-outline" href="/tours" data-link>Book Now ${icon("arrow")}</a></div>
+    <div class="tour-grid featured-tour-grid">${featured.map((tour) => tourCard(tour, 0, true)).join("")}</div>
+  </section>`;
 }
 
 function scrollControls(id) {
@@ -614,7 +636,7 @@ function testimonials() {
     ["The location and the staff were very helpful and understanding.", "Maryke", "Brazil"],
   ];
   return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
-    <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Some guests make friends, some become friends, and some keep coming back. Get the scoop.</p></div></div>
+    <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review ${icon("arrow")}</a></div></div>
     ${scrollControls("review-track")}
     <div class="review-track" id="review-track" tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" role="button" tabindex="0" aria-pressed="false"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
   </section>`;
@@ -664,21 +686,26 @@ function toursPage() {
   return `${hero("Get out there", designPhoto(51), {alt: "A surfboard loaded onto a car for an adventure", intro: "We've curated small-group tours in Cape Town and beyond. No big buses and no flags to follow. Just proper adventures, expert guides and the best memories."})}
     <section class="tours-section section-pad theme-yellow" id="adventures">
       <h2>Click for adventure.</h2>
-      <div class="tour-grid">${tours.map((tour, i) => tourCard(tour, i)).join("")}</div>
+      <div class="tour-grid">${tours.slice(0, 6).map((tour, i) => tourCard(tour, i)).join("")}</div>
+      <div class="tour-break"><a class="button button-light" href="#more-adventures">Explore More ${icon("arrow")}</a></div>
+      <div class="tour-grid" id="more-adventures">${tours.slice(6).map((tour, i) => tourCard(tour, i + 6)).join("")}</div>
     </section>
     ${lifestyleSection(true)}`;
 }
 
-function tourCard(tour, index) {
-  return `<details class="tour-item" ${index === 0 ? "open" : ""}>
-    <summary>${tour.title}<span aria-hidden="true">+</span></summary>
-    <article class="tour-card">
+function tourCard(tour, index, featured = false) {
+  const card = `<article class="tour-card ${featured ? "featured-tour" : ""}">
       <div class="tour-image">${photo(tour.image, tour.title)}<span class="tour-price">${tour.price}</span></div>
-      <div class="tour-card-body"><h3>${tour.title}</h3><p class="tour-duration">${tour.duration}</p><p>${tour.description}</p>
-        <div class="tour-inclusions"><p>${tour.voucher}</p><ul>${tour.details.map((item) => `<li>${item}</li>`).join("")}</ul></div>
+      <div class="tour-card-body"><h3>${tour.title}</h3><p class="tour-tagline">${tour.tag}</p><p>${tour.description}</p>
+        <div class="tour-card-actions">
+          ${tour.voucher ? `<p class="tour-offer">${tour.voucher}</p>` : ""}
+          ${featured ? "" : `<details class="tour-inclusions"><summary>Tour details ${icon("chevron")}</summary><p>${tour.duration}</p><ul>${tour.details.map((item) => `<li>${item}</li>`).join("")}</ul></details>`}
         <a class="button button-outline" href="${activitarUrl}" target="_blank" rel="noopener">Book Now ${icon("arrow")}</a>
+        </div>
       </div>
-    </article>
+    </article>`;
+  return featured ? card : `<details class="tour-item" ${index === 0 ? "open" : ""}>
+    <summary>${tour.title}<span aria-hidden="true">+</span></summary>${card}
   </details>`;
 }
 
@@ -696,6 +723,30 @@ function faqSection(standalone = false) {
   </section>`;
 }
 
+function termsPage() {
+  const sections = [
+    ["No smoking / vaping", ["Smoking and vaping are strictly prohibited anywhere on the entire premises, including rooms, balconies, common areas and outdoor spaces.", "A fine may be applicable for any breach of this rule."]],
+    ["No children", ["No children of any age are allowed on the premises, including in guest rooms, common areas and outdoor spaces."]],
+    ["No visitors", ["Visitors are not allowed in guest rooms. Only registered guests are permitted on the premises."]],
+    ["No pets", ["No pets or animals of any kind are allowed on the premises."]],
+    ["Quiet hours", ["Quiet hours are from 10:00 p.m. to 7:00 a.m. Please be considerate of other guests and keep noise to a minimum during this time."]],
+    ["COVID-19 / Communicable illness", ["We prioritise the health and safety of all our guests and staff. If you are feeling unwell, have symptoms of a contagious illness or have been in close contact with someone who is ill, please inform us immediately.", "We reserve the right to refuse entry or ask a guest to leave if there is a risk to the health and safety of others."]],
+    ["Severe weather & unsafe travel", ["In the event of severe weather conditions (e.g. storms, floods, heavy snow, etc.) or other unsafe travel conditions, we may need to cancel or reschedule your booking. In such cases, we will notify you as soon as possible and provide options for a refund or to reschedule."]],
+    ["Cancellations", ["Standard cancellation policies apply as per your booking channel or directly with us.", "In the event of severe weather, unsafe travel conditions or other extraordinary circumstances beyond our control, we may allow a flexible cancellation or rescheduling option."]],
+    ["Check-in & check-out", ["Check-in: from 3:00 p.m. Check-out: by 10:00 a.m.", "Late check-out may be available upon request and is subject to availability and additional fees."]],
+    ["Payment", [stayPaymentPolicy]],
+    ["Damage & liability", ["Guests are responsible for any damage caused to the property, rooms or furnishings during their stay.", "A charge may be applied to the credit card on file or invoiced directly."]],
+    ["Security & CCTV", ["For your safety, the premises are monitored by CCTV. We also have a secure entry system and take all reasonable measures to ensure a safe environment for our guests and staff."]],
+    ["Guest conduct", ["We expect all guests to respect our staff, property and other guests. Any behaviour deemed disruptive, illegal or against our house rules may result in you being asked to leave, with no refund."]],
+  ];
+  return `${hero("Terms & Conditions", "design/terms-stars.jpg", {alt: "Three star-shaped shadows in the sunshine"})}
+    <section class="terms-content section-pad">
+      <div class="section-heading"><h2>Thank you for choosing<br>Fools Inn</h2><p>To ensure a safe, comfortable and enjoyable stay for all our guests, please take note of the following terms and conditions:</p></div>
+      <div class="terms-sections">${sections.map(([heading, paragraphs]) => `<section><h3>${heading}</h3>${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}</section>`).join("")}</div>
+      <h2 class="terms-closing">We look forward to hosting<br>you at Fools Inn!</h2>
+    </section>`;
+}
+
 function contactPage() {
   return `${hero("Don't be a stranger", designPhoto(56), {alt: "Friends looking out across the beach"})}
     <section class="contact-section section-pad">
@@ -703,8 +754,11 @@ function contactPage() {
       <div>${contactForm()}${contactCards()}</div>
     </section>
     <section class="map-section section-pad theme-red">
-      <iframe title="Fools Inn at 82 Regent Road, Sea Point" src="https://maps.google.com/maps?q=82%20Regent%20Road%2C%20Sea%20Point%2C%20Cape%20Town&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Get directions ${icon("arrow")}</a></div>
+      <div class="map-panel">
+        <iframe id="contact-map" title="Fools Inn at 82 Regent Road, Sea Point" src="${escapeHtml(mapEmbedUrl())}" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="map-tools"><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Open in Google Maps ${icon("arrow")}</a><button type="button" class="map-reload" data-reload-map>Reload map</button></div>
+      </div>
+      <div class="map-copy"><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p><a class="text-link" href="${escapeHtml(directionsUrl())}" target="_blank" rel="noopener">Get directions ${icon("arrow")}</a></div>
     </section>`;
 }
 
@@ -734,11 +788,24 @@ function mapsUrl() {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(contactDetails.address + ", Cape Town");
 }
 
+function mapEmbedUrl() {
+  // Use the embed destination directly, without the legacy maps.google.com redirect.
+  const url = new URL("https://www.google.com/maps/embed");
+  url.search = new URLSearchParams({ origin: "mfe", pb: "!1m3!2m1!1s" + contactDetails.address + ", Cape Town!6i15" }).toString();
+  return url.href;
+}
+
+function directionsUrl() {
+  const url = new URL("https://www.google.com/maps/dir/");
+  url.search = new URLSearchParams({ api: "1", destination: contactDetails.address + ", Cape Town, South Africa" }).toString();
+  return url.href;
+}
+
 function bookingPage() {
   const params = currentParams();
   return `<section class="section-pad booking-page">
     <h1>Let's make it official.</h1>
-    <div class="section-heading"><h2>Come stay with us.</h2><div><p>Fools Inn is a boutique backpackers offering private en-suite rooms and female-only dorms in the heart of Sea Point. Come for the fast WiFi, the ${ponyUp("Pony Up Rooftop Bar")}, and the unbeatable Cape Town location; stay for the company.</p><p>Send us your dates and we'll confirm room availability and payment details with you.</p></div></div>
+    <div class="section-heading"><h2>Come stay with us.</h2><div><p>Fools Inn is a boutique backpackers offering private en-suite rooms and female-only dorms in the heart of Sea Point. Come for the fast WiFi, the ${ponyUp("Pony Up Rooftop Bar")}, and the unbeatable Cape Town location; stay for the curated adventures, new friends, and camera roll full of memories.</p><p>Your room's waiting. Your people are already at the bar.</p><p>Send us your dates and we'll confirm room availability and payment details with you.</p></div></div>
     <form class="stay-enquiry">
       <div class="form-grid">
         <label>Room<select name="room">${["Private Rooms", "Female-Only Dorms"].map((room) => `<option ${params.get("room") === room ? "selected" : ""}>${room}</option>`).join("")}</select></label>
@@ -827,7 +894,7 @@ function pageShell(eyebrow, title, intro, children) {
 }
 
 function footer() {
-  const warm = ["/rooms", "/tours"].includes(currentPath());
+  const warm = currentPath() === "/rooms";
   return `<footer class="footer section-pad ${warm ? "theme-red" : "theme-yellow"}">
     <div class="footer-top"><a class="wordmark footer-brand" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
       <nav class="footer-links" aria-label="Explore Fools Inn">${navItems.filter(([, href]) => href !== "/book-now").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</nav>
@@ -854,10 +921,10 @@ function render() {
   const pages = {
     "/": homePage, "/rooms": roomsPage, "/tours": toursPage,
     "/neighbourhood": neighbourhoodPage, "/gallery": galleryPage,
-    "/contact": contactPage, "/blog": blogPage, "/faqs": () => faqSection(true),
+    "/contact": contactPage, "/blog": blogPage, "/faqs": () => faqSection(true), "/terms": termsPage,
     "/book-now": bookingPage,
   };
-  document.title = "Fools Inn | " + (roomDetails[path]?.title || ({"/": "Boutique Backpackers in Sea Point", "/rooms": "Rooms", "/tours": "Cape Town Tours", "/contact": "Contact", "/faqs": "FAQs", "/gallery": "Gallery", "/blog": "Blog", "/book-now": "Plan Your Stay", "/neighbourhood": "Sea Point"}[path] || "Sea Point"));
+  document.title = "Fools Inn | " + (roomDetails[path]?.title || ({"/": "Boutique Backpackers in Sea Point", "/rooms": "Rooms", "/tours": "Cape Town Tours", "/contact": "Contact", "/faqs": "FAQs", "/gallery": "Gallery", "/blog": "Blog", "/book-now": "Plan Your Stay", "/neighbourhood": "Sea Point", "/terms": "Terms & Conditions"}[path] || "Sea Point"));
   layout(roomDetails[path] ? roomPage(roomDetails[path]) : (pages[path] || homePage)());
 }
 

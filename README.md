@@ -41,3 +41,16 @@ npm run build -- --client-preview
 - On mobile, tours expand individually and FAQ categories contain the full
   approved questions and answers. Gallery and blog content remain available.
 - The contact details match the current public Fools Inn site.
+
+## September design update
+
+- The home page uses the revised photo layout and features Kayak, Surf and Shark
+  Cage Diving. Tour cards use the supplied taglines, prices and offer labels;
+  existing duration and inclusion information remains under Tour details.
+- Terms & Conditions are available at `/terms` and linked in the footer.
+- Payment wording uses bank transfer before arrival in both the FAQ and terms,
+  as confirmed by the client instead of the alternative policy in the export.
+- Leave a Review opens the Google reviews page supplied by the client.
+  No star ratings have been inferred from review text.
+- Unfinished gallery/guide copy and booking placeholders from the export are
+  not rendered; the existing gallery and enquiry flow remain functional.

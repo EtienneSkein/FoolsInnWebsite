@@ -382,26 +382,55 @@ summary::-webkit-details-marker {
   margin-top: 24px;
 }
 .home-intro {
-  display: grid;
-  grid-template-columns: 695fr 595fr;
-  grid-template-rows: auto 1fr;
-  gap: 2.0833333vw;
   padding-top: 56px;
-  padding-bottom: 24px;
-}
-.home-intro img {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  width: 100%;
-  aspect-ratio: 695 / 765;
-  align-self: start;
-}
-.home-intro h2 {
-  grid-column: 2;
+  padding-bottom: 40px;
 }
 .home-intro>p {
-  grid-column: 2;
-  align-self: end;
+  margin-bottom: 32px;
+  font-size: 20px;
+}
+.home-photo-story img {
+  width: 100%;
+}
+.home-photo-wide img {
+  aspect-ratio: 1320 / 600;
+  object-position: center 56%;
+}
+.home-photo-pair {
+  display: grid;
+  grid-template-columns: 600fr 350fr;
+  gap: 28.030303%;
+  margin-top: 60px;
+}
+.home-photo-pair img {
+  aspect-ratio: 1;
+  object-position: center 58%;
+}
+.home-photo-pair figure:last-child img {
+  aspect-ratio: 350 / 400;
+}
+.home-photo-pair figcaption {
+  font-size: 14px;
+  margin-top: 18px;
+}
+.featured-tours {
+  padding-top: 40px;
+}
+.featured-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.featured-heading h2 {
+  line-height: 1.45;
+}
+.featured-heading .button {
+  flex-shrink: 0;
+}
+.review-link {
+  margin-top: 24px;
 }
 .photo-strip {
   display: grid;
@@ -690,6 +719,11 @@ details[open]>summary>span {
   min-width: 0;
   position: relative;
 }
+@media (min-width: 701px) {
+  .tour-item::details-content {
+    height: 100%;
+  }
+}
 .tour-card {
   background: var(--cream);
   border: 1px solid var(--red);
@@ -707,10 +741,10 @@ details[open]>summary>span {
   .tour-card {
     transition: transform 200ms ease, box-shadow 200ms ease;
   }
-  .tour-item:hover {
+  .tour-item:hover,.featured-tour:hover {
     z-index: 1;
   }
-  .tour-item:hover .tour-card {
+  .tour-item:hover .tour-card,.featured-tour:hover {
     transform: scale(1.025);
     box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
   }
@@ -741,7 +775,7 @@ details[open]>summary>span {
 .tour-card h3 {
   font-size: 25px;
 }
-.tour-duration {
+.tour-tagline {
   border-bottom: 1px solid #b5b3a8;
   padding-bottom: 16px;
   width: 100%;
@@ -752,6 +786,52 @@ details[open]>summary>span {
 }
 .tour-inclusions {
   font-size: 14px;
+}
+.tour-inclusions summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tour-inclusions summary svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 150ms ease;
+}
+.tour-inclusions[open] summary svg {
+  transform: rotate(90deg);
+}
+.tour-inclusions p {
+  margin: 8px 0;
+}
+.tour-card-actions {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  margin-top: auto;
+  width: 100%;
+}
+.tour-offer {
+  background: var(--red-text);
+  color: white;
+  padding: 3px 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.tour-card-actions>.button {
+  background: var(--yellow);
+  color: var(--red-text);
+}
+.featured-tour {
+  position: relative;
+}
+.tour-break {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px 0;
 }
 .tour-inclusions ul {
   padding-left: 20px;
@@ -836,13 +916,33 @@ details[open]>summary>span {
   align-items: end;
 }
 .map-section iframe {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 1.1;
   border: 0;
   background: var(--cream);
 }
-.map-section .text-link {
+.map-copy .text-link {
   margin-top: 20px;
+}
+.map-tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 12px;
+}
+.map-tools .text-link {
+  font-size: 14px;
+}
+.map-reload {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid currentColor;
+  background: transparent;
+  font-size: 14px;
 }
 .booking-page>h1 {
   margin-bottom: 70px;
@@ -961,6 +1061,42 @@ details[open]>summary>span {
 }
 .hero[data-page="/contact"] {
   aspect-ratio: 1440 / 709;
+}
+.hero[data-page="/terms"] {
+  aspect-ratio: 1440 / 540;
+}
+.hero[data-page="/terms"] .hero-image {
+  object-position: center 48%;
+}
+.terms-content {
+  color: var(--ink);
+}
+.terms-content .section-heading {
+  grid-template-columns: 3fr 2fr;
+}
+.terms-content .section-heading h2 {
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.terms-sections>section {
+  padding: 24px 0;
+  border-top: 1px solid #898980;
+}
+.terms-sections>section:last-child {
+  border-bottom: 1px solid #898980;
+}
+.terms-sections h3 {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.terms-sections p+p {
+  margin-top: 8px;
+}
+.terms-closing {
+  margin-top: 60px;
+  line-height: 1.4;
 }
 .hero[data-page="/rooms"] .hero-image {
   object-position: center 63.3%;
@@ -1199,19 +1335,52 @@ details[open]>summary>span {
     margin-top: 18px;
   }
   .home-intro {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 28px;
-    background: var(--yellow);
     padding-top: 36px;
-    padding-bottom: 38px;
+    padding-bottom: 24px;
   }
-  .home-intro h2,.home-intro img,.home-intro>p {
-    grid-column: auto;
-    grid-row: auto;
+  .home-intro>p {
+    font-size: 16px;
+    margin-bottom: 24px;
   }
-  .home-intro img {
+  .home-photo-wide img {
     aspect-ratio: 343 / 200;
+  }
+  .home-photo-pair {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .home-photo-pair img,.home-photo-pair figure:last-child img {
+    aspect-ratio: 163 / 200;
+  }
+  .home-photo-pair figcaption {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .featured-tours {
+    padding-top: 24px;
+  }
+  .featured-heading {
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .featured-tour-grid.tour-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .hero[data-page="/terms"] {
+    aspect-ratio: 375 / 260;
+  }
+  .terms-content .section-heading {
+    grid-template-columns: 1fr;
+  }
+  .terms-sections h3 {
+    font-size: 18px;
+  }
+  .terms-closing {
+    margin-top: 36px;
   }
   .photo-strip {
     grid-auto-columns: 50vw;
@@ -1424,7 +1593,7 @@ details[open]>summary>span {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  .map-section>div {
+  .map-section>.map-copy {
     grid-row: 1;
   }
   .map-section iframe {
