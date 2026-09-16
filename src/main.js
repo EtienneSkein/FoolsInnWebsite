@@ -203,7 +203,7 @@ const contactDetails = {
 
 const socialLinks = [
   ["Instagram", "https://www.instagram.com/foolsinnct/", "instagram"],
-  ["Facebook", "https://www.facebook.com/share/1Bm3NRQoiZ/", "facebook"],
+  ["Facebook", "https://www.facebook.com/people/Fools-Inn/61563832952552/", "facebook"],
 ];
 
 // The footer keeps to the short list in the redesign rather than mirroring the full nav.
@@ -420,7 +420,7 @@ function layout(content) {
     <a class="skip-link" href="#main-content">Skip to content</a>
     <aside class="announcement">
       <span>Want to go on an adventure? We've got curated tours you'll tell your grandkids about.</span>
-      <a href="/tours" data-link>Book a tour now ${icon("arrow")}</a>
+      <a href="/tours" data-link>Book a tour now</a>
     </aside>
     <header class="site-header ${hasHero ? "over-hero" : ""}">
       <a class="brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(hasHero ? "wordmark-yellow.png" : "wordmark-red.png")}" alt="" decoding="async"></a>
@@ -571,7 +571,7 @@ function hero(title, file, options = {}) {
     ${photo(file, options.alt || title, "hero-image", true)}
     <div class="hero-inner">
       <h1><span>${title}</span></h1>
-      ${options.intro ? `<div class="hero-description"><p>${options.intro}</p>${options.home ? bookingSearch() : `<div class="actions"><a class="button" href="/book-now" data-link>Book Now ${icon("arrow")}</a><a class="button button-light" href="#adventures">Explore More</a></div>`}</div>` : ""}
+      ${options.intro ? `<div class="hero-description"><p>${options.intro}</p>${options.home ? bookingSearch() : `<div class="actions"><a class="button" href="/book-now" data-link>Book Now</a><a class="button button-light" href="#adventures">Explore More</a></div>`}</div>` : ""}
     </div>
   </section>`;
 }
@@ -582,7 +582,7 @@ function bookingSearch() {
     <label><span>Check-out</span><input type="date" name="checkout" aria-label="Check-out date" required></label>
     <label><span>Guests</span><select name="guests" aria-label="Number of guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}">${n} ${n === 1 ? "guest" : "guests"}</option>`).join("")}</select></label>
     <label class="code-field"><span>Promo code</span><input name="code" maxlength="40" placeholder="Add code" aria-label="Promo code"></label>
-    <button class="button" type="submit">Enquire ${icon("arrow")}</button>
+    <button class="button" type="submit">Enquire</button>
   </form>`;
 }
 
@@ -618,7 +618,7 @@ function photoStrip(numbers, labels) {
 function featuredTours() {
   const featured = ["Kayak", "Surf", "Shark Cage Diving"].map((title) => tours.find((tour) => tour.title === title));
   return `<section class="featured-tours section-pad">
-    <div class="featured-heading"><h2>Make your stay more epic.<br>Book a curated tour.</h2><a class="button button-outline" href="/tours" data-link>Book Now ${icon("arrow")}</a></div>
+    <div class="featured-heading"><h2>Make your stay more epic.<br>Book a curated tour.</h2><a class="button button-outline" href="/tours" data-link>Book Now</a></div>
     <div class="tour-grid featured-tour-grid">${featured.map((tour) => tourCard(tour, 0, true)).join("")}</div>
   </section>`;
 }
@@ -739,7 +739,7 @@ function testimonials() {
     ["Good place for short stay in Cape Town.", "Charlotte", "Germany"],
   ];
   return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
-    <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review ${icon("arrow")}</a></div></div>
+    <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review</a></div></div>
     ${scrollControls("review-track")}
     <div class="review-track" id="review-track" data-carousel tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" tabindex="0"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
   </section>`;
@@ -748,7 +748,7 @@ function testimonials() {
 function roomsPage() {
   return `${hero("Meet you back at ours", designPhoto(23), {alt: "A sunny seaside afternoon"})}
     <section class="section-pad room-listing">
-      <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="/book-now" data-link>Book Now ${icon("arrow")}</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
+      <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="/book-now" data-link>Book Now</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
       <div class="room-grid" id="our-rooms">
         ${roomCard("Private Rooms", "Your own space. Your own pace.", "A comfortable private room with an en-suite bathroom, comfortable double bed and dedicated workspace for switching off or logging on.", 20, "/rooms/private")}
         ${roomCard("Female-Only Dorms", "Good company included.", "A comfortable and secure shared stay for female travellers, with an en-suite bathroom and space to unpack.", 21, "/rooms/female-dorm")}
@@ -906,7 +906,7 @@ function bookingPage() {
         <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
         <label>Promo code<input name="code" value="${escapeHtml(params.get("code") || "")}" maxlength="40"></label>
       </div>
-      <button class="button" type="submit">Enquire about my stay ${icon("arrow")}</button>
+      <button class="button" type="submit">Enquire about my stay</button>
       <p class="form-status" role="status"></p>
     </form>
   </section>`;
