@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("assets/fonts/instrument-sans-variable.ttf") format("truetype");
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
   --red: #fe1709;
   --red-text: #fe1709;
@@ -65,7 +73,7 @@ a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.nav a,.mobile-extra a,.footer-links a,.footer-contact a {
+.mobile-extra a {
   padding: 4px 8px;
   margin: 0 -8px;
 }
@@ -177,11 +185,16 @@ summary::-webkit-details-marker {
   flex-wrap: wrap;
   margin-top: 30px;
 }
-.wordmark {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
+.brand img,.footer-brand img {
+  /* Cropped to the glyphs, so height sets the cap height directly. */
+  width: auto;
+  display: block;
+}
+.brand img {
+  height: 21px;
+}
+.footer-brand img {
+  height: 102px;
 }
 .skip-link {
   position: fixed;
@@ -232,6 +245,8 @@ summary::-webkit-details-marker {
   min-width: 190px;
   padding: 6px 0;
   background: var(--cream);
+  /* The header runs white over a hero, which would hide these on cream. */
+  color: var(--red-text);
   border: 1px solid var(--red);
   z-index: 20;
 }
@@ -259,8 +274,9 @@ summary::-webkit-details-marker {
   color: white;
 }
 .brand {
-  font-size: 30px;
   margin-right: auto;
+  display: flex;
+  align-items: center;
 }
 .brand:hover {
   text-decoration: none;
@@ -272,8 +288,11 @@ summary::-webkit-details-marker {
   font-size: 14px;
   font-weight: 600;
 }
-.nav>a {
-  padding: 10px 4px;
+.nav>a,.nav-item>a {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 8px;
+  margin: 0 -4px;
 }
 .nav .active {
   text-decoration: underline;
@@ -1109,7 +1128,6 @@ details[open]>summary>span {
   gap: 40px;
 }
 .footer-brand {
-  font-size: 86px;
   align-self: start;
 }
 .footer-links {
@@ -1123,8 +1141,11 @@ details[open]>summary>span {
 }
 .footer-links a,.footer-contact a {
   font-size: 14px;
-  padding: 6px 0;
+  padding: 6px 8px;
+  margin: 0 -8px;
+  /* Block, so each sits on its own line, but only as wide as its own text. */
   display: block;
+  width: fit-content;
 }
 .footer-contact {
   overflow-wrap: anywhere;
@@ -1222,7 +1243,9 @@ details[open]>summary>span {
   }
   .footer-brand {
     grid-column: 1 / -1;
-    font-size: 64px;
+  }
+  .footer-brand img {
+    height: 76px;
   }
   .tour-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
@@ -1329,6 +1352,24 @@ details[open]>summary>span {
   .over-hero .nav .active {
     background: transparent;
     color: var(--red-text);
+  }
+  .nav-item.has-menu {
+    display: contents;
+  }
+  .nav-menu {
+    position: static;
+    display: flex;
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 0 0 0 18px;
+    border: 0;
+    background: none;
+  }
+  .nav-menu a {
+    min-height: 44px;
+    padding: 10px 6px;
+    display: flex;
+    align-items: center;
   }
   .mobile-extra {
     display: grid;
@@ -1716,8 +1757,8 @@ details[open]>summary>span {
     gap: 28px 18px;
     grid-template-columns: 0.85fr 1.15fr;
   }
-  .footer-brand {
-    font-size: 49px;
+  .footer-brand img {
+    height: 58px;
   }
   .footer-links {
     grid-template-columns: 1fr;
@@ -1749,8 +1790,8 @@ details[open]>summary>span {
   .site-header {
     gap: 6px;
   }
-  .footer-brand {
-    font-size: 42px;
+  .footer-brand img {
+    height: 50px;
   }
   .booking-search {
     padding: 8px;

@@ -202,8 +202,8 @@ const contactDetails = {
 };
 
 const socialLinks = [
-  ["Instagram", ponyUpInstagram, "instagram"],
-  ["Facebook", "https://www.facebook.com/people/Sea-Point-Holiday-Hotel/100063616450292/", "facebook"],
+  ["Instagram", "https://www.instagram.com/foolsinnct/", "instagram"],
+  ["Facebook", "https://www.facebook.com/share/1Bm3NRQoiZ/", "facebook"],
 ];
 
 // The footer keeps to the short list in the redesign rather than mirroring the full nav.
@@ -423,7 +423,7 @@ function layout(content) {
       <a href="/tours" data-link>Book a tour now ${icon("arrow")}</a>
     </aside>
     <header class="site-header ${hasHero ? "over-hero" : ""}">
-      <a class="brand wordmark" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
+      <a class="brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(hasHero ? "wordmark-yellow.png" : "wordmark-red.png")}" alt="" decoding="async"></a>
       <nav class="nav" id="main-nav" aria-label="Main navigation">
         ${primaryNav.map(([label, href]) => {
           const link = `<a class="${current === href || (href === "/rooms" && current.startsWith("/rooms/")) ? "active" : ""} ${href === "/contact" ? "contact-link" : ""}" href="${href}" data-link ${current === href ? 'aria-current="page"' : ""}>${label}</a>`;
@@ -984,7 +984,7 @@ function pageShell(eyebrow, title, intro, children) {
 
 function footer() {
   return `<footer class="footer section-pad">
-    <div class="footer-top"><a class="wordmark footer-brand" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
+    <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset("wordmark-yellow.png")}" alt="" decoding="async"></a>
       <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
       <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>
     </div>
