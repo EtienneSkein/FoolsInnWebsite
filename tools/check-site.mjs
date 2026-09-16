@@ -249,4 +249,27 @@ assert.equal(frames.size, 0, "Route cleanup cancels animation");
 assert.equal(track.children.length, 4, "Route cleanup removes duplicate reviews");
 emit(track.children[0], "pointerleave", { pointerType: "mouse" });
 assert.equal(frames.size, 0);
-console.log("Passed: continuous speed, seamless looping, hover-only pause, arrows, resize and cleanup.");
+// The room photos ride the same carousel, minus the review highlight.
+trackClasses.delete("review-track");
+// dispose() leaves the resting highlight on the originals; a real route swap
+// throws the nodes away, but these stubs are reused, so clear it by hand.
+track.children.forEach((card) => card.classList.toggle("review-selected", false));
+cardWidth = 300;
+track.scrollLeft = 0;
+const photoDispose = carousel.context.bindCarousel(track);
+assert.equal(track.children.length, 8, "Room photos are duplicated for the loop too");
+assert.deepEqual(selectedCards(), [], "Room photos take no highlight");
+tick(0);
+for (let i = 0; i < 100; i++) tick();
+assert.equal(track.scrollLeft, 90, "Room photos rotate at the same 30px per second");
+emit(track.children[0], "pointerenter", { pointerType: "mouse" });
+for (let i = 0; i < 50; i++) tick();
+assert.equal(track.scrollLeft, 90, "Hovering a room photo pauses the rotation");
+emit(track.children[0], "pointerleave", { pointerType: "mouse" });
+assert.deepEqual(selectedCards(), [], "Leaving a room photo still adds no highlight");
+emit(track, "carouselstep", { detail: 1 });
+assert.equal(track.scrollLeft, 390, "The arrows step room photos one card along");
+photoDispose();
+assert.equal(track.children.length, 4, "Cleanup removes the duplicated photos");
+
+console.log("Passed: continuous speed, seamless looping, hover-only pause, arrows, resize and cleanup, for reviews and room photos.");

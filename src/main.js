@@ -356,7 +356,6 @@ function onlyFools(label = "Only Fools") {
 
 function icon(name) {
   const paths = {
-    arrow: "M5 12h14M13 5l7 7-7 7",
     bed: "M3 11V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6M13 11V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4M3 21v-8h18v8M3 17h18",
     calendar: "M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM9 16l2 2 4-5",
     camera: "M14.5 4 16 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.5-3h5ZM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z",
@@ -759,13 +758,13 @@ function roomsPage() {
 
 function roomCard(title, tag, description, image, href) {
   return `<article class="room-card">${photo(designPhoto(image), title + " at Fools Inn")}
-    <div class="room-card-body"><h3>${title}</h3><p class="room-tag">${tag}</p><p>${description}</p><a class="text-link" href="${href}" data-link>View ${title} ${icon("arrow")}</a></div></article>`;
+    <div class="room-card-body"><h3>${title}</h3><p class="room-tag">${tag}</p><p>${description}</p><a class="text-link" href="${href}" data-link>View ${title}</a></div></article>`;
 }
 
 function roomPage(room) {
   return `${hero(room.heading, designPhoto(room.hero), {alt: room.heading})}
     <section class="room-description theme-${room.theme}">
-      <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="text-link" href="/book-now?room=${encodeURIComponent(room.title)}" data-link>Book your stay ${icon("arrow")}</a></div></div>
+      <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="text-link" href="/book-now?room=${encodeURIComponent(room.title)}" data-link>Book your stay</a></div></div>
       ${photoStrip(room.photos, room.photos.map((_, i) => room.title + " interior, view " + (i + 1)))}
     </section>
     <section class="amenities section-pad ${room.theme === "pink" ? "theme-red" : "theme-blue"}">
@@ -973,7 +972,7 @@ function neighbourhoodPage() {
     `${photo(designPhoto(15), "Cape Town coastline and mountains", "neighbourhood-image")}
     <div class="neighbourhood-grid">
       <article><h2>Coffee, then everything else.</h2><p>Nearby cafes make the remote-working rhythm easy: work, refill, walk, repeat.</p></article>
-      <article><h2>Meet you at the ocean.</h2><p>Walk the Sea Point Promenade, take a dip at Saunders' Beach, or head out on a guided kayak trip.</p><a class="text-link" href="/tours" data-link>Explore tours ${icon("arrow")}</a></article>
+      <article><h2>Meet you at the ocean.</h2><p>Walk the Sea Point Promenade, take a dip at Saunders' Beach, or head out on a guided kayak trip.</p><a class="text-link" href="/tours" data-link>Explore tours</a></article>
       <article><h2>Good company downstairs.</h2><p>${onlyFools()} and ${ponyUp("Pony Up Rooftop Bar")} keep the food, drinks and conversation close to home.</p></article>
     </div>`);
 }
