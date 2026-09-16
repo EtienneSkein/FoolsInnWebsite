@@ -13,7 +13,7 @@ const navItems = [
 
 const ponyUpInstagram = "https://www.instagram.com/_p0nyup_/";
 const onlyFoolsUrl = "https://onlyfools.co.za/";
-const stayPaymentPolicy = "Payment is made by bank transfer before you arrive. We'll send you everything you need once you've booked, so there's no scrambling on check-in day.";
+const stayPaymentPolicy = "Payment is made by bank transfer before you arrive. We'll send you the payment details and everything else you need once your booking is confirmed. No stress.";
 const googleReviewUrl = "https://www.google.com/travel/search?q=foolsinn%20google%20review&g2lb=4965990%2C72471280%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C73064764%2C121529350%2C121608706%2C121738283%2C121762713%2C121921501%2C121951222%2C121954673%2C122005372%2C122014428%2C122014429&hl=en-ZA&gl=za&cs=1&ssta=1&ts=CAEaRgooEiYyJDB4MWRjYzY3YmEyZDBmZWM4MToweDExZjY0NWFkM2M1MzEyZBIaEhQKBwjqDxAJGA8SBwjqDxAJGBAYATICEAA&qs=CAEyE0Nnb0lyZUtVbnEyTDJZOEJFQUU4AkIJCS0xxdNaZB8BQgkJLTHF01pkHwE&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwjo_-DzmvCWAxUAAAAAHQAAAAAQCw";
 
 const rooms = [
@@ -233,43 +233,46 @@ const faqSections = [
   {
     title: "Booking & Payment",
     items: [
-      ["How do I book my stay?", "Pick your room, private en-suite or a bed in our female-only dorm, and book straight through the site. Easy."],
-      ["How do I pay?", stayPaymentPolicy],
-      ["What if I need to cancel or change my dates?", "Cancellation terms depend on your room type, so check the details at checkout before you confirm. If plans change, reach out and we'll help sort it."],
-      ["What do I need to bring?", "A valid photo ID and the card you booked with. That's it."],
+      ["How do I book accommodation at Fools Inn?", "Choose a private ensuite room, or a bed in our female-only dorm. Select your dates and book online through our trusted booking partner."],
+      ["How do I pay for my Fools Inn booking?", stayPaymentPolicy],
+      ["Can I cancel my booking or change my dates?", "Cancellation and date-change terms depend on your booking. Check the policy shown at checkout before confirming your stay. If your plans change, contact us and we'll try to help you out."],
+      ["What do I need to bring when I check in?", "A valid photo ID and the card you used to make your booking. That's it."],
     ],
   },
   {
     title: "Checking In & Out",
     items: [
-      ["What time can I check in?", "From 3:00pm."],
-      ["What time is checkout?", "Between 8 and 10am. Squeeze in one more coffee before you go."],
-      ["Is there any storage for my luggage?", "Luggage storage is free of charge before check-in or on the day you check out. We unfortunately can't store luggage beyond checkout day, as luggage has previously been left for several days. Stored luggage is kept at your own risk."],
-      ["Can under-18s stay?", "Unfortunately no under 18s."],
+      ["What time is check-in at Fools Inn?", "Check-in starts from 3:00pm."],
+      ["What time is checkout at Fools Inn?", "Check-out is between 8am and 10am. That leaves time to squeeze in one more coffee before you go."],
+      ["Can I store my luggage at Fools Inn?", "Yes. Free luggage storage is available before check-in. We can't store bags overnight or beyond your departure date. Luggage is stored at your own risk, so please keep valuables with you. T&Cs apply if luggage goes missing."],
+      ["Can guests under 18 stay at Fools Inn?", "No. Fools Inn is an adults-only boutique backpackers, and all guests must be 18 or older."],
     ],
   },
   {
-    title: "Rooms",
+    title: "Rooms & Amenities",
     items: [
-      ["What's the difference between a private room and the female-only dorm?", "Private rooms give you your own en-suite space, a double bed, a desk for getting things done and a Smart TV for switching off. The female-only dorm is a comfortable, secure shared stay with a bunk bed, en-suite bathroom, wardrobe and balcony, good for meeting people while still having your own space to unpack."],
-      ["What's included in my room?", "Every room comes with WiFi, a place to store your things and a proper spot to work if you need to. Private rooms add a TV and double bed; dorms add the bunk and balcony."],
-      ["Is there parking?", "Yes, secure on-site parking is available for an extra R50 per day. It needs to be arranged before check-in and is available on a first come, first served basis."],
+      ["What room options does Fools Inn offer?", "Fools Inn offers private ensuite rooms and female-only dorm accommodation in Sea Point, Cape Town."],
+      ["What's the difference between a private room and the female-only dorm?", "Private rooms give you your own ensuite bathroom, a double bed, a desk for getting things done and a Smart TV for switching off. The female-only dorm is a comfortable, secure, shared stay with a bunk bed, ensuite bathroom, wardrobe and balcony, good for meeting people while still having your own space to unpack."],
+      ["What amenities are included in the rooms?", "Every room includes Wi-Fi, storage, and a desk to work from. Private rooms have a TV and double bed, while dorms have bunk beds."],
+      ["Is parking available at Fools Inn?", "Yes. Secure on-site parking is available for R50 per day. Spaces are limited and allocated on a first-come, first-served basis, so please arrange parking before check-in."],
     ],
   },
   {
-    title: "Food, Drink & Getting Together",
+    title: "Food, Drinks & Remote Work",
     items: [
-      ["Is there somewhere to eat and drink on site?", `Always. ${onlyFools()}, our on-site restaurant serving burgers, and ${ponyUp("Pony Up Rooftop Bar")} serving pizzas are both there: good food, good drinks and good company without leaving home.`],
-      ["Are pets or parties allowed?", `No pets and no parties in the rooms, sorry. The good news is ${ponyUp("Pony Up")} is right there when you're ready to celebrate.`],
-      ["Is there WiFi fast enough to work from?", "Yes, that's kind of the point. Fast WiFi and proper desks make Fools Inn an easy base for remote work between adventures."],
+      ["Does Fools Inn have a restaurant or bar?", `For sure! ${onlyFools()}, our on-site restaurant downstairs, serves the best burgers in Cape Town (in our humble opinion). And upstairs, we have the ${ponyUp("Pony Up Rooftop Bar")} that serves pizzas, drinks and plenty of good conversations.`],
+      ["Are pets allowed at Fools Inn?", "No (although we love them), pets aren't allowed at Fools Inn."],
+      ["Can I have a party in my room?", `No parties are allowed in the rooms. Luckily, ${onlyFools()} and ${ponyUp("Pony Up Rooftop Bar")} are right there when you feel like celebrating. And we know you'll want to.`],
+      ["Does Fools Inn have Wi-Fi for remote work?", "Yes. Fools Inn offers fast Wi-Fi and proper desks, making it an easy Sea Point base for digital nomads and remote workers."],
+      ["Is there Wi-Fi fast enough to work from?", "Yes, that's kind of the point. Fast WiFi and proper desks make Fools Inn an easy base for remote work between adventures."],
     ],
   },
   {
-    title: "Location & Exploring",
+    title: "Location & Things to Do in Sea Point",
     items: [
-      ["Where is Fools Inn based?", "Right in the heart of Sea Point, a five-minute walk from the best coffee, a short stroll to Saunder's Beach, and close enough to Lion's Head, the Sea Point Promenade, V&A Waterfront and Table Mountain to explore all of it from one home base."],
-      ["Can I book tours and activities through Fools Inn?", "Yes, our on-site tour desk can sort you out with everything from surf lessons to shark cage diving to sunset hikes up Lion's Head. Check out our Tours page or ask at the desk once you're in."],
-      ["How long can I stay?", "As long as you like. Come for a night, stay for the week, stay for the vibe."],
+      ["Where is Fools Inn based?", "Fools Inn is at 82 Regent Road in the heart of Sea Point, Cape Town. The Sea Point Promenade and Saunders' Rocks Beach are nearby, with Lion's Head, Table Mountain and the V&A Waterfront within easy reach."],
+      ["Can I book Cape Town tours and activities through Fools Inn?", "Yes, our on-site tour desk can sort you out with everything from surf lessons to shark cage diving to sunset hikes up Lion's Head. Check out our Tours page or ask at the desk once you've arrived."],
+      ["How long can I stay at Fools Inn?", "As long as you like. Come for a night, stay for the week."],
     ],
   },
 ];
@@ -818,10 +821,9 @@ function syncTourLayout() {
 }
 
 function faqSection(standalone = false) {
-  const headings = ["Booking & Payment", "Checking In & Out", "Rooms & Amenities", "Food, Drinks & Remote Work", "Location & Things to Do in Sea Point"];
   return `<section class="faqs section-pad theme-pink ${standalone ? "standalone" : ""}">
-    <div class="section-heading">${standalone ? "<h1>FAQs</h1>" : "<h2>FAQs</h2>"}<p>Got questions? We've got answers. If you don't see what you're looking for, just <a class="inline-link" href="/contact" data-link>drop us a message</a>; we're around.</p></div>
-    <div class="faq-groups">${faqSections.map((group, i) => `<details class="faq-category"><summary>${headings[i]}<span aria-hidden="true">+</span></summary><div class="faq-questions">${group.items.map(([question, answer]) => `<details><summary>${question}<span aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join("")}</div></details>`).join("")}</div>
+    <div class="section-heading">${standalone ? "<h1>FAQs</h1>" : "<h2>FAQs</h2>"}<p>Got questions? We've got answers. If you don't see the answer you're looking for, just <a class="inline-link" href="/contact" data-link>drop us a message</a>; we're around.</p></div>
+    <div class="faq-groups">${faqSections.map((group) => `<details class="faq-category"><summary>${group.title}<span aria-hidden="true">+</span></summary><div class="faq-questions">${group.items.map(([question, answer]) => `<details><summary>${question}<span aria-hidden="true">+</span></summary><p>${answer}</p></details>`).join("")}</div></details>`).join("")}</div>
   </section>`;
 }
 
@@ -923,7 +925,8 @@ function bindForms() {
       event.preventDefault();
       updateDates();
       if (!form.reportValidity()) return;
-      window.open(cloudbedsLink(new FormData(form)), "_blank", "noopener");
+      // Same tab, so the enquiry lands on Cloudbeds rather than behind a popup blocker.
+      location.assign(cloudbedsLink(new FormData(form)));
     });
   });
   document.querySelector(".contact-form")?.addEventListener("submit", (event) => {

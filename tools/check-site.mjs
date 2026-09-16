@@ -19,6 +19,7 @@ function harness(protocol = "http:", mobile = false) {
     href: protocol === "file:" ? new URL("../dist/index.html", import.meta.url).href : "http://127.0.0.1:5173/",
     redirectedTo: null,
     replace(target) { this.redirectedTo = target; },
+    assign(target) { this.redirectedTo = target; },
   };
   const head = { children: [], appendChild(node) { this.children.push(node); } };
   const document = {
@@ -28,8 +29,13 @@ function harness(protocol = "http:", mobile = false) {
     querySelectorAll: () => [],
     querySelector: (selector) => [".contact-form", ".testimonials"].includes(selector) ? null : noopElement,
   };
+  // Enough of FormData to read the booking form's own fields.
+  class StubFormData {
+    constructor(form) { this.form = form; }
+    get(name) { return this.form.elements[name] ? this.form.elements[name].value : null; }
+  }
   const context = {
-    document, location, console, URL, URLSearchParams, Date,
+    document, location, console, URL, URLSearchParams, Date, FormData: StubFormData,
     history: { pushState(_state, _title, href) { const url = new URL(href, location.href); location.pathname = url.pathname; location.search = url.search; } },
     window: { matchMedia: () => ({ matches: mobile, addEventListener() {} }), addEventListener: (name, handler) => listeners.set(name, handler), scrollTo() {} },
   };
@@ -62,7 +68,7 @@ for (const protocol of ["http:", "file:"]) {
   else env.location.pathname = "/faqs";
   env.context.render();
   assert.equal((env.root.innerHTML.match(/class="faq-category"/g) || []).length, 5);
-  assert.equal((env.root.innerHTML.match(/<details><summary>/g) || []).length, 17);
+  assert.equal((env.root.innerHTML.match(/<details><summary>/g) || []).length, 20, "All twenty FAQ questions render");
   assert.ok(env.root.innerHTML.includes("https://onlyfools.co.za/"));
   assert.ok(env.root.innerHTML.includes("https://www.instagram.com/_p0nyup_/"));
   if (protocol === "file:") env.location.hash = "#/terms";
@@ -146,7 +152,12 @@ const handlers = {};
 const field = (value) => ({ value, addEventListener(name, fn) { handlers[name] = fn; }, setCustomValidity(message) { this.error = message; } });
 const arrival = field("2028-02-29");
 const departure = field("2028-02-29");
-const form = { elements: { checkin: arrival, checkout: departure }, addEventListener() {} };
+const submitHandlers = {};
+const form = {
+  elements: { checkin: arrival, checkout: departure, guests: field("4"), code: field("SUMMER") },
+  addEventListener(name, fn) { submitHandlers[name] = fn; },
+  reportValidity: () => true,
+};
 env.document.querySelectorAll = (selector) => selector.includes(".booking-search") ? [form] : [];
 env.context.bindForms();
 assert.equal(departure.min, "2028-03-01");
@@ -155,6 +166,19 @@ departure.value = "2028-03-02";
 handlers.change();
 assert.equal(departure.error, "");
 assert.ok(env.context.localDate().match(/^\d{4}-\d{2}-\d{2}$/));
+
+// A filled-in enquiry goes straight to Cloudbeds, in this tab.
+arrival.value = "2028-03-02";
+departure.value = "2028-03-06";
+env.location.redirectedTo = null;
+submitHandlers.submit({ preventDefault() {} });
+const enquiry = new URL(env.location.redirectedTo);
+assert.equal(enquiry.origin + enquiry.pathname, "https://us2.cloudbeds.com/en/reservation/0d7YI3", "Enquire redirects to Cloudbeds");
+assert.equal(enquiry.searchParams.get("checkin"), "2028-03-02");
+assert.equal(enquiry.searchParams.get("checkout"), "2028-03-06");
+assert.equal(enquiry.searchParams.get("adults"), "4");
+assert.equal(enquiry.searchParams.get("promo"), "SUMMER");
+assert.equal(enquiry.searchParams.get("currency"), "zar");
 
 console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, the Cloudbeds handoff, mobile tour states, the See More toggle and date validation.");
 
