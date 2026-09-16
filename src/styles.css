@@ -17,12 +17,11 @@
   --cream: #fffdf5;
   --ink: #23231f;
   --gutter: 4.1666667%;
-  /* Stand-ins for the brand faces: Instrument Sans is exact, Zilla Slab covers
-     Bookman ITC Std and Courier Prime covers Gelato Typewriter until the
-     licensed files land. Swapping them is a change to these three lines. */
+  /* The Figma design sets headings, body and accents all in Instrument Sans;
+     the only slab serif is the wordmark, which ships as artwork. */
   --font-body: "Instrument Sans",Arial,Helvetica,sans-serif;
-  --font-heading: "Zilla Slab",Georgia,"Times New Roman",serif;
-  --font-accent: "Courier Prime","Courier New",monospace;
+  --font-heading: var(--font-body);
+  --font-accent: var(--font-body);
   font-family: var(--font-body);
   color: var(--red-text);
   background: var(--cream);
