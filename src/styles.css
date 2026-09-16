@@ -1,13 +1,21 @@
 :root {
-  --red: #df230c;
-  --red-text: #bd2817;
+  --red: #fe1709;
+  --red-text: #fe1709;
+  /* A deeper red for long-form body copy, where the brand red is too light to read. */
+  --red-deep: #9c1207;
   --yellow: #fae181;
   --blue: #2451bb;
   --pink: #f9cbd7;
   --cream: #fffdf5;
   --ink: #23231f;
   --gutter: 4.1666667%;
-  font-family: Arial,Helvetica,sans-serif;
+  /* Stand-ins for the brand faces: Instrument Sans is exact, Zilla Slab covers
+     Bookman ITC Std and Courier Prime covers Gelato Typewriter until the
+     licensed files land. Swapping them is a change to these three lines. */
+  --font-body: "Instrument Sans",Arial,Helvetica,sans-serif;
+  --font-heading: "Zilla Slab",Georgia,"Times New Roman",serif;
+  --font-accent: "Courier Prime","Courier New",monospace;
+  font-family: var(--font-body);
   color: var(--red-text);
   background: var(--cream);
   font-synthesis: none;
@@ -26,12 +34,13 @@ body {
   line-height: 1.55;
 }
 body,input,button,select,textarea {
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: var(--font-body);
 }
 h1,h2,h3,p,figure,blockquote {
   margin: 0;
 }
 h1,h2,h3 {
+  font-family: var(--font-heading);
   line-height: 1.12;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -55,6 +64,15 @@ a {
 a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+.nav a,.mobile-extra a,.footer-links a,.footer-contact a {
+  padding: 4px 8px;
+  margin: 0 -8px;
+}
+.nav a:hover,.mobile-extra a:hover,.footer-links a:hover,.footer-contact a:hover {
+  background: var(--red);
+  color: var(--cream);
+  text-decoration: none;
 }
 img {
   display: block;
@@ -160,8 +178,8 @@ summary::-webkit-details-marker {
   margin-top: 30px;
 }
 .wordmark {
-  font-family: Georgia,"Times New Roman",serif;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-weight: 700;
   line-height: 1;
   white-space: nowrap;
 }
@@ -188,18 +206,42 @@ summary::-webkit-details-marker {
   font-weight: 600;
 }
 .announcement a {
+  font-family: var(--font-accent);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   white-space: nowrap;
   text-transform: uppercase;
   border: 1px solid currentColor;
-  border-radius: 24px;
+  border-radius: 0;
   padding: 3px 12px;
 }
 .announcement svg {
   width: 14px;
   height: 14px;
+}
+.nav-item.has-menu {
+  position: relative;
+}
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: -8px;
+  display: none;
+  flex-direction: column;
+  min-width: 190px;
+  padding: 6px 0;
+  background: var(--cream);
+  border: 1px solid var(--red);
+  z-index: 20;
+}
+.nav-item.has-menu:hover .nav-menu,.nav-item.has-menu:focus-within .nav-menu {
+  display: flex;
+}
+.nav-menu a {
+  padding: 8px 14px;
+  margin: 0;
+  white-space: nowrap;
 }
 .site-header {
   position: relative;
@@ -378,7 +420,8 @@ summary::-webkit-details-marker {
 .section-heading p {
   max-width: 630px;
 }
-.section-heading h2+p {
+/* Only nudge the paragraph down when it sits under the heading, not beside it. */
+.section-heading>div h2+p {
   margin-top: 24px;
 }
 .home-intro {
@@ -432,22 +475,28 @@ summary::-webkit-details-marker {
 .review-link {
   margin-top: 24px;
 }
+.photo-carousel {
+  padding: 0 var(--gutter) 36px;
+}
+.photo-carousel .scroll-controls {
+  margin-bottom: 18px;
+}
 .photo-strip {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 27.9166667vw;
   gap: 1.3888889vw;
   overflow-x: auto;
-  padding: 0 var(--gutter) 36px;
-  scrollbar-width: thin;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+  scroll-snap-type: none;
+}
+.photo-strip::-webkit-scrollbar {
+  display: none;
 }
 .photo-strip img {
   width: 100%;
   height: auto;
   aspect-ratio: 402 / 300;
-  scroll-snap-align: start;
 }
 .adventure-section {
   color: var(--blue);
@@ -512,13 +561,13 @@ summary::-webkit-details-marker {
   padding: 28px;
   scroll-snap-align: start;
 }
-.review.review-selected {
+.review:hover,.review.review-selected {
   background: var(--yellow);
   color: var(--ink);
   border-color: var(--yellow);
 }
 .quote-mark {
-  font-family: Georgia,serif;
+  font-family: var(--font-heading);
   line-height: 1;
   font-size: 76px;
   color: var(--yellow);
@@ -579,12 +628,15 @@ details[open]>summary>span {
   font-weight: 600;
 }
 .faq-questions p {
-  padding: 0 50px 24px 0;
-  max-width: 950px;
-  color: var(--ink);
+  padding: 0 24px 24px 0;
+  max-width: none;
+  color: var(--red-deep);
 }
 .faq-questions summary>span {
   font-size: 22px;
+}
+.faq-questions summary {
+  color: var(--red-deep);
 }
 .room-grid {
   display: grid;
@@ -624,14 +676,16 @@ details[open]>summary>span {
 .room-description.theme-yellow {
   color: var(--blue);
 }
-.room-description .photo-strip {
+.room-description .photo-carousel {
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 70px;
+}
+.room-description .photo-strip {
   gap: 0.6944444vw;
-  scroll-padding-inline: 0;
 }
 .amenities {
+  color: var(--pink);
   display: grid;
   grid-template-columns: 814fr 626fr;
   gap: 0;
@@ -660,6 +714,7 @@ details[open]>summary>span {
   padding: 6px 0;
 }
 .amenities li span {
+  font-family: var(--font-accent);
   font-size: 14px;
 }
 .lifestyle-intro {
@@ -818,7 +873,7 @@ details[open]>summary>span {
 }
 .tour-offer {
   background: var(--red-text);
-  color: white;
+  color: var(--yellow);
   padding: 3px 6px;
   font-size: 12px;
   line-height: 1.5;
@@ -833,8 +888,12 @@ details[open]>summary>span {
 }
 .tour-break {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 24px 0;
+}
+.tour-more {
+  border-color: var(--red);
+  color: var(--red);
 }
 .tour-inclusions ul {
   padding-left: 20px;
@@ -910,7 +969,8 @@ details[open]>summary>span {
   margin-bottom: 12px;
 }
 .contact-details svg {
-  width: 18px;
+  width: 20px;
+  color: var(--red);
 }
 .map-section {
   display: grid;
@@ -929,6 +989,16 @@ details[open]>summary>span {
 /* Leaflet ships its own type and link colours; keep the map in the site's voice. */
 .map-canvas .leaflet-container {
   font: inherit;
+}
+.map-canvas .map-pin {
+  background: none;
+  border: 0;
+}
+/* Presentation attributes do not take custom properties everywhere, so style the path here. */
+.map-canvas .map-pin path {
+  fill: var(--red);
+  stroke: var(--cream);
+  stroke-width: 1.1;
 }
 .map-canvas .leaflet-control-attribution {
   font-size: 11px;
@@ -1025,6 +1095,14 @@ details[open]>summary>span {
   font-size: 26px;
   margin-bottom: 22px;
 }
+.footer {
+  background: var(--red);
+  color: var(--yellow);
+}
+.footer .footer-links a:hover,.footer .footer-contact a:hover {
+  background: var(--yellow);
+  color: var(--red);
+}
 .footer-top {
   display: grid;
   grid-template-columns: 3.2fr 1fr 1fr;
@@ -1079,7 +1157,7 @@ details[open]>summary>span {
   object-position: center 48%;
 }
 .terms-content {
-  color: var(--ink);
+  color: var(--red-deep);
 }
 .terms-content .section-heading {
   grid-template-columns: 3fr 2fr;
@@ -1088,21 +1166,9 @@ details[open]>summary>span {
   text-transform: uppercase;
   line-height: 1.4;
 }
-.terms-sections>section {
-  padding: 24px 0;
-  border-top: 1px solid #898980;
-}
-.terms-sections>section:last-child {
-  border-bottom: 1px solid #898980;
-}
-.terms-sections h3 {
-  font-size: 20px;
-  font-weight: 500;
+.terms-content .faq-category>summary {
   text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.terms-sections p+p {
-  margin-top: 8px;
+  font-size: 20px;
 }
 .terms-closing {
   margin-top: 60px;
@@ -1399,12 +1465,13 @@ details[open]>summary>span {
   .terms-closing {
     margin-top: 36px;
   }
+  .photo-carousel {
+    padding: 0 0 28px;
+    background: var(--yellow);
+  }
   .photo-strip {
     grid-auto-columns: 50vw;
     gap: 10px;
-    padding: 0 0 28px;
-    background: var(--yellow);
-    scroll-padding-inline: 0;
   }
   .photo-strip img {
     height: auto;
@@ -1490,12 +1557,13 @@ details[open]>summary>span {
   .room-description .section-heading {
     padding-bottom: 35px;
   }
-  .room-description .photo-strip {
+  .room-description .photo-carousel {
     background: inherit;
     padding: 0 16px 32px;
+  }
+  .room-description .photo-strip {
     grid-auto-columns: calc(100vw - 32px);
     gap: 10px;
-    scroll-padding-inline: 16px;
   }
   .room-description .photo-strip img {
     aspect-ratio: 343 / 200;

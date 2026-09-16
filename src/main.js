@@ -367,6 +367,7 @@ function icon(name) {
     menu: "M4 7h16M4 12h16M4 17h16",
     phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z",
     sparkle: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
+    star: "M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.7 5.8 21.4l1.6-7L2 9.7l7.1-.6L12 2.5Z",
     facebook: "M9.1 23.7v-8H6.6V12h2.5v-1.6c0-4.1 1.9-6 5.9-6 .7 0 1.8.1 2.6.3v3.3c-.2 0-.6 0-1.4 0-1.4 0-2 .4-2.3.9-.2.4-.4 1-.4 1.8V12h3.9l-.7 3.7h-3.2v8C19.4 23.2 24 18.2 24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 5.6 3.9 10.4 9.1 11.7Z",
     instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM17.5 6.4h.01",
     x: "M6 6l12 12M18 6 6 18",
@@ -374,11 +375,11 @@ function icon(name) {
     play: "m6 3 14 9-14 9V3Z",
   };
   // A couple of the brand marks read better solid than as 2px outlines.
-  const solid = name === "facebook";
+  const solid = name === "facebook" || name === "star";
   return `<svg viewBox="0 0 24 24" width="22" height="22" fill="${solid ? "currentColor" : "none"}" stroke="${solid ? "none" : "currentColor"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[name] || paths.sparkle}"></path></svg>`;
 }
 
-const primaryNav = [["Home", "/"], ["Rooms", "/rooms"], ["Tours", "/tours"], ["Contact Us", "/contact"]];
+const primaryNav = [["Rooms", "/rooms"], ["Tours", "/tours"], ["Contact Us", "/contact"]];
 const mobileViewport = window.matchMedia("(max-width: 700px)");
 const roomDetails = {
   "/rooms/private": {
@@ -409,10 +410,10 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 }
 
-let disposeTestimonials = () => {};
+let disposeCarousels = () => {};
 
 function layout(content) {
-  disposeTestimonials();
+  disposeCarousels();
   const current = currentPath();
   const hasHero = ["/", "/rooms", "/tours", "/contact", "/terms", ...Object.keys(roomDetails)].includes(current);
   root.innerHTML = `
@@ -424,8 +425,12 @@ function layout(content) {
     <header class="site-header ${hasHero ? "over-hero" : ""}">
       <a class="brand wordmark" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
       <nav class="nav" id="main-nav" aria-label="Main navigation">
-        ${primaryNav.map(([label, href]) => `<a class="${current === href || (href === "/rooms" && current.startsWith("/rooms/")) ? "active" : ""} ${href === "/contact" ? "contact-link" : ""}" href="${href}" data-link ${current === href ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
-        <div class="mobile-extra">${navItems.filter(([, href]) => !primaryNav.some(([, main]) => href === main) && href !== "/book-now").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>
+        ${primaryNav.map(([label, href]) => {
+          const link = `<a class="${current === href || (href === "/rooms" && current.startsWith("/rooms/")) ? "active" : ""} ${href === "/contact" ? "contact-link" : ""}" href="${href}" data-link ${current === href ? 'aria-current="page"' : ""}>${label}</a>`;
+          if (href !== "/rooms") return link;
+          return `<div class="nav-item has-menu">${link}<div class="nav-menu">${Object.entries(roomDetails).map(([path, room]) => `<a href="${path}" data-link ${current === path ? 'aria-current="page"' : ""}>${room.title}</a>`).join("")}</div></div>`;
+        }).join("")}
+        <div class="mobile-extra">${navItems.filter(([, href]) => !primaryNav.some(([, main]) => href === main) && href !== "/book-now" && href !== "/").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>
       </nav>
       <a class="book-link button" href="/book-now" data-link>Book Now</a>
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
@@ -437,7 +442,7 @@ function layout(content) {
   bindForms();
   bindMap();
   syncTourLayout();
-  disposeTestimonials = bindTestimonialsCarousel();
+  disposeCarousels = bindCarousels();
 }
 
 function navigate(href) {
@@ -489,7 +494,7 @@ function bindLinks() {
   document.querySelectorAll("[data-scroll]").forEach((button) => {
     button.addEventListener("click", () => {
       const track = document.getElementById(button.dataset.scroll);
-      if (track.id === "review-track") {
+      if (track.hasAttribute("data-carousel")) {
         track.dispatchEvent(new CustomEvent("carouselstep", { detail: Number(button.dataset.direction) }));
         return;
       }
@@ -502,15 +507,13 @@ function bindLinks() {
       const open = target.hidden;
       target.hidden = !open;
       button.setAttribute("aria-expanded", String(open));
-      button.innerHTML = (open ? "See Less " : "See More ") + icon("arrow");
+      button.textContent = open ? "Explore Less" : "Explore More";
     });
-  });
-  document.querySelectorAll("[data-reload-map]").forEach((button) => {
-    button.addEventListener("click", bindMap);
   });
 }
 
 const leafletBase = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4";
+const pinPath = "M12 22s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z";
 let leafletLoader;
 let activeMap = null;
 
@@ -549,11 +552,12 @@ function bindMap() {
     L.marker(contactDetails.coords, {
       title: "Fools Inn, " + contactDetails.address,
       alt: "Fools Inn",
-      icon: L.icon({
-        iconUrl: asset("star-marker.png"),
-        iconSize: [52, 52],
-        // The star's points leave a little headroom, so its centre sits above the image's.
-        iconAnchor: [26, 23],
+      icon: L.divIcon({
+        className: "map-pin",
+        html: `<svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path d="${pinPath}"></path></svg>`,
+        iconSize: [40, 40],
+        // The teardrop's tip marks the spot, and it sits at the bottom of the box.
+        iconAnchor: [20, 37],
       }),
     }).addTo(map);
     activeMap = map;
@@ -606,7 +610,9 @@ function homePage() {
 }
 
 function photoStrip(numbers, labels) {
-  return `<div class="photo-strip" aria-label="Life at Fools Inn">${numbers.map((n, i) => photo(designPhoto(n), labels[i])).join("")}</div>`;
+  return `<div class="photo-carousel">${scrollControls("photo-track")}
+    <div class="photo-strip" id="photo-track" data-carousel tabindex="0" aria-label="Life at Fools Inn">${numbers.map((n, i) => photo(designPhoto(n), labels[i])).join("")}</div>
+  </div>`;
 }
 
 function featuredTours() {
@@ -621,13 +627,16 @@ function scrollControls(id) {
   return `<div class="scroll-controls"><button type="button" data-scroll="${id}" data-direction="-1" aria-label="Scroll back" title="Scroll back">${icon("chevron")}</button><button type="button" data-scroll="${id}" data-direction="1" aria-label="Scroll forward" title="Scroll forward">${icon("chevron")}</button></div>`;
 }
 
-function bindTestimonialsCarousel() {
-  const section = document.querySelector(".testimonials");
-  if (!section) return () => {};
+function bindCarousels() {
+  const disposers = Array.from(document.querySelectorAll("[data-carousel]"), bindCarousel);
+  return () => disposers.forEach((dispose) => dispose());
+}
 
-  const track = section.querySelector(".review-track");
+function bindCarousel(track) {
   const originals = Array.from(track.children);
   if (originals.length < 2) return () => {};
+  // Only the reviews carry a highlight; the room photos just scroll.
+  const highlights = track.classList.contains("review-track");
   const copies = originals.map((review) => {
     const copy = review.cloneNode(true);
     copy.setAttribute("aria-hidden", "true");
@@ -647,35 +656,32 @@ function bindTestimonialsCarousel() {
   let appliedScroll = position;
   let lastTime;
   let frame;
-  let selectedReview = null;
+  let selectedReview = 0;
 
-  const selectReview = (index) => {
-    selectedReview = selectedReview === index ? null : index;
+  const highlightReview = (index) => {
+    if (!highlights) return;
+    selectedReview = index;
     // Keep the repeated copy in sync when the carousel crosses its loop boundary.
     [...originals, ...copies].forEach((review, position) => {
-      const selected = position % originals.length === selectedReview;
-      review.classList.toggle("review-selected", selected);
-      review.setAttribute("aria-pressed", String(selected));
+      review.classList.toggle("review-selected", position % originals.length === selectedReview);
     });
   };
 
   for (const [index, review] of [...originals, ...copies].entries()) {
-    listen(review, "click", () => selectReview(index % originals.length));
-    listen(review, "keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      if (!event.repeat) selectReview(index % originals.length);
-    });
     listen(review, "pointerenter", (event) => {
+      highlightReview(index % originals.length);
       if (event.pointerType !== "touch") hovered = true;
     });
     listen(review, "pointerleave", (event) => {
+      // The first card is the resting highlight, so the section is never all blue.
+      highlightReview(0);
       if (event.pointerType !== "touch") hovered = false;
     });
+    listen(review, "focusin", () => highlightReview(index % originals.length));
   }
 
-  // Land on the first review already highlighted rather than waiting for a click.
-  selectReview(0);
+  // Land on the first review already highlighted.
+  highlightReview(0);
 
   const loopWidth = () => copies[0].offsetLeft - originals[0].offsetLeft;
   const moveTo = (value) => {
@@ -735,7 +741,7 @@ function testimonials() {
   return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
     <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review ${icon("arrow")}</a></div></div>
     ${scrollControls("review-track")}
-    <div class="review-track" id="review-track" tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" role="button" tabindex="0" aria-pressed="false"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
+    <div class="review-track" id="review-track" data-carousel tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" tabindex="0"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
   </section>`;
 }
 
@@ -784,7 +790,7 @@ function toursPage() {
     <section class="tours-section section-pad theme-yellow" id="adventures">
       <h2>Click for adventure.</h2>
       <div class="tour-grid">${tours.slice(0, 6).map((tour, i) => tourCard(tour, i)).join("")}</div>
-      ${tours.length > 6 ? `<div class="tour-break"><button class="button button-light" type="button" data-show-more="more-adventures" aria-controls="more-adventures" aria-expanded="false">See More ${icon("arrow")}</button></div>
+      ${tours.length > 6 ? `<div class="tour-break"><button class="button button-outline tour-more" type="button" data-show-more="more-adventures" aria-controls="more-adventures" aria-expanded="false">Explore More</button></div>
       <div class="tour-grid" id="more-adventures" hidden>${tours.slice(6).map((tour, i) => tourCard(tour, i + 6)).join("")}</div>` : ""}
     </section>
     ${lifestyleSection(true)}`;
@@ -797,7 +803,7 @@ function tourCard(tour, index, featured = false) {
         <div class="tour-card-actions">
           ${tour.voucher ? `<p class="tour-offer">${tour.voucher}</p>` : ""}
           ${featured ? "" : `<details class="tour-inclusions"><summary>Tour details ${icon("chevron")}</summary><p>${tour.duration}</p><ul>${tour.details.map((item) => `<li>${item}</li>`).join("")}</ul></details>`}
-        <a class="button button-outline" href="${activitarUrl}" target="_blank" rel="noopener">Book Now ${icon("arrow")}</a>
+        <a class="button button-outline" href="${activitarUrl}" target="_blank" rel="noopener">Book Now</a>
         </div>
       </div>
     </article>`;
@@ -839,7 +845,7 @@ function termsPage() {
   return `${hero("Terms & Conditions", "design/terms-stars.jpg", {alt: "Three star-shaped shadows in the sunshine"})}
     <section class="terms-content section-pad">
       <div class="section-heading"><h2>Thank you for choosing<br>Fools Inn</h2><p>To ensure a safe, comfortable and enjoyable stay for all our guests, please take note of the following terms and conditions:</p></div>
-      <div class="terms-sections">${sections.map(([heading, paragraphs]) => `<section><h3>${heading}</h3>${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}</section>`).join("")}</div>
+      <div class="faq-groups">${sections.map(([heading, paragraphs]) => `<details class="faq-category"><summary>${heading}<span aria-hidden="true">+</span></summary><div class="faq-questions">${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}</div></details>`).join("")}</div>
       <h2 class="terms-closing">We look forward to hosting<br>you at Fools Inn!</h2>
     </section>`;
 }
@@ -853,9 +859,9 @@ function contactPage() {
     <section class="map-section section-pad theme-red">
       <div class="map-panel">
         <div id="contact-map" class="map-canvas" role="application" aria-label="Map of Fools Inn at 82 Regent Road, Sea Point"></div>
-        <div class="map-tools"><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Open in Google Maps ${icon("arrow")}</a><button type="button" class="map-reload" data-reload-map>Reload map</button></div>
+        <div class="map-tools"><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Open in Google Maps</a></div>
       </div>
-      <div class="map-copy"><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p><a class="text-link" href="${escapeHtml(directionsUrl())}" target="_blank" rel="noopener">Get directions ${icon("arrow")}</a></div>
+      <div class="map-copy"><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p></div>
     </section>`;
 }
 
@@ -868,27 +874,21 @@ function contactForm() {
       <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
     </div>
     <label>Your message<textarea name="message" rows="4" required maxlength="5000"></textarea></label>
-    <button class="button" type="submit">Send my message ${icon("arrow")}</button>
+    <button class="button" type="submit">Send my message</button>
     <p class="form-status" role="status"></p>
   </form>`;
 }
 
 function contactCards() {
   return `<div class="contact-details">
-    <a href="${contactDetails.phoneHref}">${icon("phone")}<span><strong>Phone number</strong>${contactDetails.phone}</span></a>
-    <a href="${contactDetails.emailHref}">${icon("mail")}<span><strong>Email address</strong>${contactDetails.email}</span></a>
-    <a href="${mapsUrl()}" target="_blank" rel="noopener">${icon("map")}<span><strong>Our location</strong>${contactDetails.address}</span></a>
+    <a href="${contactDetails.phoneHref}">${icon("star")}<span><strong>Phone number</strong>${contactDetails.phone}</span></a>
+    <a href="${contactDetails.emailHref}">${icon("star")}<span><strong>Email address</strong>${contactDetails.email}</span></a>
+    <a href="${mapsUrl()}" target="_blank" rel="noopener">${icon("star")}<span><strong>Our location</strong>${contactDetails.address}</span></a>
   </div>`;
 }
 
 function mapsUrl() {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(contactDetails.address + ", Cape Town");
-}
-
-function directionsUrl() {
-  const url = new URL("https://www.google.com/maps/dir/");
-  url.search = new URLSearchParams({ api: "1", destination: contactDetails.address + ", Cape Town, South Africa" }).toString();
-  return url.href;
 }
 
 function bookingPage() {
@@ -983,8 +983,7 @@ function pageShell(eyebrow, title, intro, children) {
 }
 
 function footer() {
-  const warm = currentPath() === "/rooms";
-  return `<footer class="footer section-pad ${warm ? "theme-red" : "theme-yellow"}">
+  return `<footer class="footer section-pad">
     <div class="footer-top"><a class="wordmark footer-brand" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
       <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
       <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>

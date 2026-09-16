@@ -63,7 +63,7 @@ for (const protocol of ["http:", "file:"]) {
   if (protocol === "file:") env.location.hash = "#/terms";
   else env.location.pathname = "/terms";
   env.context.render();
-  assert.equal((env.root.innerHTML.match(/<section><h3>/g) || []).length, 13);
+  assert.equal((env.root.innerHTML.match(/class="faq-category"/g) || []).length, 13, "Terms reads as an accordion, like the FAQs");
   assert.ok(env.root.innerHTML.includes(vm.runInContext("stayPaymentPolicy", env.context)), "Terms and FAQ share one payment policy");
   assert.ok(env.root.innerHTML.includes("design/terms-stars.jpg"));
   assert.ok(env.document.title.includes("Terms & Conditions"));
@@ -89,16 +89,13 @@ assert.equal(
   "[-33.9212112,18.3823576]",
   "The map is pinned to 82 Regent Road as Google Maps resolves it",
 );
-assert.ok(existsSync(resolve("src/assets/old-site/star-marker.png")), "The star marker asset ships with the site");
-const directions = new URL(env.context.directionsUrl());
-assert.equal(directions.pathname, "/maps/dir/");
-assert.equal(directions.searchParams.get("api"), "1");
-assert.equal(directions.searchParams.get("destination"), "82 Regent Road, Sea Point, Cape Town, South Africa");
 assert.ok(env.context.contactPage().includes('id="contact-map"'), "The contact page renders a map container");
 assert.ok(!env.context.contactPage().includes("<iframe"), "Google's embed, and its own pin, are gone");
-assert.ok(env.context.bindMap.toString().includes("star-marker.png"), "The star is the map's marker icon");
+assert.ok(env.context.bindMap.toString().includes("pinPath"), "A pin marks the address");
 assert.ok(env.context.contactPage().includes("Open in Google Maps"));
-assert.ok(env.context.contactPage().includes("data-reload-map"));
+assert.ok(!env.context.contactPage().includes("data-reload-map"), "The reload button is gone");
+assert.ok(!env.context.contactPage().includes("Get directions"), "The directions link is gone");
+assert.equal((env.context.contactPage().match(/icon\("star"\)|<svg/g) || []).length > 0, true);
 assert.deepEqual(
   Array.from(env.context.featuredTours().matchAll(/<h3>([^<]+)<\/h3>/g), (match) => match[1]),
   ["Kayak", "Surf", "Shark Cage Diving"],
@@ -110,6 +107,11 @@ const [visibleTours, hiddenTours] = env.context.toursPage().split('<div class="t
 assert.equal((visibleTours.match(/class="tour-item"/g) || []).length, 6, "The tours page shows six tours above the See More button");
 assert.ok(visibleTours.includes('data-show-more="more-adventures"'));
 assert.equal((hiddenTours.match(/class="tour-item"/g) || []).length, 9, "The remaining tours stay hidden until See More is clicked");
+assert.deepEqual(
+  vm.runInContext("JSON.stringify(primaryNav.map(([label]) => label))", env.context),
+  '["Rooms","Tours","Contact Us"]',
+  "The wordmark is the only way home from the nav",
+);
 assert.ok(env.context.homePage().includes('class="home-photo-story"'));
 assert.ok(env.context.homePage().includes("Leave a Review"));
 assert.ok(env.context.testimonials().includes('href="https://www.google.com/travel/search?'));
@@ -148,9 +150,12 @@ console.log("Passed: 12 routes over HTTP and file preview, image paths, featured
 
 const carousel = harness();
 let cardWidth = 300;
+const trackClasses = new Set(["review-track"]);
 const track = Object.assign(new EventTarget(), {
   scrollLeft: 0,
   children: [],
+  classList: { contains: (name) => trackClasses.has(name) },
+  hasAttribute: (name) => name === "data-carousel",
   appendChild(card) { this.children.push(card); },
   scrollTo({ left }) { this.scrollLeft = Math.round(left); },
 });
@@ -199,22 +204,19 @@ const emit = (target, name, properties = {}) => {
   Object.assign(event, properties);
   target.dispatchEvent(event);
 };
-const dispose = carousel.context.bindTestimonialsCarousel();
+const dispose = carousel.context.bindCarousel(track);
 assert.equal(track.children.length, 8, "Duplicate reviews make the loop seamless");
 assert.equal(track.children[4]["aria-hidden"], "true", "Copies are hidden from assistive technology");
 assert.equal(track.children[4]["tabindex"], "-1", "Copies are not keyboard focus stops");
 const selectedCards = () => track.children.flatMap((card, i) => card.classList.contains("review-selected") ? [i] : []);
 assert.deepEqual(selectedCards(), [0, 4], "The first review starts highlighted, copy included");
-emit(track.children[1], "click");
-assert.deepEqual(selectedCards(), [1, 5], "Selecting a review also updates its loop copy");
-assert.equal(track.children[1]["aria-pressed"], "true");
-emit(track.children[6], "click");
-assert.deepEqual(selectedCards(), [2, 6], "Clicking a copy replaces the previous selection");
-assert.equal(track.children[1]["aria-pressed"], "false");
-emit(track.children[0], "keydown", { key: "Enter" });
-assert.deepEqual(selectedCards(), [0, 4], "Keyboard users can select a review");
-emit(track.children[0], "keydown", { key: " " });
-assert.deepEqual(selectedCards(), [], "Selecting the same review again clears the highlight");
+emit(track.children[1], "pointerenter", { pointerType: "mouse" });
+assert.deepEqual(selectedCards(), [1, 5], "Hovering a review also highlights its loop copy");
+emit(track.children[6], "pointerenter", { pointerType: "mouse" });
+assert.deepEqual(selectedCards(), [2, 6], "Hovering a copy moves the highlight");
+emit(track.children[6], "pointerleave", { pointerType: "mouse" });
+assert.deepEqual(selectedCards(), [0, 4], "The highlight rests back on the first review");
+emit(track.children[0], "pointerleave", { pointerType: "mouse" });
 tick(0);
 for (let i = 0; i < 100; i++) tick();
 assert.equal(track.scrollLeft, 90, "Steady 30px per second, including fractional pixels");
