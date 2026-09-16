@@ -24,15 +24,26 @@ const rooms = [
 
 const tours = [
   {
-    title: "Surf",
-    image: designPhoto(54),
+    title: "Lion's Head Hike",
+    image: designPhoto(49),
     category: "Ocean & Adventure",
-    price: "R3,600 pp",
+    price: "R1,200 pp",
     voucher: `Beer and burger at ${onlyFools()}`,
-    duration: "4-5 hour half-day tour",
-    tag: "Let's catch some waves.",
-    description: "New to surfing or already hooked? Your private guide will find the day's best spot, bring the gear and help you make the most of it.",
-    details: ["Private surf van transport", "1.5-hour personalised surf lesson", "Premium gear included", "Photos captured by your coach"],
+    duration: "3-4 hour round trip",
+    tag: "Get the view from the top.",
+    description: "Choose sunrise or sunset, lace up and tackle Lion's Head with a qualified guide and a few future friends. Come for the views; stay for the snacks.",
+    details: ["Qualified tour guide", "Head torches and safety equipment", "Coffee, tea, biscuits and fruit", "Average fitness required"],
+  },
+  {
+    title: "Paragliding",
+    image: designPhoto(53),
+    category: "Ocean & Adventure",
+    price: "R1,900 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
+    duration: "1 hour",
+    tag: "Take the scenic way down.",
+    description: "Fly tandem from Signal Hill or Lion's Head and float above the best city (in our opinion) in the world.",
+    details: ["Lift back up to vehicle included", "Optional photos: R350", "All year, weather dependent", "Hi-res imagery available"],
   },
   {
     title: "Shark Cage Diving",
@@ -44,6 +55,50 @@ const tours = [
     tag: "Meet Great Whites in the Big Blue.",
     description: "Head out from Kleinbaai, suit up, and see one of the ocean's apex predators up-close.",
     details: ["Marine biologist guidance", "Meal and onboard refreshments", "Wetsuit, booties, mask and towel", "Weather and tide dependent"],
+  },
+  {
+    title: "Township Walking Tour",
+    image: designPhoto(42),
+    category: "Social & Sunset",
+    price: "R950 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
+    duration: "Morning or afternoon",
+    tag: "Make friends in Langa.",
+    description: "Explore Cape Town's oldest township with a local guide, stopping at the museum, community projects and family homes along the way.",
+    details: ["Pickup and return transfer included", "Langa museum and family visits", "Community projects", "Sundays may include gospel/church visit"],
+  },
+  {
+    title: "Kayak",
+    image: designPhoto(55),
+    category: "Ocean & Adventure",
+    price: "R600 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
+    duration: "2 hours",
+    tag: "See Sea Point from the sea.",
+    description: "Paddle out from the promenade and look back at the city. If you're lucky, some dolphins, seals, penguins, sunfish and whales might join you.",
+    details: ["Expert ocean guides", "Friendly and inclusive experience", "Year-round, weather dependent", "R700 from October"],
+  },
+  {
+    title: "Kruger on the GO",
+    image: designPhoto(46),
+    category: "Work & Wander",
+    price: "From R11,850 pp",
+    voucher: "",
+    duration: "2 nights / 3 days",
+    tag: "Go wild for a few days.",
+    description: "Spend two nights in a tented camp, head out on four Big Five game drives and let someone else sort the meals and transfers for you.",
+    details: ["2026: R11,850 sharing / R12,750 single", "Shared return road transfer", "All meals and tea/coffee", "Two afternoon/evening game drives", "Two morning game drives"],
+  },
+  {
+    title: "Surf",
+    image: designPhoto(54),
+    category: "Ocean & Adventure",
+    price: "R3,600 pp",
+    voucher: `Beer and burger at ${onlyFools()}`,
+    duration: "4-5 hour half-day tour",
+    tag: "Let's catch some waves.",
+    description: "New to surfing or already hooked? Your private guide will find the day's best spot, bring the gear and help you make the most of it.",
+    details: ["Private surf van transport", "1.5-hour personalised surf lesson", "Premium gear included", "Photos captured by your coach"],
   },
   {
     title: "Sea Safari",
@@ -68,28 +123,6 @@ const tours = [
     details: ["Kayak, paddles and safety gear", "Local wildlife/adventure guides", "Shower facilities", "Transport excluded; 5-min Uber recommended"],
   },
   {
-    title: "Kayak",
-    image: designPhoto(55),
-    category: "Ocean & Adventure",
-    price: "R600 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
-    duration: "2 hours",
-    tag: "See Sea Point from the sea.",
-    description: "Paddle out from the promenade and look back at the city. If you're lucky, some dolphins, seals, penguins, sunfish and whales might join you.",
-    details: ["Expert ocean guides", "Friendly and inclusive experience", "Year-round, weather dependent", "R700 from October"],
-  },
-  {
-    title: "Lion's Head Hike",
-    image: designPhoto(49),
-    category: "Ocean & Adventure",
-    price: "R1,200 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
-    duration: "3-4 hour round trip",
-    tag: "Get the view from the top.",
-    description: "Choose sunrise or sunset, lace up and tackle Lion's Head with a qualified guide and a few future friends. Come for the views; stay for the snacks.",
-    details: ["Qualified tour guide", "Head torches and safety equipment", "Coffee, tea, biscuits and fruit", "Average fitness required"],
-  },
-  {
     title: "Boerie & Games",
     image: designPhoto(48),
     category: "Social & Sunset",
@@ -112,28 +145,6 @@ const tours = [
     details: ["Safety briefing", "All necessary equipment", "Transport excluded", "Camera packages excluded"],
   },
   {
-    title: "Paragliding",
-    image: designPhoto(53),
-    category: "Ocean & Adventure",
-    price: "R1,900 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
-    duration: "1 hour",
-    tag: "Take the scenic way down.",
-    description: "Fly tandem from Signal Hill or Lion's Head and float above the best city (in our opinion) in the world.",
-    details: ["Lift back up to vehicle included", "Optional photos: R350", "All year, weather dependent", "Hi-res imagery available"],
-  },
-  {
-    title: "Kruger on the GO",
-    image: designPhoto(46),
-    category: "Work & Wander",
-    price: "From R11,850 pp",
-    voucher: "",
-    duration: "2 nights / 3 days",
-    tag: "Go wild for a few days.",
-    description: "Spend two nights in a tented camp, head out on four Big Five game drives and let someone else sort the meals and transfers for you.",
-    details: ["2026: R11,850 sharing / R12,750 single", "Shared return road transfer", "All meals and tea/coffee", "Two afternoon/evening game drives", "Two morning game drives"],
-  },
-  {
     title: "Sossusvlei Budget Safari",
     image: designPhoto(47),
     category: "Work & Wander",
@@ -154,17 +165,6 @@ const tours = [
     tag: "See the wild up close.",
     description: "Spend three days chasing wildlife sightings, watching the waterholes and camping under Namibia's brightest stars.",
     details: ["Professional English-speaking guide", "Full-day Etosha open game viewer drive", "Twin-share camping", "Saturday weekly departure"],
-  },
-  {
-    title: "Township Walking Tour",
-    image: designPhoto(42),
-    category: "Social & Sunset",
-    price: "R950 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
-    duration: "Morning or afternoon",
-    tag: "Make friends in Langa.",
-    description: "Explore Cape Town's oldest township with a local guide, stopping at the museum, community projects and family homes along the way.",
-    details: ["Pickup and return transfer included", "Langa museum and family visits", "Community projects", "Sundays may include gospel/church visit"],
   },
   {
     title: "Township Cycle Tour",
@@ -193,6 +193,8 @@ tours.push({
 
 const contactDetails = {
   address: "82 Regent Road, Sea Point",
+  // Where Google Maps resolves that address; the star marker is pinned here.
+  coords: [-33.9212112, 18.3823576],
   phone: "+27 (81) 601-8230",
   phoneHref: "tel:+27816018230",
   email: "info@foolsinn.co.za",
@@ -200,7 +202,14 @@ const contactDetails = {
 };
 
 const socialLinks = [
-  ["Facebook", "https://www.facebook.com/people/Sea-Point-Holiday-Hotel/100063616450292/"],
+  ["Instagram", ponyUpInstagram, "instagram"],
+  ["Facebook", "https://www.facebook.com/people/Sea-Point-Holiday-Hotel/100063616450292/", "facebook"],
+];
+
+// The footer keeps to the short list in the redesign rather than mirroring the full nav.
+const footerLinks = [
+  [["Home", "/"], ["Rooms", "/rooms"], ["Tours", "/tours"]],
+  [["Contact Us", "/contact"]],
 ];
 
 const blogPosts = [
@@ -358,12 +367,15 @@ function icon(name) {
     menu: "M4 7h16M4 12h16M4 17h16",
     phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z",
     sparkle: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
-    social: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z",
+    facebook: "M9.1 23.7v-8H6.6V12h2.5v-1.6c0-4.1 1.9-6 5.9-6 .7 0 1.8.1 2.6.3v3.3c-.2 0-.6 0-1.4 0-1.4 0-2 .4-2.3.9-.2.4-.4 1-.4 1.8V12h3.9l-.7 3.7h-3.2v8C19.4 23.2 24 18.2 24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 5.6 3.9 10.4 9.1 11.7Z",
+    instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM17.5 6.4h.01",
     x: "M6 6l12 12M18 6 6 18",
     pause: "M10 4H6v16h4zM18 4h-4v16h4z",
     play: "m6 3 14 9-14 9V3Z",
   };
-  return `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[name] || paths.sparkle}"></path></svg>`;
+  // A couple of the brand marks read better solid than as 2px outlines.
+  const solid = name === "facebook";
+  return `<svg viewBox="0 0 24 24" width="22" height="22" fill="${solid ? "currentColor" : "none"}" stroke="${solid ? "none" : "currentColor"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[name] || paths.sparkle}"></path></svg>`;
 }
 
 const primaryNav = [["Home", "/"], ["Rooms", "/rooms"], ["Tours", "/tours"], ["Contact Us", "/contact"]];
@@ -423,6 +435,7 @@ function layout(content) {
   `;
   bindLinks();
   bindForms();
+  bindMap();
   syncTourLayout();
   disposeTestimonials = bindTestimonialsCarousel();
 }
@@ -483,11 +496,69 @@ function bindLinks() {
       track.scrollBy({ left: Number(button.dataset.direction) * track.clientWidth * 0.85, behavior: "smooth" });
     });
   });
-  document.querySelectorAll("[data-reload-map]").forEach((button) => {
+  document.querySelectorAll("[data-show-more]").forEach((button) => {
     button.addEventListener("click", () => {
-      const frame = document.getElementById("contact-map");
-      frame.src = mapEmbedUrl();
+      const target = document.getElementById(button.dataset.showMore);
+      const open = target.hidden;
+      target.hidden = !open;
+      button.setAttribute("aria-expanded", String(open));
+      button.innerHTML = (open ? "See Less " : "See More ") + icon("arrow");
     });
+  });
+  document.querySelectorAll("[data-reload-map]").forEach((button) => {
+    button.addEventListener("click", bindMap);
+  });
+}
+
+const leafletBase = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4";
+let leafletLoader;
+let activeMap = null;
+
+// Leaflet is only needed on the contact page, so it is fetched the first time a map appears.
+function loadLeaflet() {
+  if (leafletLoader) return leafletLoader;
+  leafletLoader = new Promise((resolve, reject) => {
+    const styles = document.createElement("link");
+    styles.rel = "stylesheet";
+    styles.href = leafletBase + "/leaflet.min.css";
+    const script = document.createElement("script");
+    script.src = leafletBase + "/leaflet.min.js";
+    script.onload = () => resolve(window.L);
+    script.onerror = () => reject(new Error("Leaflet did not load"));
+    document.head.appendChild(styles);
+    document.head.appendChild(script);
+  });
+  return leafletLoader;
+}
+
+function bindMap() {
+  if (activeMap) {
+    activeMap.remove();
+    activeMap = null;
+  }
+  const node = document.getElementById("contact-map");
+  if (!node) return;
+  loadLeaflet().then((L) => {
+    // A slow load can finish after the visitor has already navigated away.
+    if (!document.body.contains(node) || activeMap) return;
+    const map = L.map(node, { scrollWheelZoom: false }).setView(contactDetails.coords, 16);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    L.marker(contactDetails.coords, {
+      title: "Fools Inn, " + contactDetails.address,
+      alt: "Fools Inn",
+      icon: L.icon({
+        iconUrl: asset("star-marker.png"),
+        iconSize: [52, 52],
+        // The star's points leave a little headroom, so its centre sits above the image's.
+        iconAnchor: [26, 23],
+      }),
+    }).addTo(map);
+    activeMap = map;
+  }).catch(() => {
+    node.classList.add("map-failed");
   });
 }
 
@@ -603,6 +674,9 @@ function bindTestimonialsCarousel() {
     });
   }
 
+  // Land on the first review already highlighted rather than waiting for a click.
+  selectReview(0);
+
   const loopWidth = () => copies[0].offsetLeft - originals[0].offsetLeft;
   const moveTo = (value) => {
     const width = loopWidth();
@@ -654,6 +728,9 @@ function testimonials() {
     ["Central location and friendly staff. Good for a quick short stay and within distance to all restaurants and bars! They do have a nice secure place for luggage storage.", "Nemi", "the UK"],
     ["The room is clean and has everything you need for a short stay. The location is fantastic and the staff were lovely.", "Rachel", "the USA"],
     ["The location and the staff were very helpful and understanding.", "Maryke", "Brazil"],
+    ["I liked the room's decor; it was inviting and comfortable with a beautiful view.", "Ananya", "Thailand"],
+    ["The clean environment and the location is perfect to explore the surrounding areas. They are very organized and responsive.", "Willis", "South Africa"],
+    ["Good place for short stay in Cape Town.", "Charlotte", "Germany"],
   ];
   return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
     <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review ${icon("arrow")}</a></div></div>
@@ -707,8 +784,8 @@ function toursPage() {
     <section class="tours-section section-pad theme-yellow" id="adventures">
       <h2>Click for adventure.</h2>
       <div class="tour-grid">${tours.slice(0, 6).map((tour, i) => tourCard(tour, i)).join("")}</div>
-      <div class="tour-break"><a class="button button-light" href="#more-adventures">Explore More ${icon("arrow")}</a></div>
-      <div class="tour-grid" id="more-adventures">${tours.slice(6).map((tour, i) => tourCard(tour, i + 6)).join("")}</div>
+      ${tours.length > 6 ? `<div class="tour-break"><button class="button button-light" type="button" data-show-more="more-adventures" aria-controls="more-adventures" aria-expanded="false">See More ${icon("arrow")}</button></div>
+      <div class="tour-grid" id="more-adventures" hidden>${tours.slice(6).map((tour, i) => tourCard(tour, i + 6)).join("")}</div>` : ""}
     </section>
     ${lifestyleSection(true)}`;
 }
@@ -775,7 +852,7 @@ function contactPage() {
     </section>
     <section class="map-section section-pad theme-red">
       <div class="map-panel">
-        <iframe id="contact-map" title="Fools Inn at 82 Regent Road, Sea Point" src="${escapeHtml(mapEmbedUrl())}" loading="eager" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div id="contact-map" class="map-canvas" role="application" aria-label="Map of Fools Inn at 82 Regent Road, Sea Point"></div>
         <div class="map-tools"><a class="text-link" href="${mapsUrl()}" target="_blank" rel="noopener">Open in Google Maps ${icon("arrow")}</a><button type="button" class="map-reload" data-reload-map>Reload map</button></div>
       </div>
       <div class="map-copy"><p>Find us in the heart of Sea Point, right in the middle of the hustle and bustle. The promenade, beaches, coffee shops, restaurants and bars are all just a short walk away.</p><a class="text-link" href="${escapeHtml(directionsUrl())}" target="_blank" rel="noopener">Get directions ${icon("arrow")}</a></div>
@@ -808,13 +885,6 @@ function mapsUrl() {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(contactDetails.address + ", Cape Town");
 }
 
-function mapEmbedUrl() {
-  // Use the embed destination directly, without the legacy maps.google.com redirect.
-  const url = new URL("https://www.google.com/maps/embed");
-  url.search = new URLSearchParams({ origin: "mfe", pb: "!1m3!2m1!1s" + contactDetails.address + ", Cape Town!6i15" }).toString();
-  return url.href;
-}
-
 function directionsUrl() {
   const url = new URL("https://www.google.com/maps/dir/");
   url.search = new URLSearchParams({ api: "1", destination: contactDetails.address + ", Cape Town, South Africa" }).toString();
@@ -839,7 +909,6 @@ function bookingPage() {
       <button class="button" type="submit">Enquire about my stay ${icon("arrow")}</button>
       <p class="form-status" role="status"></p>
     </form>
-    <div class="booking-tours theme-blue"><div><h2>Coming with plans?</h2><p>Find your next adventure and continue to Activitar for tour bookings.</p></div><a class="button" href="${activitarUrl}" target="_blank" rel="noopener">Visit Activitar ${icon("arrow")}</a></div>
   </section>`;
 }
 
@@ -917,10 +986,10 @@ function footer() {
   const warm = currentPath() === "/rooms";
   return `<footer class="footer section-pad ${warm ? "theme-red" : "theme-yellow"}">
     <div class="footer-top"><a class="wordmark footer-brand" href="/" data-link aria-label="Fools Inn home">FOOLS INN</a>
-      <nav class="footer-links" aria-label="Explore Fools Inn">${navItems.filter(([, href]) => href !== "/book-now").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</nav>
-      <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="${contactDetails.emailHref}">${contactDetails.email}</a><a href="${contactDetails.phoneHref}">${contactDetails.phone}</a></div>
+      <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
+      <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>
     </div>
-    <div class="footer-bottom"><small>Copyright &copy; ${new Date().getFullYear()} Fools Inn. All rights reserved.</small><div>${socialLinks.map(([label, href]) => `<a href="${href}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">${icon("social")}</a>`).join("")}</div></div>
+    <div class="footer-bottom"><small>Copyright &copy; ${new Date().getFullYear()} Fools Inn. All rights reserved.</small><div>${socialLinks.map(([label, href, glyph]) => `<a href="${href}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">${icon(glyph)}</a>`).join("")}</div></div>
   </footer>`;
 }
 

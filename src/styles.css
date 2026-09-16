@@ -712,6 +712,9 @@ details[open]>summary>span {
   grid-template-columns: repeat(3,minmax(0,1fr));
   gap: 32px 1.5277778vw;
 }
+.tour-grid[hidden] {
+  display: none;
+}
 .tour-item>summary {
   display: none;
 }
@@ -830,7 +833,7 @@ details[open]>summary>span {
 }
 .tour-break {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 24px 0;
 }
 .tour-inclusions ul {
@@ -915,13 +918,29 @@ details[open]>summary>span {
   gap: 50px;
   align-items: end;
 }
-.map-section iframe {
+.map-canvas {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 1.1;
   border: 0;
   background: var(--cream);
+}
+/* Leaflet ships its own type and link colours; keep the map in the site's voice. */
+.map-canvas .leaflet-container {
+  font: inherit;
+}
+.map-canvas .leaflet-control-attribution {
+  font-size: 11px;
+}
+.map-failed::after {
+  content: "The map could not load. Use the link below for directions.";
+  display: grid;
+  place-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  color: var(--red-text);
 }
 .map-copy .text-link {
   margin-top: 20px;
@@ -949,20 +968,7 @@ details[open]>summary>span {
 }
 .stay-enquiry {
   max-width: 900px;
-  margin: 0 auto 80px;
-}
-.booking-tours {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 45px;
-}
-.booking-tours p {
-  margin-top: 18px;
-}
-.booking-tours .button {
-  flex-shrink: 0;
+  margin: 0 auto;
 }
 .page-heading {
   max-width: 900px;
@@ -1021,11 +1027,11 @@ details[open]>summary>span {
 }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.4fr 0.8fr 1fr;
-  gap: 55px;
+  grid-template-columns: 3.2fr 1fr 1fr;
+  gap: 40px;
 }
 .footer-brand {
-  font-size: 70px;
+  font-size: 86px;
   align-self: start;
 }
 .footer-links {
@@ -1034,6 +1040,9 @@ details[open]>summary>span {
   align-content: start;
   column-gap: 25px;
 }
+.footer-links>div {
+  min-width: 0;
+}
 .footer-links a,.footer-contact a {
   font-size: 14px;
   padding: 6px 0;
@@ -1041,13 +1050,14 @@ details[open]>summary>span {
 }
 .footer-contact {
   overflow-wrap: anywhere;
+  justify-self: end;
 }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  margin-top: 90px;
+  margin-top: 120px;
 }
 .footer-bottom small {
   font-size: 13px;
@@ -1603,19 +1613,11 @@ details[open]>summary>span {
   .map-section>.map-copy {
     grid-row: 1;
   }
-  .map-section iframe {
+  .map-canvas {
     aspect-ratio: 0.95;
   }
   .booking-page>h1 {
     margin-bottom: 40px;
-  }
-  .booking-tours {
-    display: grid;
-    padding: 28px 22px;
-    gap: 30px;
-  }
-  .stay-enquiry {
-    margin-bottom: 45px;
   }
   .page-heading {
     margin-bottom: 35px;
@@ -1651,6 +1653,9 @@ details[open]>summary>span {
   }
   .footer-links {
     grid-template-columns: 1fr;
+  }
+  .footer-contact {
+    justify-self: start;
   }
   .footer-contact a {
     font-size: 14px;

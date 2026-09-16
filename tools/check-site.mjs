@@ -15,8 +15,10 @@ function harness(protocol = "http:", mobile = false) {
   const listeners = new Map();
   const noopElement = { addEventListener() {}, setAttribute() {}, classList: { remove() {}, toggle() { return false; } }, focus() {} };
   const location = { protocol, pathname: "/", search: "", hash: "", href: protocol === "file:" ? new URL("../dist/index.html", import.meta.url).href : "http://127.0.0.1:5173/" };
+  const head = { children: [], appendChild(node) { this.children.push(node); } };
   const document = {
-    title: "", currentScript: null,
+    title: "", currentScript: null, head,
+    createElement: () => ({}),
     getElementById: () => root,
     querySelectorAll: () => [],
     querySelector: (selector) => [".contact-form", ".testimonials"].includes(selector) ? null : noopElement,
@@ -82,15 +84,19 @@ for (const mobile of [false, true]) {
 }
 
 const env = harness();
-const embedUrl = new URL(env.context.mapEmbedUrl());
-assert.equal(embedUrl.origin, "https://www.google.com");
-assert.equal(embedUrl.pathname, "/maps/embed");
-assert.ok(embedUrl.searchParams.get("pb").includes("82 Regent Road, Sea Point, Cape Town"));
+assert.equal(
+  vm.runInContext("JSON.stringify(contactDetails.coords)", env.context),
+  "[-33.9212112,18.3823576]",
+  "The map is pinned to 82 Regent Road as Google Maps resolves it",
+);
+assert.ok(existsSync(resolve("src/assets/old-site/star-marker.png")), "The star marker asset ships with the site");
 const directions = new URL(env.context.directionsUrl());
 assert.equal(directions.pathname, "/maps/dir/");
 assert.equal(directions.searchParams.get("api"), "1");
 assert.equal(directions.searchParams.get("destination"), "82 Regent Road, Sea Point, Cape Town, South Africa");
-assert.ok(env.context.contactPage().includes('loading="eager"'));
+assert.ok(env.context.contactPage().includes('id="contact-map"'), "The contact page renders a map container");
+assert.ok(!env.context.contactPage().includes("<iframe"), "Google's embed, and its own pin, are gone");
+assert.ok(env.context.bindMap.toString().includes("star-marker.png"), "The star is the map's marker icon");
 assert.ok(env.context.contactPage().includes("Open in Google Maps"));
 assert.ok(env.context.contactPage().includes("data-reload-map"));
 assert.deepEqual(
@@ -100,22 +106,29 @@ assert.deepEqual(
 );
 assert.equal((env.context.toursPage().match(/class="tour-offer"/g) || []).length, 11);
 assert.equal((env.context.toursPage().match(/class="tour-inclusions"/g) || []).length, 15);
+const [visibleTours, hiddenTours] = env.context.toursPage().split('<div class="tour-grid" id="more-adventures" hidden>');
+assert.equal((visibleTours.match(/class="tour-item"/g) || []).length, 6, "The tours page shows six tours above the See More button");
+assert.ok(visibleTours.includes('data-show-more="more-adventures"'));
+assert.equal((hiddenTours.match(/class="tour-item"/g) || []).length, 9, "The remaining tours stay hidden until See More is clicked");
 assert.ok(env.context.homePage().includes('class="home-photo-story"'));
 assert.ok(env.context.homePage().includes("Leave a Review"));
 assert.ok(env.context.testimonials().includes('href="https://www.google.com/travel/search?'));
+assert.equal((env.context.testimonials().match(/class="review"/g) || []).length, 7, "All seven guest reviews are on the page");
+for (const name of ["Ananya", "Willis", "Charlotte"]) {
+  assert.ok(env.context.testimonials().includes("<strong>" + name + "</strong>"), name + " is quoted in the testimonials");
+}
 assert.ok(!env.context.homePage().includes("Backpacker energy."));
 const expectedTours = [
-  ["Surf", 54], ["Shark Cage Diving", 45], ["Sea Safari", 52],
-  ["Kayak & Sauna", 50], ["Kayak", 55], ["Lion's Head Hike", 49],
-  ["Boerie & Games", 48], ["Skydiving", 44], ["Paragliding", 53],
-  ["Kruger on the GO", 46], ["Sossusvlei Budget Safari", 47],
-  ["Etosha Budget Safari", 43], ["Township Walking Tour", 42],
-  ["Township Cycle Tour", 39], ["Secret Hike", 41],
+  ["Lion's Head Hike", 49], ["Paragliding", 53], ["Shark Cage Diving", 45],
+  ["Township Walking Tour", 42], ["Kayak", 55], ["Kruger on the GO", 46],
+  ["Surf", 54], ["Sea Safari", 52], ["Kayak & Sauna", 50],
+  ["Boerie & Games", 48], ["Skydiving", 44], ["Sossusvlei Budget Safari", 47],
+  ["Etosha Budget Safari", 43], ["Township Cycle Tour", 39], ["Secret Hike", 41],
 ].map(([title, number]) => [title, `design/photo-${number}.jpg`]);
 assert.deepEqual(
   JSON.parse(vm.runInContext("JSON.stringify(tours.map(({ title, image }) => [title, image]))", env.context)),
   expectedTours,
-  "The 15 advertised tours and their photos match the Figma PDF in order",
+  "The 15 advertised tours and their photos stay in the order the client asked for",
 );
 const handlers = {};
 const field = (value) => ({ value, addEventListener(name, fn) { handlers[name] = fn; }, setCustomValidity(message) { this.error = message; } });
@@ -131,7 +144,7 @@ handlers.change();
 assert.equal(departure.error, "");
 assert.ok(env.context.localDate().match(/^\d{4}-\d{2}-\d{2}$/));
 
-console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, enquiry parameters, mobile tour states and date validation.");
+console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, enquiry parameters, mobile tour states, the See More toggle and date validation.");
 
 const carousel = harness();
 let cardWidth = 300;
@@ -191,7 +204,7 @@ assert.equal(track.children.length, 8, "Duplicate reviews make the loop seamless
 assert.equal(track.children[4]["aria-hidden"], "true", "Copies are hidden from assistive technology");
 assert.equal(track.children[4]["tabindex"], "-1", "Copies are not keyboard focus stops");
 const selectedCards = () => track.children.flatMap((card, i) => card.classList.contains("review-selected") ? [i] : []);
-assert.deepEqual(selectedCards(), [], "All reviews start blue");
+assert.deepEqual(selectedCards(), [0, 4], "The first review starts highlighted, copy included");
 emit(track.children[1], "click");
 assert.deepEqual(selectedCards(), [1, 5], "Selecting a review also updates its loop copy");
 assert.equal(track.children[1]["aria-pressed"], "true");
