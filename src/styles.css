@@ -690,6 +690,15 @@ details[open]>summary>span {
 .room-description.theme-yellow {
   color: var(--blue);
 }
+/* The room sections are yellow or pink, so a yellow button would vanish. */
+.room-description .button {
+  margin-top: 28px;
+  background: var(--red);
+  color: var(--cream);
+}
+.room-description .button:hover {
+  background: var(--red-deep);
+}
 .room-description .photo-carousel {
   padding-left: 0;
   padding-right: 0;
@@ -931,12 +940,12 @@ details[open]>summary>span {
   grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 28px 40px;
 }
-.contact-form label,.stay-enquiry label {
+.contact-form label {
   display: grid;
   gap: 10px;
   font-size: 14px;
 }
-.contact-form input,.contact-form textarea,.stay-enquiry input,.stay-enquiry select {
+.contact-form input,.contact-form textarea {
   width: 100%;
   padding: 8px 0;
   color: var(--ink);
@@ -954,7 +963,7 @@ details[open]>summary>span {
 .contact-form>label {
   margin-top: 32px;
 }
-.contact-form>.button,.stay-enquiry>.button {
+.contact-form>.button {
   margin-top: 36px;
 }
 .form-status {
@@ -1047,12 +1056,12 @@ details[open]>summary>span {
   background: transparent;
   font-size: 14px;
 }
+.booking-handoff p {
+  max-width: 560px;
+  margin-top: 20px;
+}
 .booking-page>h1 {
   margin-bottom: 70px;
-}
-.stay-enquiry {
-  max-width: 900px;
-  margin: 0 auto;
 }
 .page-heading {
   max-width: 900px;

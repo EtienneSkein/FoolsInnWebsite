@@ -14,7 +14,12 @@ function harness(protocol = "http:", mobile = false) {
   const root = { innerHTML: "" };
   const listeners = new Map();
   const noopElement = { addEventListener() {}, setAttribute() {}, classList: { remove() {}, toggle() { return false; } }, focus() {} };
-  const location = { protocol, pathname: "/", search: "", hash: "", href: protocol === "file:" ? new URL("../dist/index.html", import.meta.url).href : "http://127.0.0.1:5173/" };
+  const location = {
+    protocol, pathname: "/", search: "", hash: "",
+    href: protocol === "file:" ? new URL("../dist/index.html", import.meta.url).href : "http://127.0.0.1:5173/",
+    redirectedTo: null,
+    replace(target) { this.redirectedTo = target; },
+  };
   const head = { children: [], appendChild(node) { this.children.push(node); } };
   const document = {
     title: "", currentScript: null, head,
@@ -67,12 +72,17 @@ for (const protocol of ["http:", "file:"]) {
   assert.ok(env.root.innerHTML.includes(vm.runInContext("stayPaymentPolicy", env.context)), "Terms and FAQ share one payment policy");
   assert.ok(env.root.innerHTML.includes("design/terms-stars.jpg"));
   assert.ok(env.document.title.includes("Terms & Conditions"));
-  if (protocol === "file:") env.location.hash = "#/book-now?room=Female-Only%20Dorms&guests=3&code=%22%3E%3Cscript%3E";
-  else { env.location.pathname = "/book-now"; env.location.search = "?room=Female-Only%20Dorms&guests=3&code=%22%3E%3Cscript%3E"; }
+  if (protocol === "file:") env.location.hash = "#/book-now?guests=3&checkin=2029-04-01&checkout=2029-04-05&code=%22%3E%3Cscript%3E";
+  else { env.location.pathname = "/book-now"; env.location.search = "?guests=3&checkin=2029-04-01&checkout=2029-04-05&code=%22%3E%3Cscript%3E"; }
   env.context.render();
-  assert.ok(env.root.innerHTML.includes("<option selected>Female-Only Dorms</option>"));
-  assert.ok(env.root.innerHTML.includes('value="3" selected'));
+  const handoff = new URL(env.location.redirectedTo);
+  assert.equal(handoff.origin + handoff.pathname, "https://us2.cloudbeds.com/en/reservation/0d7YI3", "Book Now hands off to Cloudbeds");
+  assert.equal(handoff.searchParams.get("currency"), "zar");
+  assert.equal(handoff.searchParams.get("adults"), "3", "The guest count travels with the booking");
+  assert.equal(handoff.searchParams.get("checkin"), "2029-04-01");
+  assert.equal(handoff.searchParams.get("checkout"), "2029-04-05");
   assert.ok(!env.root.innerHTML.includes("<script>"));
+  assert.ok(env.root.innerHTML.includes("Taking you to our booking system"), "A fallback shows while the redirect runs");
 }
 
 for (const mobile of [false, true]) {
@@ -146,7 +156,7 @@ handlers.change();
 assert.equal(departure.error, "");
 assert.ok(env.context.localDate().match(/^\d{4}-\d{2}-\d{2}$/));
 
-console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, enquiry parameters, mobile tour states, the See More toggle and date validation.");
+console.log("Passed: 12 routes over HTTP and file preview, image paths, featured tours, offers, terms, FAQs, the Cloudbeds handoff, mobile tour states, the See More toggle and date validation.");
 
 const carousel = harness();
 let cardWidth = 300;

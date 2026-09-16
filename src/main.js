@@ -431,7 +431,7 @@ function layout(content) {
         }).join("")}
         <div class="mobile-extra">${navItems.filter(([, href]) => !primaryNav.some(([, main]) => href === main) && href !== "/book-now" && href !== "/").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>
       </nav>
-      <a class="book-link button" href="/book-now" data-link>Book Now</a>
+      <a class="book-link button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a>
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
     </header>
     <main id="main-content" tabindex="-1">${content}</main>
@@ -570,7 +570,7 @@ function hero(title, file, options = {}) {
     ${photo(file, options.alt || title, "hero-image", true)}
     <div class="hero-inner">
       <h1><span>${title}</span></h1>
-      ${options.intro ? `<div class="hero-description"><p>${options.intro}</p>${options.home ? bookingSearch() : `<div class="actions"><a class="button" href="/book-now" data-link>Book Now</a><a class="button button-light" href="#adventures">Explore More</a></div>`}</div>` : ""}
+      ${options.intro ? `<div class="hero-description"><p>${options.intro}</p>${options.home ? bookingSearch() : `<div class="actions"><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a><a class="button button-light" href="#adventures">Explore More</a></div>`}</div>` : ""}
     </div>
   </section>`;
 }
@@ -747,7 +747,7 @@ function testimonials() {
 function roomsPage() {
   return `${hero("Meet you back at ours", designPhoto(23), {alt: "A sunny seaside afternoon"})}
     <section class="section-pad room-listing">
-      <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="/book-now" data-link>Book Now</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
+      <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
       <div class="room-grid" id="our-rooms">
         ${roomCard("Private Rooms", "Your own space. Your own pace.", "A comfortable private room with an en-suite bathroom, comfortable double bed and dedicated workspace for switching off or logging on.", 20, "/rooms/private")}
         ${roomCard("Female-Only Dorms", "Good company included.", "A comfortable and secure shared stay for female travellers, with an en-suite bathroom and space to unpack.", 21, "/rooms/female-dorm")}
@@ -764,7 +764,7 @@ function roomCard(title, tag, description, image, href) {
 function roomPage(room) {
   return `${hero(room.heading, designPhoto(room.hero), {alt: room.heading})}
     <section class="room-description theme-${room.theme}">
-      <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="text-link" href="/book-now?room=${encodeURIComponent(room.title)}" data-link>Book your stay</a></div></div>
+      <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book your stay</a></div></div>
       ${photoStrip(room.photos, room.photos.map((_, i) => room.title + " interior, view " + (i + 1)))}
     </section>
     <section class="amenities section-pad ${room.theme === "pink" ? "theme-red" : "theme-blue"}">
@@ -890,24 +890,14 @@ function mapsUrl() {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(contactDetails.address + ", Cape Town");
 }
 
+function redirectToBooking() {
+  location.replace(cloudbedsLink(currentParams()));
+}
+
 function bookingPage() {
-  const params = currentParams();
-  return `<section class="section-pad booking-page">
-    <h1>Let's make it official.</h1>
-    <div class="section-heading"><h2>Come stay with us.</h2><div><p>Fools Inn is a boutique backpackers offering private en-suite rooms and female-only dorms in the heart of Sea Point. Come for the fast WiFi, the ${ponyUp("Pony Up Rooftop Bar")}, and the unbeatable Cape Town location; stay for the curated adventures, new friends, and camera roll full of memories.</p><p>Your room's waiting. Your people are already at the bar.</p><p>Send us your dates and we'll confirm room availability and payment details with you.</p></div></div>
-    <form class="stay-enquiry">
-      <div class="form-grid">
-        <label>Room<select name="room">${["Private Rooms", "Female-Only Dorms"].map((room) => `<option ${params.get("room") === room ? "selected" : ""}>${room}</option>`).join("")}</select></label>
-        <label>Guests<select name="guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}" ${params.get("guests") === String(n) ? "selected" : ""}>${n}</option>`).join("")}</select></label>
-        <label>Check-in<input type="date" name="checkin" value="${escapeHtml(params.get("checkin") || "")}" required></label>
-        <label>Check-out<input type="date" name="checkout" value="${escapeHtml(params.get("checkout") || "")}" required></label>
-        <label>Name<input name="name" autocomplete="name" required maxlength="100"></label>
-        <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
-        <label>Promo code<input name="code" value="${escapeHtml(params.get("code") || "")}" maxlength="40"></label>
-      </div>
-      <button class="button" type="submit">Enquire about my stay</button>
-      <p class="form-status" role="status"></p>
-    </form>
+  return `<section class="section-pad booking-page booking-handoff">
+    <h1>Taking you to our booking system.</h1>
+    <p>We book through Cloudbeds. If nothing happens in a moment, <a class="inline-link" href="${cloudbedsUrl}" target="_blank" rel="noopener">open the booking page</a>.</p>
   </section>`;
 }
 
@@ -916,7 +906,7 @@ function localDate(date = new Date()) {
 }
 
 function bindForms() {
-  document.querySelectorAll(".booking-search, .stay-enquiry").forEach((form) => {
+  document.querySelectorAll(".booking-search").forEach((form) => {
     const arrival = form.elements.checkin;
     const departure = form.elements.checkout;
     arrival.min = localDate();
@@ -933,13 +923,7 @@ function bindForms() {
       event.preventDefault();
       updateDates();
       if (!form.reportValidity()) return;
-      const data = new FormData(form);
-      if (form.matches(".booking-search")) {
-        window.open(cloudbedsLink(data), "_blank", "noopener");
-      } else {
-        const body = `Hi Fools Inn,\n\nI'd like to enquire about a stay.\nRoom: ${data.get("room")}\nGuests: ${data.get("guests")}\nCheck-in: ${data.get("checkin")}\nCheck-out: ${data.get("checkout")}\nPromo code: ${data.get("code") || "None"}\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}`;
-        openEmail(form, "Fools Inn stay enquiry", body);
-      }
+      window.open(cloudbedsLink(new FormData(form)), "_blank", "noopener");
     });
   });
   document.querySelector(".contact-form")?.addEventListener("submit", (event) => {
@@ -1016,6 +1000,7 @@ function render() {
     "/contact": contactPage, "/blog": blogPage, "/faqs": () => faqSection(true), "/terms": termsPage,
     "/book-now": bookingPage,
   };
+  if (path === "/book-now") redirectToBooking();
   document.title = "Fools Inn | " + (roomDetails[path]?.title || ({"/": "Boutique Backpackers in Sea Point", "/rooms": "Rooms", "/tours": "Cape Town Tours", "/contact": "Contact", "/faqs": "FAQs", "/gallery": "Gallery", "/blog": "Blog", "/book-now": "Plan Your Stay", "/neighbourhood": "Sea Point", "/terms": "Terms & Conditions"}[path] || "Sea Point"));
   layout(roomDetails[path] ? roomPage(roomDetails[path]) : (pages[path] || homePage)());
 }
