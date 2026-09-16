@@ -293,10 +293,6 @@ summary::-webkit-details-marker {
   padding: 10px 8px;
   margin: 0 -4px;
 }
-.nav .active {
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
 .over-hero .nav .active {
   background: var(--red);
   color: white;
