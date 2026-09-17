@@ -46,10 +46,10 @@ body,input,button,select,textarea {
 h1,h2,h3,p,figure,blockquote {
   margin: 0;
 }
-h1,h2,h3 {
+h1,h2,h3,h4,h5,h6 {
   font-family: var(--font-heading);
   line-height: 1.12;
-  font-weight: 700;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 h1 {
@@ -509,9 +509,6 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 }
 .photo-carousel {
   padding: 0 var(--gutter) 36px;
-}
-.photo-carousel .scroll-controls {
-  margin-bottom: 18px;
 }
 .photo-strip {
   display: grid;

@@ -612,7 +612,7 @@ function homePage() {
 }
 
 function photoStrip(numbers, labels) {
-  return `<div class="photo-carousel">${scrollControls("photo-track")}
+  return `<div class="photo-carousel">
     <div class="photo-strip" id="photo-track" data-carousel tabindex="0" aria-label="Life at Fools Inn">${numbers.map((n, i) => photo(designPhoto(n), labels[i])).join("")}</div>
   </div>`;
 }
