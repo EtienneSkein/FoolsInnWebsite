@@ -228,7 +228,7 @@ summary::-webkit-details-marker {
   white-space: nowrap;
   text-transform: uppercase;
   border: 1px solid currentColor;
-  border-radius: 999px;
+  border-radius: 0;
   padding: 3px 12px;
 }
 .announcement svg {
