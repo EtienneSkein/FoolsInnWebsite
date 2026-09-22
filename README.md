@@ -49,10 +49,9 @@ To preview the deployed configuration locally:
 npm run cf-dev
 ```
 
-Pushes to `main` deploy automatically via `.github/workflows/deploy.yml`, which
-needs two repository secrets: `CLOUDFLARE_API_TOKEN` and
-`CLOUDFLARE_ACCOUNT_ID`. Until those are set, deploy manually with the command
-above.
+Deploys are manual: pushing to `main` does not publish the site. Cloudflare is
+a staging host until the site moves to its permanent home, so there is no
+automatic deploy to maintain.
 
 ### Hosting somewhere other than the domain root
 
