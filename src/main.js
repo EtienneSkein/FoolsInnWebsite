@@ -251,9 +251,9 @@ const faqSections = [
   {
     title: "Rooms & Amenities",
     items: [
-      ["What room options does Fools Inn offer?", "Fools Inn offers private ensuite rooms and female-only dorm accommodation in Sea Point, Cape Town."],
-      ["What's the difference between a private room and the female-only dorm?", "Private rooms give you your own ensuite bathroom, a double bed, a desk for getting things done and a Smart TV for switching off. The female-only dorm is a comfortable, secure, shared stay with a bunk bed, ensuite bathroom, wardrobe and balcony, good for meeting people while still having your own space to unpack."],
-      ["What amenities are included in the rooms?", "Every room includes Wi-Fi, storage, and a desk to work from. Private rooms have a TV and double bed, while dorms have bunk beds."],
+      ["What room options does Fools Inn offer?", "Fools Inn offers three types of private ensuite room (Standard, Deluxe and Superior King) and female-only dorm accommodation in Sea Point, Cape Town."],
+      ["What's the difference between a private room and the female-only dorm?", "Private rooms give you your own ensuite bathroom, a double or king-size bed depending on the room, a desk for getting things done, a Smart TV for switching off and a coffee and tea station. The female-only dorm is a comfortable, secure, shared stay with a bunk bed, ensuite bathroom, wardrobe and balcony, good for meeting people while still having your own space to unpack."],
+      ["What amenities are included in the rooms?", "Every room includes Wi-Fi, storage, and a desk to work from. Private rooms have a Smart TV, a coffee and tea station, and a double or king-size bed, while dorms have bunk beds."],
       ["Is parking available at Fools Inn?", "Yes. Secure on-site parking is available for R50 per day. Spaces are limited and allocated on a first-come, first-served basis, so please arrange parking before check-in."],
     ],
   },
@@ -443,7 +443,7 @@ function layout(content) {
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
     </header>
     <main id="main-content" tabindex="-1">${content}</main>
-    ${footer(["/contact", "/rooms/female-dorm"].includes(current))}
+    ${footer(current !== "/rooms")}
   `;
   bindLinks();
   bindForms();
@@ -974,7 +974,7 @@ function pageShell(eyebrow, title, intro, children) {
   return `<section class="section-pad page-shell"><div class="page-heading"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${intro}</p></div>${children}</section>`;
 }
 
-// Pages that end on a red section switch to the yellow footer so the two don't run together.
+// Figma gives every page the yellow footer except Rooms, which ends on a yellow section.
 function footer(yellow = false) {
   return `<footer class="footer section-pad ${yellow ? "footer-yellow" : ""}">
     <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(yellow ? "wordmark-red.png" : "wordmark-yellow.png")}" alt="" decoding="async"></a>
