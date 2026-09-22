@@ -187,13 +187,21 @@ summary::-webkit-details-marker {
   flex-wrap: wrap;
   margin-top: 30px;
 }
-.brand img,.footer-brand picture {
-  display: block;
-}
-.footer-brand img {
+.brand img,.footer-brand img {
   /* Cropped to the glyphs, so height sets the cap height directly. */
   width: auto;
   display: block;
+}
+.brand picture,.footer-brand picture {
+  display: block;
+}
+/* Pieces drawn only in the Figma mobile frames. */
+.mobile-only,.adventure-star,.review-stars,.booking-dates>svg,.booking-arrow {
+  display: none;
+}
+/* On desktop the date pair sits in the search grid like any other field. */
+.booking-dates {
+  display: contents;
 }
 .brand img {
   height: 21px;
@@ -1923,5 +1931,527 @@ details[open]>summary>span {
   }
   .announcement a {
     justify-content: center;
+  }
+}
+
+/* Phones, as drawn in the Figma mobile frames (375px wide). This sits last so it
+   settles anything the earlier breakpoints and the touch rules set. */
+@media (max-width: 700px) {
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+
+  /* Body copy in the frames is 14/21 and justified. */
+  .hero-description p,.home-hero .hero-description p,.section-heading p,.home-story>p,.adventure-grid p,
+  .room-options p,.lifestyle-intro,.map-copy p,.contact-section>div:first-child p,.tour-card-body>p:not(.tour-tagline) {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  /* Announcement bar: one compact strip. */
+  .announcement {
+    min-height: 32px;
+    padding: 4px var(--gutter);
+    gap: 12px;
+  }
+  .announcement span {
+    max-width: 215px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  .announcement a {
+    position: relative;
+    min-height: 22px;
+    padding: 3px 10px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+  /* Drawn small, but the tap area still reaches 44px. */
+  .announcement a::after {
+    content: "";
+    position: absolute;
+    inset: -11px -6px;
+  }
+
+  /* Header: white, wordmark and menu only. */
+  .site-header,.site-header.over-hero {
+    background: white;
+    min-height: 62px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+  .brand img {
+    height: 18px;
+  }
+  .book-link {
+    display: none;
+  }
+  .menu-button {
+    color: var(--red);
+  }
+  .nav {
+    background: white;
+    border-top: 1px solid var(--red);
+  }
+  .nav.nav-open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .nav.nav-open a {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 16px;
+  }
+  .nav-menu {
+    flex-direction: column;
+    padding-left: 18px;
+  }
+  .mobile-extra {
+    display: contents;
+  }
+  .mobile-home {
+    order: -1;
+  }
+  .nav .mobile-extra .button {
+    align-self: start;
+    margin-top: 12px;
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  /* Hero: content centred in the frame. */
+  .hero-inner,.home-hero .hero-inner {
+    align-self: center;
+    padding: 24px var(--gutter);
+  }
+  .hero h1,.home-hero h1 {
+    font-size: 24px;
+    line-height: 1.45;
+  }
+  .home-hero h1 {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .home-hero .hero-description p {
+    margin-bottom: 30px;
+  }
+  .tour-hero .actions {
+    margin-top: 24px;
+  }
+
+  /* Buttons are drawn 30px tall on phones. */
+  .button,.actions .button {
+    min-height: 30px;
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+
+  /* Booking search: stacked pills. */
+  .booking-search {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 17px;
+    border-radius: 30px;
+    background: transparent;
+  }
+  .booking-search label {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .booking-dates,.booking-search .guests-field,.booking-search .code-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 50px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--red-text);
+  }
+  .booking-dates>svg,.booking-search label>svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+  .booking-arrow {
+    display: flex;
+  }
+  .booking-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+  .booking-dates label {
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    background: none;
+  }
+  .booking-dates label>span {
+    font-size: 14px;
+  }
+  /* The picker sits invisibly over its label until a date is chosen. */
+  .booking-dates input {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    opacity: 0;
+    text-align: center;
+    font-size: 16px;
+  }
+  .booking-dates input::-webkit-date-and-time-value {
+    text-align: center;
+  }
+  .booking-dates label.has-value>span {
+    visibility: hidden;
+  }
+  .booking-dates label.has-value input {
+    opacity: 1;
+  }
+  .booking-search .guests-field>span,.booking-search .code-field>span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .booking-search .guests-field select {
+    width: auto;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 16px;
+  }
+  .booking-search .code-field {
+    background: transparent;
+    border: 1px solid rgb(255 255 255 / 80%);
+    color: white;
+  }
+  .booking-search .code-field input {
+    width: 7em;
+    flex: none;
+    color: white;
+    font-size: 16px;
+  }
+  .booking-search .code-field input::placeholder {
+    color: white;
+    opacity: 1;
+  }
+  .booking-search .button {
+    min-height: 50px;
+    border-radius: 999px;
+    font-size: 14px;
+  }
+
+  /* Home: the yellow story section. */
+  .home-story {
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+  .home-story h2 {
+    line-height: 1.48;
+    margin-bottom: 36px;
+  }
+  .home-story img {
+    width: 100%;
+  }
+  .home-story-wide img {
+    aspect-ratio: 343 / 200;
+  }
+  .home-story>p {
+    margin: 22px 0 56px;
+  }
+  .home-story-pair {
+    display: grid;
+    grid-template-columns: 186fr 178fr;
+    gap: 11px;
+    margin: 0 calc(var(--gutter) * -1);
+  }
+  .home-story-pair img {
+    height: 200px;
+  }
+
+  /* Choose your own adventure: one card at a time. */
+  .adventure-section .section-heading {
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .adventure-section>.scroll-controls {
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .adventure-section .scroll-controls button {
+    width: 28px;
+    height: 28px;
+  }
+  .adventure-section .scroll-controls svg {
+    width: 14px;
+    height: 14px;
+  }
+  .adventure-section .scroll-controls button[data-direction="1"] {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+  }
+  .adventure-grid {
+    grid-auto-columns: 100%;
+    gap: 16px;
+  }
+  .adventure-grid article {
+    padding: 17px;
+    background: transparent;
+  }
+  .adventure-star {
+    display: block;
+    color: var(--blue);
+    margin-bottom: 22px;
+  }
+  .adventure-star svg {
+    width: 33px;
+    height: 33px;
+  }
+  .adventure-grid h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  /* Testimonials: full-width cards with stars, the button on the right. */
+  .testimonials>.scroll-controls {
+    display: none;
+  }
+  .testimonials .section-heading>div {
+    display: grid;
+  }
+  .testimonials .review-link {
+    justify-self: end;
+    width: 119px;
+    margin-top: 26px;
+  }
+  .testimonials .section-heading {
+    margin-bottom: 30px;
+  }
+  /* One card per swipe; the loop's duplicates only serve desktop's drift. */
+  .review-track,.photo-strip {
+    scroll-snap-type: x mandatory;
+  }
+  .review,.photo-strip>img {
+    scroll-snap-align: start;
+  }
+  [data-carousel]>[aria-hidden="true"] {
+    display: none;
+  }
+  .review-track {
+    grid-auto-columns: 100%;
+    gap: 16px;
+  }
+  .review {
+    min-height: 398px;
+    padding: 31px;
+    border-color: var(--yellow);
+    border-radius: 5px;
+  }
+  .review blockquote {
+    margin-top: auto;
+  }
+  .review figcaption {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+    margin-top: 36px;
+  }
+  .review figcaption>strong,.review figcaption>span:not(.review-stars) {
+    grid-column: 1;
+  }
+  .review-stars {
+    display: flex;
+    gap: 4px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    color: var(--yellow);
+  }
+  .review-stars svg {
+    width: 20px;
+    height: 20px;
+  }
+  .review.review-selected .review-stars,.review:hover .review-stars {
+    color: var(--red);
+  }
+
+  /* FAQs. */
+  .faqs .section-heading {
+    gap: 22px;
+    margin-bottom: 110px;
+  }
+  .faqs .section-heading h1,.faqs .section-heading h2 {
+    font-size: 36px;
+  }
+  .faqs .section-heading p {
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .faq-category>summary {
+    font-size: 16px;
+    min-height: 79px;
+    padding: 16px 10px;
+  }
+
+  /* Rooms: the lifestyle section gets its heading. */
+  .lifestyle-heading {
+    color: var(--red-text);
+    line-height: 1.48;
+    margin-bottom: 36px;
+  }
+
+  /* Room pages: no booking button in the frames, so no room left for one. */
+  .room-description .button {
+    display: none;
+  }
+  .room-description .section-heading {
+    margin-bottom: 0;
+    padding-bottom: 36px;
+  }
+  .amenities li {
+    font-size: 14px;
+  }
+
+  /* Tours: every tour in one list, chevrons, the offer over the photo. */
+  .tour-break {
+    display: none;
+  }
+  .tour-grid#more-adventures[hidden] {
+    display: block;
+  }
+  .tour-item>summary {
+    min-height: 35px;
+    padding: 6px 0;
+    font-size: 16px;
+    border-bottom: 2px solid var(--red);
+  }
+  .tour-item>summary>span,.tour-item[open]>summary>span {
+    display: flex;
+    justify-content: center;
+    width: 20px;
+    flex-basis: 20px;
+    transform: rotate(90deg);
+  }
+  .tour-item>summary svg {
+    width: 20px;
+    height: 20px;
+  }
+  .tour-item[open]>summary {
+    margin-bottom: 16px;
+  }
+  .tour-item[open] {
+    padding-bottom: 30px;
+  }
+  .tour-inclusions {
+    display: none;
+  }
+  .tour-card {
+    position: relative;
+  }
+  /* Centred on the photo, which is the card's inner width at 341:250. */
+  .tour-offer {
+    position: absolute;
+    left: 50%;
+    top: calc((100vw - var(--gutter) * 2 - 2px) * 125 / 341);
+    transform: translate(-50%,-50%);
+    white-space: nowrap;
+    font-size: 14px;
+    padding: 2px 6px;
+  }
+  .tour-card-body {
+    padding: 33px 17px 17px;
+  }
+  .tour-card h3 {
+    font-size: 22px;
+  }
+  .tour-tagline {
+    font-size: 14px;
+  }
+
+  /* Contact. */
+  .contact-section>div:first-child h2 {
+    font-size: 36px;
+  }
+  .contact-section>div:first-child p {
+    max-width: 300px;
+  }
+  /* Each label sits just above its line, as drawn. */
+  .contact-form label {
+    gap: 0;
+  }
+  .form-grid {
+    gap: 36px;
+  }
+  .contact-form>label {
+    margin-top: 36px;
+  }
+  .contact-form input {
+    min-height: 32px;
+    padding: 4px 0;
+  }
+  .contact-form textarea {
+    min-height: 0;
+    height: 72px;
+  }
+  .contact-form>.button {
+    width: 200px;
+    min-height: 44px;
+    margin-top: 50px;
+    font-size: 14px;
+  }
+  .contact-details {
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .contact-details svg {
+    display: none;
+  }
+  .contact-details a {
+    font-size: 14px;
+  }
+  .contact-details a>span {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    text-align: right;
+  }
+  .contact-details strong {
+    flex: none;
+    margin: 0;
+    font-weight: 400;
+    text-align: left;
+  }
+  .map-canvas {
+    aspect-ratio: 343 / 400;
+  }
+
+  /* Footer: Rooms, Tours, Contact Us, and a full-width wordmark. */
+  .footer-links .footer-home {
+    display: none;
+  }
+  /* The address column sizes to its line, as drawn, so it doesn't wrap. */
+  .footer-top {
+    grid-template-columns: 1fr auto;
+    column-gap: 16px;
+  }
+  .footer-brand img {
+    width: 100%;
+    max-width: 324px;
+    height: auto;
   }
 }

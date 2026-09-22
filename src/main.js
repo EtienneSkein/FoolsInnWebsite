@@ -362,6 +362,7 @@ function icon(name) {
     bed: "M3 11V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6M13 11V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4M3 21v-8h18v8M3 17h18",
     calendar: "M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM9 16l2 2 4-5",
     camera: "M14.5 4 16 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.5-3h5ZM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z",
+    arrow: "M5 12h14M13 6l6 6-6 6",
     chevron: "m9 18 6-6-6-6",
     compass: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM16 8l-2.2 5.8L8 16l2.2-5.8L16 8Z",
     mail: "M4 4h16v16H4V4Zm0 2 8 7 8-7",
@@ -369,6 +370,8 @@ function icon(name) {
     menu: "M4 7h16M4 12h16M4 17h16",
     phone: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z",
     sparkle: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z",
+    tag: "M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8ZM7.5 7.5h.01",
+    user: "M19 21a7 7 0 0 0-14 0M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z",
     star: "M12 2.5l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.7 5.8 21.4l1.6-7L2 9.7l7.1-.6L12 2.5Z",
     facebook: "M9.1 23.7v-8H6.6V12h2.5v-1.6c0-4.1 1.9-6 5.9-6 .7 0 1.8.1 2.6.3v3.3c-.2 0-.6 0-1.4 0-1.4 0-2 .4-2.3.9-.2.4-.4 1-.4 1.8V12h3.9l-.7 3.7h-3.2v8C19.4 23.2 24 18.2 24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 5.6 3.9 10.4 9.1 11.7Z",
     instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM17.5 6.4h.01",
@@ -430,14 +433,14 @@ function layout(content) {
       <a href="/tours" data-link>Book a tour now</a>
     </aside>
     <header class="site-header ${hasHero ? "over-hero" : ""}">
-      <a class="brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(hasHero ? "wordmark-yellow.png" : "wordmark-red.png")}" alt="" decoding="async"></a>
+      <a class="brand" href="/" data-link aria-label="Fools Inn home"><picture>${hasHero ? `<source media="(max-width: 700px)" srcset="${asset("wordmark-red.png")}">` : ""}<img src="${asset(hasHero ? "wordmark-yellow.png" : "wordmark-red.png")}" alt="" decoding="async"></picture></a>
       <nav class="nav" id="main-nav" aria-label="Main navigation">
         ${primaryNav.map(([label, href]) => {
           const link = `<a class="${current === href || (href === "/rooms" && current.startsWith("/rooms/")) ? "active" : ""} ${href === "/contact" ? "contact-link" : ""}" href="${href}" data-link ${current === href ? 'aria-current="page"' : ""}>${label}</a>`;
           if (href !== "/rooms") return link;
           return `<div class="nav-item has-menu">${link}<div class="nav-menu">${Object.entries(roomDetails).map(([path, room]) => `<a href="${path}" data-link ${current === path ? 'aria-current="page"' : ""}>${room.title}</a>`).join("")}</div></div>`;
         }).join("")}
-        <div class="mobile-extra">${navItems.filter(([, href]) => !primaryNav.some(([, main]) => href === main) && href !== "/book-now" && href !== "/").map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>
+        <div class="mobile-extra"><a class="mobile-home ${current === "/" ? "active" : ""}" href="/" data-link>Home</a><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a></div>
       </nav>
       <a class="book-link button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a>
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
@@ -587,10 +590,13 @@ function hero(title, file, options = {}) {
 
 function bookingSearch() {
   return `<form class="booking-search" aria-label="Plan your stay">
-    <label>${icon("calendar")}<span>Check-in</span><input type="date" name="checkin" aria-label="Check-in date" required></label>
-    <label><span>Check-out</span><input type="date" name="checkout" aria-label="Check-out date" required></label>
-    <label><span>Guests</span><select name="guests" aria-label="Number of guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}">${n} ${n === 1 ? "guest" : "guests"}</option>`).join("")}</select></label>
-    <label class="code-field"><span>Promo code</span><input name="code" maxlength="40" placeholder="Add code" aria-label="Promo code"></label>
+    <div class="booking-dates">${icon("calendar")}
+      <label><span>Check-in</span><input type="date" name="checkin" aria-label="Check-in date" required></label>
+      <span class="booking-arrow" aria-hidden="true">${icon("arrow")}</span>
+      <label><span>Check-out</span><input type="date" name="checkout" aria-label="Check-out date" required></label>
+    </div>
+    <label class="guests-field">${icon("user")}<span>Guests</span><select name="guests" aria-label="Number of guests">${[1,2,3,4,5,6].map((n) => `<option value="${n}">${n} ${n === 1 ? "guest" : "guests"}</option>`).join("")}</select></label>
+    <label class="code-field">${icon("tag")}<span>Promo code</span><input name="code" maxlength="40" placeholder="Add code" aria-label="Promo code"></label>
     <button class="button" type="submit">Enquire</button>
   </form>`;
 }
@@ -601,7 +607,16 @@ function homePage() {
       home: true, alt: "Only Fools restaurant below Fools Inn in Sea Point",
       intro: `Fools Inn is a boutique backpackers perched above one of Cape Town's favourite local bars. Come for a night; stay for a week.`
     })}
-    <section class="home-intro section-pad" aria-label="Your Sea Point home base">
+    <section class="home-story section-pad theme-yellow mobile-only" aria-label="Your Sea Point home base">
+      <h2>Backpacker energy.<br>Boutique comfort.</h2>
+      <figure class="home-story-wide">${photo(designPhoto(11), "The Fools Inn reception with a Welcome sign and fresh tulips")}</figure>
+      <p>Fools Inn is like a backpackers, but better. Check into a private en-suite room or a female-only dorm. Get some work done. Go for a walk on the Sea Point Promenade or a dip at Saunders' Beach. And end your day with new friends at ${onlyFools()} or the ${ponyUp("Pony Up Rooftop Bar")}. Experience it all from your home base in the heart of Sea Point.</p>
+      <div class="home-story-pair">
+        <figure>${photo(designPhoto(15), "Palm trees and yellow umbrellas beneath the Twelve Apostles")}</figure>
+        <figure>${photo(designPhoto(3), "A guest in a bucket hat sipping an iced tea")}</figure>
+      </div>
+    </section>
+    <section class="home-intro section-pad desktop-only" aria-label="Your Sea Point home base">
       <p>Fools Inn is like a backpackers, but better. Check into a private en-suite room or a female-only dorm. Get some work done. Go for a walk on the Sea Point Promenade or a dip at Saunders' Beach. And end your day with new friends at ${onlyFools()} or the ${ponyUp("Pony Up Rooftop Bar")}. Experience it all from your home base in the heart of Sea Point.</p>
       <div class="home-photo-story">
         <figure class="home-photo-wide">${photo(designPhoto(13), "Yellow umbrellas and sunbathers on a Cape Town beach")}</figure>
@@ -626,7 +641,7 @@ function photoStrip(numbers, labels) {
 
 function featuredTours() {
   const featured = ["Kayak", "Surf", "Shark Cage Diving"].map((title) => tours.find((tour) => tour.title === title));
-  return `<section class="featured-tours section-pad">
+  return `<section class="featured-tours section-pad desktop-only">
     <div class="featured-heading"><h2>Make your stay more epic.<br>Book a curated tour.</h2><a class="button button-outline" href="/tours" data-link>Book Now</a></div>
     <div class="tour-grid featured-tour-grid">${featured.map((tour) => tourCard(tour, 0, true)).join("")}</div>
   </section>`;
@@ -725,7 +740,8 @@ function bindCarousel(track) {
       pausedUntil = time + 2500;
       touchEnded = false;
     }
-    if (!hovered && !touching && time >= pausedUntil) moveTo(position + speed * elapsed / 1000);
+    // Phones show one card or photo at a time, as drawn, so they swipe rather than drift.
+    if (!hovered && !touching && time >= pausedUntil && !mobileViewport.matches) moveTo(position + speed * elapsed / 1000);
     frame = window.requestAnimationFrame(animate);
   };
   frame = window.requestAnimationFrame(animate);
@@ -747,7 +763,7 @@ function adventureSection() {
   return `<section class="adventure-section section-pad theme-yellow">
     <div class="section-heading"><h2>Choose your own adventure.</h2><p>Work a little, explore a lot, and meet some people along the way. The best coffee, the best food, the best beaches, and the best trails in Cape Town are on your doorstep. Where you go next is up to you.</p></div>
     ${scrollControls("adventure-track")}
-    <div class="adventure-grid" id="adventure-track">${items.map(([title, image, alt, copy]) => `<article>${photo(designPhoto(image), alt)}<h3>${title}</h3><p>${copy}</p></article>`).join("")}</div>
+    <div class="adventure-grid" id="adventure-track">${items.map(([title, image, alt, copy]) => `<article>${photo(designPhoto(image), alt)}<span class="adventure-star" aria-hidden="true">${icon("star")}</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}</div>
   </section>`;
 }
 
@@ -764,7 +780,7 @@ function testimonials() {
   return `<section class="testimonials section-pad theme-blue" aria-label="Guest testimonials" aria-roledescription="carousel">
     <div class="section-heading"><h2>Testimonials</h2><div><h2>The word on the street.</h2><p>Since 2022, thousands of happy guests have called Fools Inn home. Some have made friends, some have become friends and some keep coming back. We're dying to know how your experience was.</p><a class="button review-link" href="${escapeHtml(googleReviewUrl)}" target="_blank" rel="noopener">Leave a Review</a></div></div>
     ${scrollControls("review-track")}
-    <div class="review-track" id="review-track" data-carousel tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" tabindex="0"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span></figcaption></figure>`).join("")}</div>
+    <div class="review-track" id="review-track" data-carousel tabindex="0" aria-label="Guest reviews">${reviews.map(([copy, name, country]) => `<figure class="review" tabindex="0"><span class="quote-mark" aria-hidden="true">&ldquo;</span><blockquote>${copy}</blockquote><figcaption><strong>${name}</strong><span>from ${country}</span><span class="review-stars" role="img" aria-label="Five stars">${icon("star").repeat(5)}</span></figcaption></figure>`).join("")}</div>
   </section>`;
 }
 
@@ -800,6 +816,7 @@ function roomPage(room) {
 
 function lifestyleSection(tour = false) {
   return `<section class="lifestyle section-pad ${tour ? "theme-navy" : "theme-yellow"}">
+    ${tour ? "" : `<h2 class="lifestyle-heading mobile-only">Backpacker energy.<br>Boutique comfort.</h2>`}
     <p class="lifestyle-intro">${tour ? "Salt in your hair. Cape Town at your feet. A shark gliding past the cage or wildlife wandering into view at an Etosha waterhole. These are the days that get you up early, turn strangers into friends, and leave you with a camera roll filled with experiences to take back home." : "You'll know you've settled in when the faces downstairs become familiar, yesterday's stranger is today's adventure buddy, and the local barista knows your order. Fools Inn gives you the space to make yourself comfortable, and enough happening around you to make every day different. Stay for a good time or a long time, or both."}</p>
     <figure class="lifestyle-wide">${photo(designPhoto(tour ? 38 : 19), tour ? "A Cape Town beach with yellow umbrellas" : "Friends on the beach with a portable radio")}<figcaption>${tour ? "Swim, surf and kayak in our backyard." : "Book your room at Fools Inn and this could be you on a random Tuesday."}</figcaption></figure>
     <div class="lifestyle-pair">
@@ -832,7 +849,7 @@ function tourCard(tour, index, featured = false) {
       </div>
     </article>`;
   return featured ? card : `<details class="tour-item" ${index === 0 ? "open" : ""}>
-    <summary>${tour.title}<span aria-hidden="true">+</span></summary>${card}
+    <summary>${tour.title}<span aria-hidden="true">${icon("chevron")}</span></summary>${card}
   </details>`;
 }
 
@@ -940,6 +957,10 @@ function bindForms() {
       departure.min = localDate(earliest);
       departure.setCustomValidity(departure.value && departure.value < departure.min ? "Check-out must be after check-in." : "");
     };
+    const markFilled = () => [arrival, departure].forEach((input) => input.closest?.("label")?.classList.toggle("has-value", Boolean(input.value)));
+    form.addEventListener("input", markFilled);
+    form.addEventListener("change", markFilled);
+    markFilled();
     arrival.addEventListener("change", updateDates);
     departure.addEventListener("change", updateDates);
     updateDates();
@@ -995,7 +1016,7 @@ function pageShell(eyebrow, title, intro, children) {
 function footer(yellow = false, redOnMobile = false) {
   return `<footer class="footer section-pad ${yellow ? "footer-yellow" : ""} ${redOnMobile ? "footer-red-mobile" : ""}">
     <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><picture>${redOnMobile ? `<source media="(max-width: 700px)" srcset="${asset("wordmark-yellow.png")}">` : ""}<img src="${asset(yellow ? "wordmark-red.png" : "wordmark-yellow.png")}" alt="" decoding="async"></picture></a>
-      <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
+      <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link ${href === "/" ? 'class="footer-home"' : ""}>${label}</a>`).join("")}</div>`).join("")}</nav>
       <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>
     </div>
     <div class="footer-bottom"><small>Copyright &copy; ${new Date().getFullYear()} Fools Inn. All rights reserved.</small><div>${socialLinks.map(([label, href, glyph]) => `<a href="${href}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">${icon(glyph)}</a>`).join("")}</div></div>

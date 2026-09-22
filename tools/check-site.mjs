@@ -135,7 +135,10 @@ assert.equal((env.context.testimonials().match(/class="review"/g) || []).length,
 for (const name of ["Ananya", "Willis", "Charlotte"]) {
   assert.ok(env.context.testimonials().includes("<strong>" + name + "</strong>"), name + " is quoted in the testimonials");
 }
-assert.ok(!env.context.homePage().includes("Backpacker energy."));
+// The final desktop design dropped this heading; only the mobile frame keeps it.
+const homeOutsideMobile = env.context.homePage().replace(/<section class="home-story[^"]*mobile-only"[\s\S]*?<\/section>/, "");
+assert.ok(env.context.homePage().includes("Backpacker energy."), "The phone home page carries the mobile frame's heading");
+assert.ok(!homeOutsideMobile.includes("Backpacker energy."), "Desktop keeps the heading out, as the final design does");
 const expectedTours = [
   ["Lion's Head Hike", 49], ["Paragliding", 53], ["Shark Cage Diving", 45],
   ["Township Walking Tour", 42], ["Kayak", 55], ["Kruger on the GO", 46],
