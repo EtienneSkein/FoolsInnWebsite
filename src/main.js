@@ -28,7 +28,7 @@ const tours = [
     image: designPhoto(49),
     category: "Ocean & Adventure",
     price: "R1,200 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "3-4 hour round trip",
     tag: "Get the view from the top.",
     description: "Choose sunrise or sunset, lace up and tackle Lion's Head with a qualified guide and a few future friends. Come for the views; stay for the snacks.",
@@ -39,7 +39,7 @@ const tours = [
     image: designPhoto(53),
     category: "Ocean & Adventure",
     price: "R1,900 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "1 hour",
     tag: "Take the scenic way down.",
     description: "Fly tandem from Signal Hill or Lion's Head and float above the best city (in our opinion) in the world.",
@@ -50,7 +50,7 @@ const tours = [
     image: designPhoto(45),
     category: "Ocean & Adventure",
     price: "From R4,655 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "4 hours",
     tag: "Meet Great Whites in the Big Blue.",
     description: "Head out from Kleinbaai, suit up, and see one of the ocean's apex predators up-close.",
@@ -61,7 +61,7 @@ const tours = [
     image: designPhoto(42),
     category: "Social & Sunset",
     price: "R950 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "Morning or afternoon",
     tag: "Make friends in Langa.",
     description: "Explore Cape Town's oldest township with a local guide, stopping at the museum, community projects and family homes along the way.",
@@ -72,7 +72,7 @@ const tours = [
     image: designPhoto(55),
     category: "Ocean & Adventure",
     price: "R600 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "2 hours",
     tag: "See Sea Point from the sea.",
     description: "Paddle out from the promenade and look back at the city. If you're lucky, some dolphins, seals, penguins, sunfish and whales might join you.",
@@ -94,7 +94,7 @@ const tours = [
     image: designPhoto(54),
     category: "Ocean & Adventure",
     price: "R3,600 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "4-5 hour half-day tour",
     tag: "Let's catch some waves.",
     description: "New to surfing or already hooked? Your private guide will find the day's best spot, bring the gear and help you make the most of it.",
@@ -105,7 +105,7 @@ const tours = [
     image: designPhoto(52),
     category: "Ocean & Adventure",
     price: "From R2,340 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "45 min meeting + 2h30 at sea",
     tag: "Spot the Big Five of the sea.",
     description: "Cruise around Dyer Island and keep watch for whales, dolphins, seals, penguins and sharks. Bring your camera and capture more than memories.",
@@ -116,7 +116,7 @@ const tours = [
     image: designPhoto(50),
     category: "Ocean & Adventure",
     price: "R850 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "2 hours",
     tag: "Paddle, sweat, chill.",
     description: "Kayak along the Atlantic coastline, then warm up with a guided sauna and ice-bath ritual at SaunaHaus on the promenade.",
@@ -138,7 +138,7 @@ const tours = [
     image: designPhoto(44),
     category: "Ocean & Adventure",
     price: "R3,950 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "Approximately 2 hours",
     tag: "Take the leap.",
     description: "10,000-foot flying, 40-second freefall, 6-7 minutes of pure adrenaline. You'll never look at Cape Town the same again.",
@@ -171,7 +171,7 @@ const tours = [
     image: designPhoto(39),
     category: "Social & Sunset",
     price: "R1,150 pp",
-    voucher: `Beer and burger at ${onlyFools()}`,
+    voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
     duration: "Approximately 3 hours cycling",
     tag: "Cruise around Langa.",
     description: "Take a three-hour ride with a local guide, cycling between Langa's landmarks, community spaces and everyday meeting places.",
@@ -184,7 +184,7 @@ tours.push({
   image: designPhoto(41),
   category: "Ocean & Adventure",
   price: "R1,150 pp",
-  voucher: `Beer and burger at ${onlyFools()}`,
+  voucher: `Free Beer &amp; Burger at ${onlyFools()}`,
   duration: "Guided hike",
   tag: "We'll lead the way.",
   description: "Cape Town has some of the most beautiful hikes in the world. And we want to take you there. Pack your hiking shoes, and we'll sort the rest.",
@@ -387,9 +387,14 @@ const roomDetails = {
   "/rooms/private": {
     title: "Private Rooms", heading: "Make yourself at home", theme: "yellow",
     hero: 36, photos: [33, 34, 32, 31], amenityPhoto: 35,
-    copy: "Our private en-suite rooms are made for travellers who enjoy the energy of a backpackers and the freedom of having their own space.",
-    more: "Stretch out on a double bed, catch up on work at your desk or switch off in front of the Smart TV. If you like to share memories, but not bathrooms, this room's for you.",
-    amenities: ["Double bed", "Table & chair", "Wardrobe", "En-suite bathroom", "WiFi", "Smart TV"],
+    copy: "Our private en-suite rooms are made for travellers who enjoy the energy of a backpackers, and the freedom of having their own space.",
+    more: "Stretch out on your bed, catch up on work at your desk, or switch off in front of the Smart TV. If you like to share memories, but not bathrooms, this room's for you.",
+    options: [
+      ["Standard Room", "The Standard Room features a double bed, an en-suite bathroom, and a 32-inch Smart TV. You'll have access to a shared coffee and tea station."],
+      ["Deluxe Room", "The Deluxe Room features a double bed, an en-suite bathroom, a 42-inch Smart TV, and your own private coffee and tea station."],
+      ["Superior King Room", "The Superior King Room features a king-size bed (with the option to configure it as two single beds), an en-suite bathroom, a 43-inch Smart TV, and your own private coffee and tea station."],
+    ],
+    amenities: ["Bed", "Table & Chair", "Wardrobe", "En-suite bathroom", "WiFi", "Smart TV", "Coffee & Tea Station (private or shared)"],
   },
   "/rooms/female-dorm": {
     title: "Female-Only Dorms", heading: "Stay in good company", theme: "pink",
@@ -438,7 +443,7 @@ function layout(content) {
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
     </header>
     <main id="main-content" tabindex="-1">${content}</main>
-    ${footer()}
+    ${footer(["/contact", "/rooms/female-dorm"].includes(current))}
   `;
   bindLinks();
   bindForms();
@@ -592,12 +597,12 @@ function homePage() {
   return `
     ${hero("Stay where the people are.", "design/home-exterior.jpg", {
       home: true, alt: "Only Fools restaurant below Fools Inn in Sea Point",
-      intro: `Perched above one of Cape Town's favourite local bars, Fools Inn is a boutique backpackers and your home base for working, exploring and meeting people. Come for a night; stay for the week.`
+      intro: `Fools Inn is a boutique backpackers perched above one of Cape Town's favourite local bars. Come for a night; stay for a week.`
     })}
     <section class="home-intro section-pad" aria-label="Your Sea Point home base">
       <p>Fools Inn is like a backpackers, but better. Check into a private en-suite room or a female-only dorm. Get some work done. Go for a walk on the Sea Point Promenade or a dip at Saunders' Beach. And end your day with new friends at ${onlyFools()} or the ${ponyUp("Pony Up Rooftop Bar")}. Experience it all from your home base in the heart of Sea Point.</p>
       <div class="home-photo-story">
-        <figure class="home-photo-wide">${photo(designPhoto(13), "A red umbrella beside the Sea Point tidal pool")}</figure>
+        <figure class="home-photo-wide">${photo(designPhoto(13), "Yellow umbrellas and sunbathers on a Cape Town beach")}</figure>
         <div class="home-photo-pair">
           <figure>${photo(designPhoto(20), "A private room with a double bed and fresh flowers")}</figure>
           <figure>${photo(designPhoto(16), "A sunny desk and chair in a Fools Inn room")}<figcaption>This is the place. Wait till you meet the people.</figcaption></figure>
@@ -752,7 +757,7 @@ function roomsPage() {
     <section class="section-pad room-listing">
       <div class="section-heading"><h2>We've got room(s) for you.</h2><div><p>Choose a private en-suite room for a space of your own, or check into a female-only dorm for a more social stay. Whichever you choose, you'll find thoughtful comforts inside and the Fools Inn atmosphere just outside your door.</p><div class="actions"><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book Now</a><a class="button button-outline" href="#our-rooms">Explore More</a></div></div></div>
       <div class="room-grid" id="our-rooms">
-        ${roomCard("Private Rooms", "Your own space. Your own pace.", "A comfortable private room with an en-suite bathroom, comfortable double bed and dedicated workspace for switching off or logging on.", 20, "/rooms/private")}
+        ${roomCard("Private Rooms", "Your own space. Your own pace.", "Find the perfect private room for your trip. We have Standard Rooms, Deluxe Rooms, or Superior King Rooms available.", 20, "/rooms/private")}
         ${roomCard("Female-Only Dorms", "Good company included.", "A comfortable and secure shared stay for female travellers, with an en-suite bathroom and space to unpack.", 21, "/rooms/female-dorm")}
       </div>
     </section>
@@ -768,6 +773,7 @@ function roomPage(room) {
   return `${hero(room.heading, designPhoto(room.hero), {alt: room.heading})}
     <section class="room-description theme-${room.theme}">
       <div class="section-heading section-pad"><h2>${room.title}</h2><div><p>${room.copy}</p><p>${room.more}</p><a class="button" href="${cloudbedsUrl}" target="_blank" rel="noopener">Book your stay</a></div></div>
+      ${room.options ? `<div class="room-options section-pad">${room.options.map(([name, copy]) => `<article><h3>${name}</h3><p>${copy}</p></article>`).join("")}</div>` : ""}
       ${photoStrip(room.photos, room.photos.map((_, i) => room.title + " interior, view " + (i + 1)))}
     </section>
     <section class="amenities section-pad ${room.theme === "pink" ? "theme-red" : "theme-blue"}">
@@ -805,7 +811,7 @@ function tourCard(tour, index, featured = false) {
         <div class="tour-card-actions">
           ${tour.voucher ? `<p class="tour-offer">${tour.voucher}</p>` : ""}
           ${featured ? "" : `<details class="tour-inclusions"><summary>Tour details ${icon("chevron")}</summary><p>${tour.duration}</p><ul>${tour.details.map((item) => `<li>${item}</li>`).join("")}</ul></details>`}
-        <a class="button button-outline" href="${activitarUrl}" target="_blank" rel="noopener">Book Now</a>
+        <a class="button" href="${activitarUrl}" target="_blank" rel="noopener">Book Now</a>
         </div>
       </div>
     </article>`;
@@ -854,7 +860,7 @@ function termsPage() {
 function contactPage() {
   return `${hero("Don't be a stranger", designPhoto(56), {alt: "Friends looking out across the beach"})}
     <section class="contact-section section-pad">
-      <div><h2>Let's chat.</h2><p>Need a room, an adventure or a little local advice? Pop us a message.</p></div>
+      <div><h2>Let's chat.</h2><p>Need a room, an adventure, or a little local advice? Pop us a message.</p></div>
       <div>${contactForm()}${contactCards()}</div>
     </section>
     <section class="map-section section-pad theme-red">
@@ -968,9 +974,10 @@ function pageShell(eyebrow, title, intro, children) {
   return `<section class="section-pad page-shell"><div class="page-heading"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${intro}</p></div>${children}</section>`;
 }
 
-function footer() {
-  return `<footer class="footer section-pad">
-    <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset("wordmark-yellow.png")}" alt="" decoding="async"></a>
+// Pages that end on a red section switch to the yellow footer so the two don't run together.
+function footer(yellow = false) {
+  return `<footer class="footer section-pad ${yellow ? "footer-yellow" : ""}">
+    <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(yellow ? "wordmark-red.png" : "wordmark-yellow.png")}" alt="" decoding="async"></a>
       <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
       <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>
     </div>

@@ -12,6 +12,8 @@
   /* A deeper red for long-form body copy, where the brand red is too light to read. */
   --red-deep: #9c1207;
   --yellow: #fae181;
+  /* Figma fills buttons with a deeper yellow than the section backgrounds. */
+  --button-yellow: #f6d762;
   --blue: #2451bb;
   --pink: #f9cbd7;
   --cream: #fffdf5;
@@ -158,8 +160,8 @@ summary::-webkit-details-marker {
   gap: 12px;
   min-height: 46px;
   padding: 12px 24px;
-  border: 1px solid transparent;
-  background: var(--yellow);
+  border: 1px solid var(--red);
+  background: var(--button-yellow);
   color: var(--red-text);
   border-radius: 0;
   font-size: 14px;
@@ -168,14 +170,15 @@ summary::-webkit-details-marker {
   line-height: 1.4;
 }
 .button:hover {
-  background: #f6d451;
+  background: #f2cc45;
   text-decoration: none;
 }
-.button-outline {
-  border-color: currentColor;
-  background: transparent;
+.button-outline,.button-light {
+  border-color: var(--red);
+  background: white;
+  color: var(--red-text);
 }
-.button-light {
+.button-outline:hover,.button-light:hover {
   background: var(--cream);
 }
 .actions {
@@ -225,7 +228,7 @@ summary::-webkit-details-marker {
   white-space: nowrap;
   text-transform: uppercase;
   border: 1px solid currentColor;
-  border-radius: 0;
+  border-radius: 999px;
   padding: 3px 12px;
 }
 .announcement svg {
@@ -298,7 +301,7 @@ summary::-webkit-details-marker {
   color: white;
 }
 .nav .contact-link {
-  background: var(--cream);
+  background: white;
   border: 1px solid var(--red);
   color: var(--red-text);
   padding: 12px 18px;
@@ -469,7 +472,6 @@ input[type="date"]::-webkit-datetime-edit-year-field {
 }
 .home-photo-wide img {
   aspect-ratio: 1320 / 600;
-  object-position: center 56%;
 }
 .home-photo-pair {
   display: grid;
@@ -702,17 +704,30 @@ details[open]>summary>span {
 .room-description .section-heading {
   margin-bottom: 0;
 }
+/* Interim layout for the three private room types until the Figma layout lands. */
+.room-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  padding-top: 0;
+}
+.room-options h3 {
+  margin: 0 0 12px;
+}
+.room-options p {
+  margin: 0;
+}
 .room-description.theme-yellow {
   color: var(--blue);
 }
-/* The room sections are yellow or pink, so a yellow button would vanish. */
+/* The room sections are yellow or pink, so the button takes the white secondary style. */
 .room-description .button {
   margin-top: 28px;
-  background: var(--red);
-  color: var(--cream);
+  background: white;
+  color: var(--red-text);
 }
 .room-description .button:hover {
-  background: var(--red-deep);
+  background: var(--cream);
 }
 .room-description .photo-carousel {
   padding-left: 0;
@@ -918,7 +933,7 @@ details[open]>summary>span {
   text-transform: uppercase;
 }
 .tour-card-actions>.button {
-  background: var(--yellow);
+  background: var(--button-yellow);
   color: var(--red-text);
 }
 .featured-tour {
@@ -938,7 +953,7 @@ details[open]>summary>span {
 }
 .tour-card-body .button {
   margin-top: auto;
-  background: var(--yellow);
+  background: var(--button-yellow);
   color: var(--red-text);
 }
 .contact-section {
@@ -1050,6 +1065,13 @@ details[open]>summary>span {
   text-align: center;
   color: var(--red-text);
 }
+.map-copy {
+  align-self: start;
+}
+.map-copy p {
+  font-size: 20px;
+  max-width: 520px;
+}
 .map-copy .text-link {
   margin-top: 20px;
 }
@@ -1140,6 +1162,14 @@ details[open]>summary>span {
 .footer .footer-links a:hover,.footer .footer-contact a:hover {
   background: var(--yellow);
   color: var(--red);
+}
+.footer-yellow {
+  background: var(--yellow);
+  color: var(--red-text);
+}
+.footer-yellow .footer-links a:hover,.footer-yellow .footer-contact a:hover {
+  background: var(--red);
+  color: var(--yellow);
 }
 .footer-top {
   display: grid;
@@ -1614,6 +1644,10 @@ details[open]>summary>span {
     aspect-ratio: 343 / 321;
     object-position: center 68%;
   }
+  .room-options {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
   .room-description .section-heading {
     padding-bottom: 35px;
   }
@@ -1740,6 +1774,9 @@ details[open]>summary>span {
   }
   .map-section>.map-copy {
     grid-row: 1;
+  }
+  .map-copy p {
+    font-size: 18px;
   }
   .map-canvas {
     aspect-ratio: 0.95;
