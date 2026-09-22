@@ -187,7 +187,10 @@ summary::-webkit-details-marker {
   flex-wrap: wrap;
   margin-top: 30px;
 }
-.brand img,.footer-brand img {
+.brand img,.footer-brand picture {
+  display: block;
+}
+.footer-brand img {
   /* Cropped to the glyphs, so height sets the cap height directly. */
   width: auto;
   display: block;
@@ -764,11 +767,15 @@ details[open]>summary>span {
 .amenities li {
   display: flex;
   gap: 30px;
+  align-items: baseline;
   padding: 6px 0;
 }
 .amenities li span {
   font-family: var(--font-accent);
   font-size: 14px;
+  /* A fixed column, so [ 01 ] and [ 07 ] don't push their items to different starts. */
+  flex: 0 0 3.5em;
+  white-space: nowrap;
 }
 .lifestyle-intro {
   font-size: 24px;
@@ -1764,6 +1771,14 @@ details[open]>summary>span {
   }
   .tours-section+.lifestyle {
     display: none;
+  }
+  .footer-yellow.footer-red-mobile {
+    background: var(--red);
+    color: var(--yellow);
+  }
+  .footer-yellow.footer-red-mobile .footer-links a:hover,.footer-yellow.footer-red-mobile .footer-contact a:hover {
+    background: var(--yellow);
+    color: var(--red);
   }
   .contact-section {
     grid-template-columns: 1fr;

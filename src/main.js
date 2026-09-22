@@ -443,7 +443,7 @@ function layout(content) {
       <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">${icon("menu")}</button>
     </header>
     <main id="main-content" tabindex="-1">${content}</main>
-    ${footer(current !== "/rooms")}
+    ${footer(current !== "/rooms", current === "/tours")}
   `;
   bindLinks();
   bindForms();
@@ -551,7 +551,9 @@ function bindMap() {
   loadLeaflet().then((L) => {
     // A slow load can finish after the visitor has already navigated away.
     if (!document.body.contains(node) || activeMap) return;
-    const map = L.map(node, { scrollWheelZoom: false }).setView(contactDetails.coords, 16);
+    // On touch screens a one-finger drag should scroll the page, not trap it in the map.
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    const map = L.map(node, { scrollWheelZoom: false, dragging: !touch, tap: !touch }).setView(contactDetails.coords, 16);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -652,9 +654,9 @@ function bindCarousel(track) {
     return copy;
   });
   const cleanups = [];
-  const listen = (target, type, handler) => {
-    target.addEventListener(type, handler);
-    cleanups.push(() => target.removeEventListener(type, handler));
+  const listen = (target, type, handler, options) => {
+    target.addEventListener(type, handler, options);
+    cleanups.push(() => target.removeEventListener(type, handler, options));
   };
   const speed = 30; // Pixels per second, independent of the display refresh rate.
   let hovered = window.matchMedia("(hover: hover)").matches &&
@@ -664,6 +666,11 @@ function bindCarousel(track) {
   let lastTime;
   let frame;
   let selectedReview = 0;
+  // A swipe on a touch screen has no hover to pause on, and scrolling under the
+  // finger (or through its momentum) fights the gesture, so hold off until it settles.
+  let pausedUntil = 0;
+  let touching = false;
+  let touchEnded = false;
 
   const highlightReview = (index) => {
     if (!highlights) return;
@@ -699,6 +706,10 @@ function bindCarousel(track) {
     appliedScroll = track.scrollLeft;
   };
 
+  listen(track, "touchstart", () => { touching = true; }, { passive: true });
+  for (const type of ["touchend", "touchcancel"]) {
+    listen(track, type, () => { touching = false; touchEnded = true; }, { passive: true });
+  }
   listen(track, "carouselstep", (event) => {
     const step = originals[1].offsetLeft - originals[0].offsetLeft;
     moveTo(position + event.detail * step);
@@ -709,7 +720,12 @@ function bindCarousel(track) {
     const elapsed = lastTime === undefined ? 0 : Math.min(time - lastTime, 64);
     lastTime = time;
     if (Math.abs(track.scrollLeft - appliedScroll) > 1) position = track.scrollLeft;
-    if (!hovered) moveTo(position + speed * elapsed / 1000);
+    if (touchEnded) {
+      // Leave room for the swipe's momentum before rotation picks up again.
+      pausedUntil = time + 2500;
+      touchEnded = false;
+    }
+    if (!hovered && !touching && time >= pausedUntil) moveTo(position + speed * elapsed / 1000);
     frame = window.requestAnimationFrame(animate);
   };
   frame = window.requestAnimationFrame(animate);
@@ -975,9 +991,10 @@ function pageShell(eyebrow, title, intro, children) {
 }
 
 // Figma gives every page the yellow footer except Rooms, which ends on a yellow section.
-function footer(yellow = false) {
-  return `<footer class="footer section-pad ${yellow ? "footer-yellow" : ""}">
-    <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><img src="${asset(yellow ? "wordmark-red.png" : "wordmark-yellow.png")}" alt="" decoding="async"></a>
+// Tours hides its navy section on phones, so there it goes red again below 700px.
+function footer(yellow = false, redOnMobile = false) {
+  return `<footer class="footer section-pad ${yellow ? "footer-yellow" : ""} ${redOnMobile ? "footer-red-mobile" : ""}">
+    <div class="footer-top"><a class="footer-brand" href="/" data-link aria-label="Fools Inn home"><picture>${redOnMobile ? `<source media="(max-width: 700px)" srcset="${asset("wordmark-yellow.png")}">` : ""}<img src="${asset(yellow ? "wordmark-red.png" : "wordmark-yellow.png")}" alt="" decoding="async"></picture></a>
       <nav class="footer-links" aria-label="Explore Fools Inn">${footerLinks.map((group) => `<div>${group.map(([label, href]) => `<a href="${href}" data-link>${label}</a>`).join("")}</div>`).join("")}</nav>
       <div class="footer-contact"><a href="${mapsUrl()}" target="_blank" rel="noopener">${contactDetails.address}</a><a href="/terms" data-link>Terms &amp; Conditions</a></div>
     </div>
