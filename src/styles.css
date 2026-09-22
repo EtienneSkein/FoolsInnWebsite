@@ -1028,8 +1028,21 @@ details[open]>summary>span {
 .map-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 0 50px;
   align-items: end;
+}
+/* Flatten the panel so the copy can line up with the bottom of the map itself,
+   rather than with the Google Maps link underneath it. */
+.map-panel {
+  display: contents;
+}
+.map-canvas {
+  grid-column: 1;
+  grid-row: 1;
+}
+.map-tools {
+  grid-column: 1;
+  grid-row: 2;
 }
 .map-canvas {
   display: block;
@@ -1066,7 +1079,8 @@ details[open]>summary>span {
   color: var(--red-text);
 }
 .map-copy {
-  align-self: start;
+  grid-column: 2;
+  grid-row: 1;
 }
 .map-copy p {
   font-size: 20px;
@@ -1770,10 +1784,17 @@ details[open]>summary>span {
   }
   .map-section {
     grid-template-columns: 1fr;
-    gap: 30px;
   }
   .map-section>.map-copy {
+    grid-column: 1;
     grid-row: 1;
+    margin-bottom: 30px;
+  }
+  .map-canvas {
+    grid-row: 2;
+  }
+  .map-tools {
+    grid-row: 3;
   }
   .map-copy p {
     font-size: 18px;
